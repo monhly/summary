@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        函数的多种角色:
+        函数:
+        普通函数
+        构造函数
+        普通对象:键值对
+
+        */
+        function fn() { }
+        console.log(fn.__proto__ === Function.prototype)
+        console.log(Function.prototype.__proto__ === Object.prototype)
+        console.dir(Function.__proto__ === Function.prototype)
+        console.dir(Object)
+        //所有的普通函数或者是构造函数都是Function函数的一个实例.
+
+
+        /**
+         *function 和object的区分
+         *原型和内置函数之间的关系
+         1.除了Object,其他所有的内置函数的原型对象prototype的内置属性proto都指向Object.prototype
+         Object构造函数的内置属性为null =====>Object.prototype.__proto__=null;
+        即(所有的内置函数的原型对象都是Object.prototype构造出来的)
+         2.所有的内置函数(包括Function,其实应该是所有构造函数)的内置属性proto都指向Function.prototype;
+         Function.__proto__===Function.prototype;
+         Number.prototype.__proto__===Object.prototype;
+         Number.__proto__===Function.prototype
+         *
+         * */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //基于js实现快速排序
+        // console.log('成功');
+        // function quickSort(arr) {
+        //     //检测传入数组的数量,如果小于1就返回
+        //     if (arr.length <= 1) return arr
+        //         //选择一个基准,将其与原数组进行分离,再定义两个数组,用来存放左右
+        //     var pivotIndex = Math.floor(arr.length / 2)
+        //     var pivot = arr.splice(pivotIndex, 1)[0];
+        //     let left = [],
+        //         right = [],
+        //         i = 0;
+        //     // console.log(pivotIndex, pivot);
+        //     for (; i < arr.length; i++) {
+        //         if (arr[i] < pivot) {
+        //             left.push(arr[i])
+        //         } else {
+        //             right.push(arr[i])
+        //         }
+        //     }
+        //     // console.log(arr);//第一遍left [2,3]
+        //     debugger
+        //     return quickSort(left).concat([pivot], quickSort(right))
+        // }
+        // let arr = [4, 2, 1]
+        // let now = quickSort(arr)
+        // console.log(now);
+
+
+        // 3. 实现快速排序
+        const quickSort = (arr, left = 0, right = arr.length - 1) => {
+            // 判断传入的arr.
+            if (left > right) return
+            let i = left,
+                j = right,
+                baseVal = arr[j] //取无序数组的最后一个数值
+            while (i < j) {
+                //判断左侧
+                while (arr[i] <= baseVal && i < j) {
+                    i++
+                }
+                arr[j] = arr[i]
+                while (arr[j] >= baseVal && i < j) {
+                    j--
+                }
+                arr[i] = arr[j]
+            }
+            arr[i] = baseVal; //将基准值放到中间的位置完成一次循环
+            quickSort(arr, left, i - 1)
+            quickSort(arr, i + 1, right)
+        }
+        let arr = [2, 3, 41.1, 2, 3, 4, 42., 4, 4]
+        quickSort(arr, 0, arr.length - 1);
+        console.log('newArr,', arr);
+    </script>
+</body>
+
+</html>

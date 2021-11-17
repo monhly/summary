@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //判断输入的是不是回文字符串
+        //使用api
+        function isPlaindrome(str) {
+            if (typeof str !== 'string') {
+                return false
+            }
+            return str.split('').reverse().join('') === str;
+
+        }
+
+        //不使用api,使用
+        function isPlaindrom(str) {
+            if (typeof str !== 'string') return false;
+            let i = 0, j = str.length - 1
+            while (i < j) {
+                if (str.charAt(i) !== str.charAt(j)) return false
+                i++;
+                j--
+            }
+            return true
+        }
+
+
+
+    </script>
+</body>
+
+</html>

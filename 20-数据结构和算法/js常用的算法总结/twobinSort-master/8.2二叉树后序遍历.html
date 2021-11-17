@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //给定一个二叉树，返回它的 后序 遍历。
+
+        // 示例:
+
+        // 输入: [1,null,2,3]
+        //    1
+        //     \
+        //      2
+        //     /
+        //    3
+
+        // 输出: [3,2,1]
+
+
+        //1.采用递归的方法
+        // function postOrder(root) {
+        //     let arr = []
+        //     function deepOrder(node) {
+        //         if (node) {
+        //             deepOrder(node.left)
+        //             deepOrder(node.right)
+        //             arr.push(node.val)
+        //         }
+        //     }
+        //     deepOrder(deep)
+        //     return arr
+        // }
+
+
+
+        //2.采用迭代算法:
+        var postorderTraversal = function (root) {
+            let arr = [], stack = [];
+            if (root) stack.push(root);
+            while (stack.length > 0) {
+                const chTree = stack.pop()
+                arr.unshift(chTree.val)
+                if (chTree.left) stack.push(chTree.left)
+                if (chTree.right) stack.push(chTree.right)
+
+            }
+            return arr
+        };
+    </script>
+</body>
+
+</html>

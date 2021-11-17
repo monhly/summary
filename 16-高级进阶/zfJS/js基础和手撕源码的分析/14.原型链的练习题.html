@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function Fn() {
+            this.x = 100;
+            this.y = 200;
+            this.getX = function () {
+                console.log(this.x);
+            };
+        }
+        Fn.prototype.getX = function () {
+            console.log('获取的x', this)
+            console.log(this.x);
+        };
+        Fn.prototype.getY = function () {
+            console.log('获取的this.this', this)
+            console.log(this.y);
+        };
+        let f1 = new Fn;
+        let f2 = new Fn;
+        console.log(Fn.prototype.__proto__ === Object.prototype)
+        console.log(Object.prototype)
+        console.log(f1.getX === f2.getX);
+        console.log(f1.getY === f2.getY);
+        console.log(f1.__proto__.getY === Fn.prototype.getY);
+        console.log(f1.__proto__.getX === f2.getX);
+        console.log(f1.getX === Fn.prototype.getX);
+        console.log(f1.constructor);
+        console.log(Fn.prototype.__proto__ === Object.prototype);
+        f1.getX();
+        //Fn.prototype.getX()
+        //此时获取的y不是自己私有的数据,需要从原型链上继续寻找
+        console.log(Fn.prototype.getX())
+        f2.getY();
+        Fn.prototype.getY();
+
+    </script>
+</body>
+
+</html>

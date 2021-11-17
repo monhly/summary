@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //字符串相加:
+        var addStrings = function (num1, num2) {
+
+
+            let result = ''
+            let i = num1.length - 1
+            let j = num2.length - 1
+            let flag = 0 // 进位
+            let sum = 0
+
+            while (i >= 0 || j >= 0 || flag) {
+                let n1 = +num1[i--] || 0
+                let n2 = +num2[j--] || 0
+
+                sum = n1 + n2 + flag
+
+                if (sum >= 10) {
+                    sum -= 10
+                    flag = 1
+                } else {
+                    flag = 0
+                }
+
+                result = sum + '' + result
+            }
+
+            return result
+
+
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>

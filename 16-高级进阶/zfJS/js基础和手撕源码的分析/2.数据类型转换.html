@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据类型转换</title>
+</head>
+
+<body>
+    <script>
+        //数据类型的转换
+
+        //1.对象转换成数字或者是字符串
+        // 1.首先查找对象的Symbol.toPrimitive属性;
+        // 2.如果不存在这个属性,紧接着会调用对象的valueOf方法获取原始值
+        // 3.如果获取不到原始值,则在调用toString&number转化成数字或者是字符串
+        /**几种特殊情况:如果对象出现在左侧,则会把左侧的{}当做一个代码块,是不会参与到运算中去的;
+         *如:{}+0 此时输出的结果就是0   0+{}此时输出的结果就是 "0[object Object]"
+         */
+
+        //2.不同类型==之间的转换
+        //对象==字符串,先将对象转成字符串
+        //null==undefined
+        //NaN==NaN //false
+        //Symbol==Symbol
+        //其余的剩余情况,都是需要转换成数字的,然后在进行比较
+
+        //经典题型: []==false ![]==false
+        //第一个是将至都转换成数值进行比较,
+        ///第二个是都转成布尔值进行比较 []==true
+
+        // // let result = 100 + true + 21.2 + null + undefined + "Tencent" + [] + null + 9 + false;
+        // // let i=0
+        // // Object.defineProperty(window,'a',{
+        // //     get(){
+        // //         return ++i
+        // //     }
+        // // });
+        // // if (a == 1 && a == 2 && a == 3) {
+        // //     console.log('OK');
+        // // }
+        // let a = {
+        //     n: 12
+        // }
+        // let b = a
+        // a.x = a = { n: 2 }
+        //
+
+        // 函数的使用
+        var x = [12, 13];
+
+        function fn(y) {
+            y[0] = 100;
+            y = [100];
+            y[1] = 200;
+            console.log(y); //[100,200]
+        }
+        fn(x);
+        console.log(x); //[100,13]
+
+        // console.log(arr);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //接口的串行;请求之间有关联
+        //1.基于promise.then实现接口的并发请求
+
+        // axios.get('/user/list').then(res => {
+        //     console.log(res)
+        //     return axis.get('/list')
+
+        // }).then(res => {
+        //     console.log('用户的信息', data)
+        // })
+
+
+        //2.基于async 和await 实现接口的并发
+        // async function xhrs() {
+        //     const data = await axios.get('/user')
+        //     const list = await axios.post('/lisyusda')
+        // }
+
+        //并发 ;多个请求之间没有关联,同时发送多个请求,一般指所有的请求成功以后,统一处理的事情;
+        //1.基于Promise.all
+        // let req1 = axios.get('/sad')
+        // let req2 = axios.get('/sad')
+        // Promise.all([req1, req2]).then(res => {
+        //     console.log(res)
+        // })
+
+        //JS实现ajax并发控制的两大解决方案:
+        // 1.限制并发的数量limit,限制多少个,我们创造多少个工作区,当某个工作区请求成功,我们从总任务中执行下一个任务放到工作区去处理;
+        //tasks:总任务的列表[返回一个Promsie的实例]
+        //limit:限制并发的数量[一般小于5个]
+        const createRequest = function (tasks, limit) {
+
+            // judge params
+            if (typeof limit !== 'number') limit = 2;
+            if (!Array.isArray(tasks)) {
+                throw new TypeError(`${tasks} must be an array!`)
+            };
+            let results = [],
+                index = 0,
+                works = new Array(limit).fill(null);
+            works = works.map(() => {
+                //让每个工作区都是一个Promsie的实例
+                return new Promise(resolve => {
+                    const next = async () => {
+                        let preIndex = index,
+                            task = tasks[index++],
+                            temp;
+                        if (index > tasks.length - 1) {
+                            resolve();
+                            return
+                        }
+                        if (typeof task === 'function') {
+                            try {
+                                //返回的是promsie实例
+                                temp = await task();
+                                results[preIndex] = temp
+                            } catch (error) {
+                                //如果当前的任务是失败的
+                                results[preIndex] = null
+                            }
+                           
+                        }
+                        next()
+
+                    }
+                    next()
+                })
+
+            })
+            console.log('获取的works', works)
+            return Promise.all(works).then((()=>results))
+        }
+        const delay = function delay(interval) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(interval);
+                }, interval);
+            });
+        };
+        let tasks = [() => {
+            return delay(1000);
+        }, () => {
+            return delay(1003);
+        }, () => {
+            return delay(1005);
+        }, () => {
+            return delay(1002);
+        }, () => {
+            return delay(1004);
+        }, () => {
+            return delay(1006);
+        }, () => {
+            return delay(1007);
+        }];
+        createRequest(tasks, 2).then(results => {
+            console.log('all done', results)
+        })
+    </script>
+</body>
+
+</html>

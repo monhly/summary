@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        //编写一个函数来查找字符串数组中的最长公共前缀,如果不存在公共前缀,则返回字符串"",
+
+        function longetCommonPrefix(strs) {
+            if (strs == null || strs.length === 0) return "";
+            let prev = strs[0];
+            for (let index = 0; index < strs.length; index++) {
+                let j = 0;
+                for (; j < prev.length && j < strs[i].length; j++) {
+                    if (prev.charAt(j) !== strs[i].charAt(j)) break;
+
+
+                }
+                prev = prev.substring(0, j)
+                if (prev === "") return ""
+
+            }
+            return prev
+        }
+    </script>
+</body>
+
+</html>

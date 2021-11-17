@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面向对象</title>
+</head>
+
+<body>
+    <script>
+        let obj = [1, 2, 3, 4];
+        let obj2 = {
+            nakme: 'sadsa',
+            [Symbol('aa')]: 'sad',
+            2: 'sadas'
+        }
+        for (const key in obj2) {
+            console.log(key, obj2[key]);
+            //for in的执行顺序
+            /*
+            1.不能迭代Symbol的属性;
+            2.迭代的时候,先迭代数字属性,然后在迭代非数字属性
+            3.会迭代自己的公有属性
+
+
+            */
+        }
+        // for (let index = 0; index < 2; index++) {
+        //     console.log(index)
+
+        // }
+
+
+
+        //解决for in的问题
+        function each(obj, callback) {
+            let keys = Object.keys(obj);
+            keys = keys.concat(Object.getOwnPropertySymbols(obj));
+            console.log('keys', keys)
+            for (let index = 0; index < keys.length; index++) {
+                callback(obj[keys[index]], keys[index])
+
+            }
+        }
+        each(obj2, (key, value) => {
+            console.log(key, value)
+        })
+    </script>
+</body>
+
+</html>

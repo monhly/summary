@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        服务端与网络
+        http1.1的改进:
+        长连接复用(默认keep-alive)
+        host字段指定对应的虚拟站点
+        新增功能:
+        断点续传
+        身份认证
+        状态管理
+        cache缓存
+          cache-control
+          expires
+          last-modified
+          etag
+
+        2.http2.0
+        多路复用
+        二进制的分帧ceng
+        服务端推送
+
+        https:较为安全的网络传输协议
+        证书(公钥)
+        ssl加密
+        端口443
+
+
+
+
+        */
+
+
+
+
+        /*
+        http的状态码的响应信息:
+        1xx:临时回应,表示客户端请继续
+        200:成功传输
+        201:创建
+        301:永久重定向;
+        302:临时重定向
+        304:客户端缓存没有进行更新(客户端本地已经有缓存的版本,并且在request中告诉了服务端,当服务端通过时间或者是tag,发现没有进行更新的时候,就会返回一个不包含body的304状态吗)
+        400:不良的请求,传参错误;
+        401:未经授权,需要身份的验证
+        403:禁止访问:身份不会影响
+        404:资请求不存在
+        405:方法不允许
+        500:内部服务器出现错误
+        501:未实现,服务器要么不识别请求方法,要么不支持请求
+        502错误的网关
+        503:服务不可用
+
+
+
+        */
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //栈的学习
+
+
+        /*
+        栈是一种遵循后进先出原则的有序集合,
+
+        
+        */
+        function Stack() {
+            let items = [];
+            this.push = function(e) {
+                items.push(e)
+            };
+            this.pop = function(e) {
+                return items.pop()
+            };
+            this.isEmpty = function() {
+                return items.length === 0
+            }
+            this.size = function() {
+                return items.length
+            }
+            this.clear = function() {
+                items = []
+            }
+            console.trace()
+        }
+        Stack()
+
+        /*
+            使用console.trace获取当前栈的信息
+        */
+
+
+
+        /*
+        调用栈:
+        调用栈是js用来管理函数执行上下文的一种数据结构,它记录当前函数执行的位置,那个函数在执行,哪个函数正在被执行.如果我们执行一个函数,就会为函数创建执行上下文并放入到栈顶.如果我们从函数返回,就会将它的执行上下文从栈顶弹出,也就可以说调用栈是用来管理这种执行上下文的栈,(执行上下文栈)
+        
+        */
+
+
+        /*
+        栈空间和堆空间
+        js的内存空间主要有三种类型:
+        代码空间
+        栈空间
+        堆空间
+        
+        */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            width: 200px;
+            height: 300px;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<button>我是按钮</button>
+
+<body>
+    <script>
+        //函数的防抖和节流
+        // 防抖,在多次触发(触发的条件可以由我们来进行规定)的时候,只触发一次, 多次执行,只执行一次
+        //节流: 降低触发的频率,它能够识别多次,浏览器有自己的最快反应时间,在疯狂出触发的时候,我们控制时间间隔,让其执行一次. 多次执行,在规定的时间执行一次
+        /*
+            func  执行的函数
+            wait 中间间隔的时间
+            immediate  是否立即执行
+
+
+
+        */
+        function debounce(func, wait, immediate) {
+            var timer = null;
+            var isFirst = true
+            console.log(func, wait, immediate);
+            return function proxy(...params) {
+                if (timer) clearTimeout(timer)
+                if (!isFirst) {
+                    timer = setTimeout(() => {
+                        //规范写法,定时器执行完成以后需要随时进行清除
+                        if (timer) {
+                            clearTimeout(timer)
+                            timer = null
+                        }
+                        console.log('走到了里面')
+                        func(...params)
+                    }, wait);
+                }
+
+                // 根据传入的立即执行函数进行判断
+                if (isFirst) {
+                    console.log('立即执行了这里')
+                    func(...params)
+                    isFirst = false
+                }
+            }
+        }
+
+
+
+
+        // 实现节流的效果
+        // var throttle = function (func, wait) {
+        //     var timer = null,
+        //         previous = 0,
+
+        //     return function proxy() {
+        //         var now = +new Date(),
+        //             //获取的值是时间间隔
+        //             remaining = wait - (now - previous);
+        //         if (remaining <= 0) {
+        //             //此时说明时间已经走完;
+        //             if (timer) {
+        //                 clearTimeout(timer)
+        //                 timer = null
+        //             }
+        //             func()
+        //             //将现在的时间赋值
+        //             previous = +new Date()
+        //         } else if (!timer) {
+        // timer = setTimeout(() => {
+        //     if (timer) {
+        //         clearTimeout(timer);
+        //         timer = null
+        //     }
+        //     func()
+        //     previous = +new Date()
+        // }, remaining);
+        //         }
+        //     }
+        // }
+        //throttle
+        function throttle(func, wait) {
+            var pre = 0,
+                timer = null
+            return function proxy() {
+                //根据当前的时间段进行判断
+                var now = +new Date()
+                var remaining = wait - (now - pre);
+                if (remaining <= 0) {
+                    //到达执行时间
+                    // 清除之前的定时器
+                    if (timer) {
+                        clearTimeout(timer);
+                        timer = null
+                    }
+                    func();
+                    //
+                    pre = +new Date()
+                } else if (!timer) {
+                    timer = setTimeout(() => {
+                        if (timer) {
+                            clearTimeout(timer);
+                            timer = null
+                        }
+                        func()
+                        pre = +new Date()
+                    }, remaining)
+                }
+            }
+        }
+        //手动实现节流的函数
+        function throttle(func, wait) {
+            var pre = 0,
+                timer = null;
+            return function Proxy() {
+                //根据当前的时间段进行判断;
+                var now = +new Date();
+                var remaining = wait - (now - pre);
+                if (remaining < 0) {
+                    //此时说明已经到执行的时间了;
+                    if (timer) clearTimeout(timer);
+                    func();
+                    pre = +new Date();
+
+                } else if (!timer) {
+                    timer = setTimeout(() => {
+                        if (timer) clearTimeout(timer);
+                        func();
+                        pre = +new Date()
+                    }, remaining)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

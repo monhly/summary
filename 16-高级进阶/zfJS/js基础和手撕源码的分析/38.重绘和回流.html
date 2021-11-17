@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+
+                       浏览器的渲染机制:
+                       浏览器采用流式布局的模型:
+                       浏览爱情会把HTML解析成为DOM,把css解析成CSSOM,DOM和CSSOM合并就产生了渲染树,(renderTRee);
+                       有了renderTree,我们就知道了所有节点的样式,然后可以计算他们在页面上的大小和位置,最后把节点绘制在页面上;
+                       由于浏览器使用的是流式布局,对于render tree的计算通常只需要遍历一次就可以完成,但是table及其内部的元素除外,他们可能需要多次的计算,通常需要花费3倍同等元素的时间
+
+                       */
+        //参考 https://zhuanlan.zhihu.com/p/52076790
+        // 重绘和回流的节点:
+
+        //重绘:（repaints）是一个元素外观的改变所触发的浏览器行为，例如改变vidibility、outline、背景色等属性。浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。重绘不会带来重新布局，并不一定伴随回流。
+
+        //回流(重排):回流（reflow）是更明显的一种改变，可以理解为渲染树需要重新计算。
+
+        //1.添加删除可见的DOM元素
+        //2.元素的位置发生改变
+        //3.元素的尺寸发生改变(包括外边距/内边哭/边框大小/高度和宽度)
+        //4.内容发生改变,比如文本的变化或者是图片被另一个不同尺寸的图片所代替
+        //5.页面一开始渲染的时候
+        //6.浏览器窗口尺寸的变化
+
+        /*
+          减少重绘和回流的操作:
+          css:
+          使用transform代替top的操作;
+          使用visibility代替display:none,因为前者只会引起重绘,后者会引发回流的操作;
+          避免使用table布局;
+          尽可能的再DOM数的最末端改变class,
+          避免设置多层的内联样式,css选择器是从右向左匹配查找的,避免节点层级过多;
+          将动画效果应用到position属性为absolute或者是fixed元素上,同时控制懂动画你的速度可以是requestAnimationFrame
+          避免使用css表达式;
+           js:
+          避免频繁的操作样式
+          避免频繁的操作DOM
+          避免频繁的读取可能会引发回流或者是重绘的属性
+          对具有复杂属性的动画元素使用绝对定位
+
+
+
+          */
+    </script>
+</body>
+
+</html>

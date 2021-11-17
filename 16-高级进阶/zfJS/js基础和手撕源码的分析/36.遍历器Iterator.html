@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //遍历器的使用
+        /*
+        Iterator是一种机制,为各种不同的数据结构提供统一的访问机制;任何数据结构只要部署在Iterator接口,就可以完成遍历的操作
+        for of循环,依次梳理该数据结构的所有成员
+
+        1.拥有next方法用于依次遍历数据结构的成员
+        2.每次遍历返回的结果是一个对象{done:false,value:xxx}
+        */
+
+        // 手动实现Iterator
+        class Iterator {
+            constructor(arr) {
+                this.arr = arr
+                this.index = 0
+            }
+            next() {
+                let self = this,
+                    { arr, index } = self;
+                if (index > arr.length - 1) return {
+                    done: true,
+                    value: undefined
+                }
+                return {
+                    done: false,
+                    value: arr[self.index++] * 200
+                }
+            }
+        }
+        let arr = [1, 2, 3, 4, 45]
+        let p = new Iterator(arr)
+        console.log(p.next())
+        console.log(p.next());
+        console.log(p.next());
+        console.log(p.next());
+        console.log(p.next());
+        console.log(p.next());
+        console.log(p.next());
+
+        //for of实现的原理
+        arr[Symbol.iterator] = function () {
+            return new Iterator(this)
+        }
+        for (const item of arr) {
+            console.log('获取的item', item)
+            //for of在循环的时候都会遍历里面的iterator函数,调用里面的next方法
+        }
+        //for of 循环只针对含有Symbol.iterator属性的数据类型才会遍历;
+
+
+        //如何让对象也能够使用for of循环
+
+        let obj = {
+            name: '奥术大师',
+            age: '12321'
+        }
+        obj[Symbol.iterator] = function () {
+            let self = this,
+                index = 0,
+                key = [...Object.keys(self), ...Object.getOwnPropertySymbols(self)];
+
+            return {
+
+                next() {
+                    if (index > key.length - 1) {
+                        return {
+                            done: true,
+                            value: 'undefined'
+                        }
+                    }
+                    console.log('获取的key', key)
+                    return {
+                        done: false,
+                        value: self[key[index++]]
+                    }
+                }
+            }
+        }
+        for (const item of obj) {
+            console.log('获取的cale', item)
+        }
+
+    </script>
+</body>
+
+</html>

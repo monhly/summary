@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //树: 🌲是一种非线性的结构,
+        /**
+         * 仅有唯一一个根节点;
+         * 没有节点就是空树,除了根节点以外,每个节点都有并且仅有唯一一个父节点
+         * 节点之间不能形成闭环
+         */
+
+        //树的概念:
+        /**
+         * 拥有相同的父节点的节点,是兄弟节点
+         * 节点的深度:是指从根节点到该节点所经历的边的个数
+         * 节点的高度:节点到叶节点的最长路径
+         * 树的高度:根节点的高度
+         *
+         *
+         */
+
+        //二叉树:最多仅有两个子节点的树,最多能分两个叉的树.
+
+        //在代码中标识一颗二叉树
+
+
+        // 1.链式存储法
+        //设计一个节点
+        function Node(val) {
+            //保持当前的节点
+            this.val = val;
+            //指向左子节点
+            this.left = null;
+            //指向右节点
+            this.right = null
+        }
+        //设计一颗二叉树
+        function BinaryTree() {
+            Node(val)
+            let root = null
+        }
+
+        //2.数组存储法(适用于完全二叉树)
+
+
+
+        //二.二叉树的遍历
+
+        //1.前序的遍历,对于二叉树中的任意一个节点,先打印该节点,然后是它的左子树,最后是右子树 (根左右)
+
+        const preTraval = function (root) {
+            let result = [];
+            var preNode = (node) => {
+                if (node) {
+                    result.push(node.val);
+                    preNode(node.left);
+                    preNode(node.right)
+                }
+            }
+            preNode(root)
+            return result
+        }
+
+        //2.中序遍历:对于二叉树的任意一个节点,先打印它的左子树,然后是该节点,最后是右子树(左根右)
+
+        const preTraval = function (root) {
+            let result = [];
+            var preNode = (node) => {
+                if (node) {
+
+                    preNode(node.left);
+                    result.push(node.val);
+                    preNode(node.right)
+                }
+            }
+            preNode(root)
+            return result
+        }
+
+        //3.后序遍历:对于任意的一个节点,先打印左子树,然后是右子树,然后是该节点(左右根)
+        const preTraval = function (root) {
+            let result = [];
+            var preNode = (node) => {
+                if (node) {
+
+                    preNode(node.left);
+
+                    preNode(node.right)
+                    result.push(node.val);
+                }
+            }
+            preNode(root)
+            return result
+        }
+
+
+        //二叉查找树
+        /**
+         * 二叉查找树,它是在二叉树的基础上,增加了对二叉树上的节点存储位置的限制,二叉搜索树上的每个节点都需要满足:
+         * 左子节点的值小于该节点的值
+         * 右子节点 的值大于或者是=等于该节点的值
+        */
+
+        function BinarySearchTree() {
+            let Node = function (key) {
+                let key = key;
+                this.left = null;
+                this.right = null;
+
+            };
+            let root = null;
+            //插入某个节点:
+            /**
+             * 首先创建一个新节点,判断树3是否为空,为空设置为根节点,不为空进行比较根节点与该节点,比根小,插入左子树,否则插入右子树
+            */
+            this.insert = function (key) {
+                let newNode = new Node(key)
+                //判断是否是空树;
+                if (root === null) {
+                    root = newNode
+                } else {
+                    insertNode(root, newNode)
+                }
+            };
+            function insertNode(node, newNode) {
+                //node 根节点, newNode:新节点
+                if (newNode.key < node.key) {
+                    //插入node的左子树
+                    if (node.left == null) {
+                        node.left = newNode
+                    } else {
+                        insertNode(node.left, newNode)
+                    }
+                } else {
+                    if (node.right == null) {
+                        node.right = newNode
+                    } else {
+                        insertNode(node.right, newNode)
+                    }
+                }
+            }
+            //查找
+            this.search = function (key) {
+                searchNode(root, key)
+            };
+            function searchNode(node, key) {
+                if (node == null) return false;
+                if (key < node.key) {
+                    return searchNode(node.left, key)
+                } else if (key > node.key) {
+                    return searchNode(node.right, key)
+                } else {
+                    return true
+                }
+            }
+            //删除
+            this.remove = function (key) {
+                root = removeNode(root, key)
+            };
+            function removeNode(node, key) {
+                if (node == null) {
+                    return null
+                }
+                if (key < node.key) {
+                    return removeNode(node.left, key)
+                } else if (key > node.key) {
+                    return removeNode(node.right, key)
+                } else {
+                    // key === node.key
+                    // 判断节点的个数
+                    if (node.left == null && node.right == null) {
+                        node = null;
+                        return node
+                    }
+                    // 只有一个子节点
+                    if (node.left === null) {
+                        node = node.right
+                        return node
+                    }
+                    if (node.right === null) {
+                        node = node.left
+                        return node
+                    }
+                    //有两个节点
+                    let minRight = findMinNode(node.right)
+                    node.key = minRight.key;
+                    node.right = removeNode(node.right, minRight.key)
+                    return node
+                }
+            };
+            function findMinNode(node) {
+                if (node) {
+                    while (node && node.right) {
+                        node = node.right
+                    }
+                    return node
+                }
+                return null
+            }
+            //最大值
+            this.max = function () {
+                //树最右端的值:
+                let node = root;
+                if (node) {
+                    while (node && node.right) {
+                        node = node.right
+                    }
+                    return node.key
+                }
+                return node.key
+            }
+            //最小值
+            this.min = function () {
+                let node = root;
+                if (node) {
+                    while (node && node.left) {
+                        node = node.left
+                    }
+                    return node.key
+                }
+                return null
+            };
+            //中序遍历
+            this.inOrderTraverse = function () { };
+
+            //先序遍历
+            this.preOrderTraverse = function () { };
+            //后序遍历
+            this.postOrderTraverse = function () { }
+        }
+    </script>
+</body>
+
+</html>

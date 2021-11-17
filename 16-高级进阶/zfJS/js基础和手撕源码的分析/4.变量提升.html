@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>anniu</button>
+    <button>anniu</button>
+    <button>anniu</button>
+    <button>anniu</button>
+    <button>anniu</button>
+
+
+
+    <script>
+        let btns = document.querySelectorAll('button'),
+            i = 0, len = btns.length;
+
+        for (; i < len; i++) {
+            let index = i;
+            btns[i].onclick = function () {
+                console.log(i);
+                console.log(index)
+            }
+        }
+    </script>
+    <!-- <script>
+        // 全局变量的提升
+        // if(a in window){
+        //     var a=1;
+        //     function fn(){}
+        // }
+        // console.log('获取的a',a);
+        //     console.log('全局de',a);
+        //     fn()
+        //     var a=10;
+        //    var fn= function(){
+
+        //         //变量提升
+        //         // var  a   ===>undefined
+        //         console.log('函数的',a);
+        //         var a=20
+        //     }
+
+        // 匿名函数具名化的实现
+        // var fn=function add(){
+        //     console.log(add);
+        //     console.log(add.name);
+        // }
+        // fn()
+        // console.dir(fn)
+        // {
+        //     function foo() { }
+        //     foo = 1;
+        //     function foo() { }
+        // }
+        // // console.log(foo);
+        // console.log(foo);
+        // console.log(a);//a 是undefined
+        // a = 12;
+        // function fn() {
+        //     console.log(a);
+        //     a = 13;
+        // }
+        // fn();
+        // console.log(a);
+
+        // var foo = 'hello';
+        // (function (foo) {
+        //     //形参赋值
+        //     console.log(foo)
+        //     foo = 'world'
+        //     console.log(foo)
+        // })(foo)
+        // console.log(foo)
+        var i = 0
+        if (1 === 1) {
+            console.log(i);
+            var i = 2
+            console.log(i)
+            console.log(this)
+        }
+
+
+    </script> -->
+</body>
+
+</html>

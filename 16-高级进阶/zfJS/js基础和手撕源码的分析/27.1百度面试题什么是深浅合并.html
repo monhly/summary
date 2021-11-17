@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //浅拷贝:浅拷贝复制了指向对象的指针,地址,原对象的地址指向相同
+        //深拷贝:是完全脱离了源原对象,只有值和原对象保持一致
+
+        //深拷贝:
+        function checkType(obj) {
+            return Object.prototype.toString.call(obj).slice(8, -1);
+        }
+
+        function clone(obj) {
+            let result,
+                objType = checkType(obj);
+            if (objType === "Object") {
+                result = {};
+            } else if (objType === "Array") {
+                result = [];
+            } else {
+                return obj;
+            }
+            for (const key in obj) {
+                let value = obj[key];
+                if (checkType(value) === "Object" || checkType(value) === "Array") {
+                    resut[key] = clone(value);
+                } else {
+                    resut[key] = value;
+                }
+            }
+            return result;
+        }
+    </script>
+</body>
+
+</html>

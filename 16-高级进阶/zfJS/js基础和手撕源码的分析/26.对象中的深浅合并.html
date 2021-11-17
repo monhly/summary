@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 对象中的深浅合并
+
+        // 对象中的浅合并
+        // 1.Object.assign(obj1,obj2) 将obj2中的内容合并到obj1中并返回obj1
+        let obj = {
+            name: '哈哈',
+            age: 22
+        }
+        let obj2 = {
+            name: 'sadsad',
+            age: 77
+
+        }
+        let obj3 = Object.assign(obj, obj2)
+        console.log(obj3 === obj) //此时获取的obj3===obj true
+        //Object.assign({},obj,obj1)
+        //将obj合并到{}中,将obj1合并到空对象中
+        var _extend = function () {
+            var options, name, src, copy, copyIsArray, clone,
+                target = arguments[0] || {},
+                i = 1,
+                length = arguments.length,
+                deep = false;
+
+            // Handle a deep copy situation
+            if (typeof target === "boolean") {
+                deep = target;
+
+                // Skip the boolean and the target
+                target = arguments[i] || {};
+                i++;
+            }
+
+            // Handle case when target is a string or something (possible in deep copy)
+            if (typeof target !== "object" && !isFunction(target)) {
+                target = {};
+            }
+
+            // Extend jQuery itself if only one argument is passed
+            if (i === length) {
+                target = this;
+                i--;
+            }
+
+            for (; i < length; i++) {
+
+                // Only deal with non-null/undefined values
+                if ((options = arguments[i]) != null) {
+
+                    // Extend the base object
+                    for (name in options) {
+                        copy = options[name];
+
+                        //防止死循环,递归的元素是目标元素,则返回
+                        if (name === "__proto__" || target === copy) {
+                            continue;
+                        }
+
+                        // Recurse if we're merging plain objects or arrays
+                        if (deep && copy && (jQuery.isPlainObject(copy) ||
+                            (copyIsArray = Array.isArray(copy)))) {
+                            src = target[name];
+
+                            // Ensure proper type for the source value
+                            if (copyIsArray && !Array.isArray(src)) {
+                                clone = [];
+                            } else if (!copyIsArray && !jQuery.isPlainObject(src)) {
+                                clone = {};
+                            } else {
+                                clone = src;
+                            }
+                            copyIsArray = false;
+
+                            // Never move original objects, clone them
+                            target[name] = jQuery.extend(deep, clone, copy);
+
+                            // Don't bring in undefined values
+                        } else if (copy !== undefined) {
+                            target[name] = copy;
+                        }
+                    }
+                }
+            }
+
+            // Return the modified object
+            return target;
+        };
+    </script>
+</body>
+
+</html>

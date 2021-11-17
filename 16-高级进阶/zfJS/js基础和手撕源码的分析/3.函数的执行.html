@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数的执行</title>
+</head>
+
+<body>
+    <script>
+        /**
+         函数执行的步骤:
+         1.形成一个执行上下文,存储当前上下文中声明的变量,然后近栈执行
+         2.代码执行之前,先初始化作用域链,初始化this 初始化arguments 形参赋值 代码执行 进行出栈释放
+                        */
+        // //函数的执行机制
+        // var i = 0
+        // function A() {
+        //     var i = 10;
+        //     function x() {
+        //         console.log(this.i)
+        //         console.log(i);
+        //     }
+        //     return x
+        // }
+        // var y = A()
+        // y()
+        // function B() {
+        //     var i = 20
+        //     y()//10
+        // }
+        // B()
+
+
+        // 2. 
+        let x = 5;
+
+        function fn(x) {
+            return function(y) {
+                // 10
+                console.log(y + (++x));
+                //首次
+
+            }
+        }
+        let f = fn(6)
+        f(7)
+        fn(8)(9)
+        f(10)
+        console.log(x)
+            //函数执行的过程
+
+
+        // let a = 0,
+        //     b = 0;
+        // function A(a) {
+        //     // a=2
+        //     A = function (b) {
+
+        //         alert(a + b++)
+        //     }
+        //     console.log(typeof alert(a++));
+        // }
+        // A(1) // 
+        // A(2) //4
+    </script>
+
+</body>
+
+</html>

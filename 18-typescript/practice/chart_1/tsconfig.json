@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "module": "es2015",
+      "target": "es2016",
+     "outDir": "dist",
+     //是否移除注释
+     "removeComments": true,
+     "noEmitOnError": true,//编译有错误的时候,不生成编译后的文件
+    }
+    
+  }

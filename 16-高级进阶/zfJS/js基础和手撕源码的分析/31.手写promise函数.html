@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // //手写promise函数
+        // function _Promise(executor) {
+        //     //判断promise是否是new 执行
+
+        //     let self = this;
+        //     // console.log('self', self)
+        //     // if (!(self instanceof Promise)) throw new TypeError('undefined is not a promise!')
+        //     // if (typeof executor !== 'function ') throw new Error('promise resolver executor is not a function')
+
+        //     //设置私有的属性
+        //     self.PromiseState = 'pending';
+        //     self.PromiseResult = undefined;
+
+        //     //修改实例的状态和结果
+        //     change = function change(state, result) {
+        //         //一旦状态被改变就不能继续改变了
+        //         if (self.PromiseState !== 'pending') return
+        //         self.PromiseResult = result;
+        //         self.PromiseState = state;
+        //         self.onFulfilledList = [];
+        //         self.onRejectList = [];
+        //         //创建异步的微任务,通知集合中存储的方法执行[前提是集合中需要有东西才能执行]
+        //         var callbacks = state === 'resolve' ? self.onFulfilledList : self.onRejectList
+        //         if (callbacks.length > 0) {
+        //           setTimeout(()=>{
+        // for (let index = 0; index < callbacks.length; index++) {
+        //                 callbacks[i](result)
+        //             }
+        // }, 0)
+        //         }
+
+        //     }
+        //     //立即执行executor函数
+
+        //     // 异常捕获 如果执行的代码出现报错,则是reject
+        //     try {
+        //         executor(function resolve(result) {
+        //             //修改状态
+        //             change('resolve', result)
+        //         }, function reject(reason) {
+        //             change('reject', reason)
+        //         })
+        //     } catch (error) {
+        //         change('reject', error)
+        //     }
+        // }
+
+        // //处理onFulFiled  或者是onRejected方法返回结果的处理
+
+        // function handele(promise, x, resolve, reject) {
+        //     if (x === promsie) throw new TypeError('chainin ')
+        //     if (isPromise(x)) {
+        //         //返回的是promsie
+        //         try {
+        //             x.then(resolve, reject)
+        //         } catch (error) {
+        //             reject(error)
+        //         }
+
+        //         return
+        //     }
+        //     //返回的不是promise实例,而且没有执行报错
+        //     try {
+        //         resolve(x)
+        //     } catch (error) {
+        //         resolve(error)
+        //     }
+        // }
+
+        // //验证是否是promise
+        // function isPromise(result) {
+        //     if (x == null) return fasle;
+        //     if (/^(object|function)$/i.test(typeof result)) {
+        //         if (typeof result.then === 'function') {
+        //             return true
+        //         }
+        //     }
+        //     return fasle
+        // }
+        // _Promise.prototype = {
+        //     constructor: _Promise,
+        //     self: true,
+        //     then: function (onFulfilled, onReject) {
+        //         //1.如果已经知道对应实例的状态是成功了还是失败了,需要创建一个微任务后执行
+        //         //2.如果此时还不知道实例的状态,就需要先把实例onFulfilled和onReject进行存储起来;后期知道状态了以后,再通知方法进行执行
+
+        //         //每次执行then的时候,都会返回一个全新的Promise实例;这个promise的实例是由上一个的then中传入的方法决定的
+
+        //         if (typeof onReject !== 'function ') {
+        //             onReject = function (reason) {
+        //                 throw reason
+        //             }
+        //         }
+        //         let result = null, newPromise = null
+        //         return newPromise = new _Promise((resolve
+        //             , reject
+        //         ) => {
+        //             switch (self.PromiseState) {
+        //                 case 'resolve':
+        //                     try {
+        //                         setTimeout(() => {
+        //                             result = onFulfilled(self.PromiseResult)
+        //                             handele(newPromise, result, resolve, reject)
+        //                         }, 0);
+        //                     } catch (error) {
+        //                         reject(error)
+        //                     }
+        //                     break;
+        //                 case 'reject':
+        //                     try {
+        //                         setTimeout(() => {
+        //                             result = onFulfilled(self.PromiseResult)
+        //                             handele(newPromise, result, resolve, reject)
+        //                         }, 0);
+        //                     } catch (error) {
+        //                         reject(error)
+        //                     }
+        //                     break
+        //                 default:
+
+        //                     self.onFulfilledList.push(function (results) {
+        //                         try {
+        //                             result = onFulfilled(results)
+        //                             handele(newPromise, result, resolve, reject)
+        //                         } catch (error) {
+        //                             reject(error)
+        //                         }
+        //                     });
+        //                     self.onRejectList.push(function (results) {
+        //                         try {
+        //                             result = onReject(results)
+        //                             handele(newPromise, result, resolve, reject)
+        //                         } catch (error) {
+        //                             reject(error)
+        //                         }
+        //                     })
+        //             }
+        //         })
+
+        //     },
+        //     catch: function () { }
+        // }
+        // _Promise.all = function () { };
+        // _Promise.resolve = function () { }
+        // _Promise.reject = function () { }
+        // let p = new _Promise((resolve, reject) => {
+        //     resolve('ok')
+        // })
+
+
+
+        //手写promise
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包练习题的练习</title>
+</head>
+
+<body>
+    <script>
+        //闭包的概念:
+        /**
+            闭包是一种机制,函数在执行过程中产生的上下文,
+            一方面是可以保护里面的私有变量不被污染,
+            另一方面,如果不被释放,私有变量及相关的信息也都会被保存起来 ;
+            这种保存和保护的机制被称为闭包;
+        **/
+        //习题1
+        // var a = 10,
+        //     b = 11,
+        //     c = 12;
+
+        // function test(a) {
+        //     a = 1;
+        //     var b = 2;
+        //     c = 3;
+        // }
+        // test(10);
+        // console.log(a, b, c);
+
+
+
+        //习题2
+        // var a = 4;
+        // function b(x, y, a) {
+        //     console.log(a);
+        //     arguments[2] = 10;
+        //     console.log(a);
+        // }
+        // a = b(1, 2, 3);
+
+        // console.log(a);
+
+
+
+
+        //习题3:
+        // var a = 9;
+
+        // function fn() {
+        //     a = 0;
+        //     return function(b) {
+        //         return b + a++;
+        //     }
+        // }
+        // var f = fn();
+        // console.log(f(5));
+        // console.log(f(5))
+        // console.log(fn()(5));
+        // console.log(f(5));
+        // console.log(a);
+
+
+        //习题4
+        // var test = (function(i) {
+        //     // i=2
+        //     return function() {
+        //         alert(i *= 2);
+        //     }
+        // })(2);
+        // test(5); //alert输出的是字符串,所以事字符串"4"
+
+
+
+        //习题5
+        // var x = 4;
+        // function func() {
+        //     return function(y) {
+        //         console.log(y + (--x));
+        //     }
+        // }
+        // var f = func(5);
+        // f(6);
+        // func(7)(8);
+        // f(9);
+        // console.log(x);
+
+
+
+        //习题6
+        // var x = 5,
+        //     y = 6;
+        // function func() {
+        //     x += y;
+        //     func = function(y) {
+        //         console.log(y + (--x));
+        //     };
+        //     console.log(x, y);
+        // }
+        // func(4);
+        // func(3);
+        // console.log(x, y);
+
+
+        //习题7:
+        // function fun(n, o) {
+        //     console.log('n', n, o);
+        //     return {
+        //         fun: function(m) {
+        //             // m ==>1
+        //             return fun(m, n);
+
+        //             //此处的fun执行的是整个函数的fun,不是对象里面的fun,对象里面的fun需要使用obj.fun的方式去调用
+        //         }
+        //     };
+        // }
+        // var c = fun(0).fun(1);
+        // c.fun(2);
+        // c.fun(3);
+
+
+
+        //习题8:
+        // var b = 10;
+        // (function b() {
+        //     var b = 20;
+        //     console.log(b);
+        // })();
+        // console.log(b);
+    </script>
+</body>
+
+</html>

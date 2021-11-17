@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    canvas{
+        border:1px solid #000
+    }
+</style>
+<body>
+    <!-- 面向对象设置canvas对象
+     -->
+     <canvas id="canvas" width="500px" height="600px"></canvas>
+     <script>
+         function Canvas(ctx){
+            //  获取canvas对象,或者是传入canvas对象
+            this.ctx=ctx||document.getElementById('canvas').getContext('2d')
+            // 获取canvas的宽度
+            this.w=this.ctx.canvas.width
+            //获取canvas的高度
+            this.h=this.ctx.canvas.height
+            //设置网格的间距
+            this.size=20
+            // 设置坐标至今的距离
+            this.origin=20
+            // 设置原点坐标
+            this.xOrigin=this.origin
+            this.yOrigin=this.h-this.origin
+            // 设置箭头的大小
+            this.arror=10
+
+         }
+         //初始化canvas
+         Canvas.prototype.init=function(){
+             this.getCanvas()
+            //  绘制原点坐标
+            this.drawDoat()
+         }
+         Canvas.prototype.getCanvas=function(){
+             //绘制canvas
+            // 获取绘制的次数
+            var count=Math.floor(this.h/this.size)
+            for (let index = 0; index <count; index++) {
+            //   进行循环的遍历
+            this.ctx.beginPath();
+                this.ctx.moveTo(0,index*this.size-.5)
+                this.ctx.lineTo(this.w,index*this.size-.5)
+                this.ctx.stroke()
+            }
+            // 同理绘制y轴坐标
+            var yCount=Math.floor(this.w/this.size)
+            for (let index = 0; index < yCount; index++) {
+            this.ctx.beginPath()
+            this.ctx.moveTo(index*this.size-.5,0)
+            this.ctx.lineTo(index*this.size-.5,this.h)
+            this.ctx.stroke()
+
+            }
+         }
+
+        // 绘制坐标轴
+        Canvas.prototype.drawDoat=function(){
+            // 绘制原点坐标轴
+            this.ctx.beginPath()
+            this.ctx.moveTo(this.xOrigin,this.yOrigin)
+            this.ctx.lineTo(this.w-this.size,this.yOrigin)
+            this.ctx.lineWidth=2
+            this.ctx.stroke()
+            // 绘制y轴
+            this.ctx.beginPath()
+            this.ctx.moveTo(this.xOrigin,this.yOrigin)
+            this.ctx.lineTo(this.size,this.size)
+            this.ctx.lineWidth=2
+            this.ctx.stroke()
+        }
+
+
+        var newCanvas=new Canvas()
+         console.log(newCanvas.w);
+         newCanvas.init()
+     </script>
+</body>
+</html>

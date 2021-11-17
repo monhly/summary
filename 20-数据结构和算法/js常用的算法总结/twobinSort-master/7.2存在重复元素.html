@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+
+        //给定一个整数,判断是否存在重复的元素,如果存在一个值,在数组中出现至少两次则返回true,如果数组中的每一个元素都不相同,则返回false
+
+
+        /*
+            示例:
+        示例 1:
+        输入: [1,2,3,1]
+        输出: true
+
+        示例 2:
+
+        输入: [1,2,3,4]
+        输出: false
+        */
+
+
+        const containsDuplicate = (nums) => {
+            let map = new Map();
+            for (const i of nums) {
+                if (map.has(i)) {
+                    return true
+                }
+                else {
+                    map.set(i, 1)
+                }
+
+            }
+            return false
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //给定一个大小为n的数组,找到其中的多数元素,多数元素是指在数组中出现的次数大于n/2的元素
+        // leecode 169多数元素
+
+        /*
+        示例 1：
+
+        输入：[3,2,3]
+        输出：3
+        示例 2：
+
+        输入：[2,2,1,1,1,2,2]
+        输出：2
+        复制代码
+
+
+        */
+        // var majorityEle = function (nums) {
+
+        //     const map = {};
+        //     const n = nums.length >> 1
+        //     for (let index = 0; index < nums.length; index++) {
+        //         let val = nums[index]
+        //         map[val] = (map[val] || 0) + 1;
+        //         if (map[val] > n) return val
+        //     }
+
+
+        // }
+        // console.log(majorityEle([2, 2, 1, 1, 1, 2, 1]))
+
+        var majorityEle = function (nums) {
+            const map = {};
+            const n = nums.length >> 1;
+            for (let index = 0; index < nums.length; index++) {
+                let val = nums[index];
+                map[val] = (map[val] || 0) + 1
+                if (map[val] > n) return val
+
+            }
+        }
+    </script>
+</body>
+
+</html>

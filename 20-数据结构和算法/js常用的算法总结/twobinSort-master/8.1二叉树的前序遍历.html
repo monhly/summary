@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //leecode 144
+        // 给定一个二叉树，返回它的 前序 遍历。
+
+        //  示例:
+
+        // 输入: [1,null,2,3]
+        //    1
+        //     \
+        //      2
+        //     /
+        //    3
+
+        // 输出: [1,2,3]
+
+        //1.递归实现
+        // function preorderTraversal(root) {
+
+        //     let arr = [];
+        //     function preOder(node) {
+        //         if (node !== null) {
+        //             //先访问根节点
+        //             list.push(node.val);
+        //             //    在访问左节点
+        //             preOder(node.left)
+        //             //在访问右节点
+        //             preOder(node.right)
+        //         }
+        //     }
+        //     preOder(root)
+        //     return arr
+        // }
+
+
+        //2,迭代实现
+        function preorderTraversal(root) {
+            const list = [], stack = [];
+            if (root) stack.push(root)
+            while (stack.length > 0) {
+                //访问根节点
+                const curNode = stack.pop();
+                list.push(curNode.val);
+                if (curNode.right !== null) {
+                    stack.push(curNode.right);
+                }
+                if (curNode.left !== null) {
+                    stack.push(curNode.left)
+                }
+
+            }
+            return list
+        }
+    </script>
+</body>
+
+</html>

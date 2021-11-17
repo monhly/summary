@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <ul>
+            <!-- 定义路由 -->
+            <li><a href="/home">home</a></li>
+            <li><a href="/about">about</a></li>
+
+            <!-- 渲染路由对应的 UI -->
+            <div id="routeView"></div>
+        </ul>
+    </ul>
+</body>
+<script>
+//前端路由:url的变化引起UI的更新,(无需刷新页面);
+/*
+1.hash的实现:
+hash是URL中#号后面的部分,同时修改hash值不会引起页面的刷新,也不会向服务器重新发起请求
+通过hashChange事件可以监听到它的变化.改变hash的值有三种方式:
+浏览器的前进后退改变URL
+通过a便签改变URL
+通过window.location.hash来改变URL
+以上三种方式均可触发hashchange事件
+
+2.history是HTML5新增的,提供了两个方法用来修改浏览器的历史记录,且不会引起页面的刷新
+pushState,向浏览器中新增一条历史记录,同时修改地址栏
+replaceState,替换浏览器中当前的历史记录,同时修改地址栏;
+
+history提供了popState监听事件,但是只有以下两种情况会触发该事件,
+点击浏览器前进和后退的按钮
+显示调用history的back/go/forward方法
+
+
+*/
+
+//$router是VueRouter的实例对象;$route是当前路由对象;$route是$router的一个属性;
+
+
+
+</script>
+
+<script src="./2.history.js"></script>
+</html>

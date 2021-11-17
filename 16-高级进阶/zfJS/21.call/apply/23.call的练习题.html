@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var name = '珠峰'
+        function A(x, y) {
+            var res = x + y
+            console.log(res, this.name)
+        }
+        function B(x, y) {
+            var res = x - y
+            console.log(res, this.name)
+        }
+        B.call(A, 40, 30)
+        B.call.call(A, 40, 30)
+
+        /*
+        调用B,将this指向A,传入参数 40,30
+        此时B中的this指向的就是A,
+        B.call.call(A,40,30)
+        此时B.call指向A之后,往后继续操作
+        传入的this就是40,参数是30,,y的值就是undefined
+        所以res=30-undefined===>NaN
+        40.name中没有获取到name属性,所以输出的就是undefined
+
+
+        */
+
+    </script>
+</body>
+
+</html>

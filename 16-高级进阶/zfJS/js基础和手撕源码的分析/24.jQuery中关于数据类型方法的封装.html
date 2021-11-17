@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        手动=封装 数据类型
+
+
+
+        */
+        var toString = Object.prototype.toString
+        var getProto = Object.getPrototypeOf
+        //数据类型检测的办法
+        var toType = function (obj) {
+            if (obj == null) return obj + ''
+            if (!/^(object|function)$/.test(typeof obj)) return typeof obj
+            var reg = /^\[object ([0-9A-Za-z]+)\]$/,
+                value = reg.exec(toString.call(obj))[1] || 'object'
+            return value.toLowerCase()
+        }
+        //检测是否是函数
+        var isFunction = function (obj) {
+            //nodeType 返回的是元素的节点,则返回的就是1 如果是属性节点,返回的就是2
+            return typeof obj === 'function' && typeof obj.nodeType !== 'number'
+        }
+        //检测是否是window对象
+        var isWindowObj = function (obj) {
+            return obj != null && obj === obj.window
+        }
+
+        //检测是否是数组或者是类数组
+        var isArrayLike = function (obj) {
+            var length = !!obj && 'length'in obj && obj.length
+
+            //函数和windo中都有length属性,但是都不是类数组
+            if (isFunction(obj) || isWindowObj(obj)) return false
+            return toType(obj) === 'array' || length === 0 || typeof length === 'number' && length > 0 || (length - 1) in obj
+
+
+        }
+        // jquery中merge的思想
+        function _merge(first, second) {
+            var len = +second.length,
+                j = 0,
+                i = first.length;
+            for (; j < len; j++) {
+                first[i++] = second[j]
+            }
+            first.length = i;
+            return first
+
+        }
+    </script>
+</body>
+
+</html>

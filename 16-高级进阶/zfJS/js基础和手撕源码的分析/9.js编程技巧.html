@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js的编程技巧</title>
+</head>
+<style>
+    button {
+        width: 200px;
+        height: 300px;
+        background-color: red;
+    }
+</style>
+
+<body>
+    <button>按钮</button>
+    <script>
+        // 模块化的使用
+        /*
+                                                            模块化的演变进程
+                                                            1.早期的是单例设计模式
+                                                            2.commond.js
+                                                            3.es6的module的设计模式
+                                                            4.
+
+                                                        */
+        // function fn() {
+        //     // console.log(aa);
+        // }
+        // // 基于单例模式实现数据的转换
+        // let Jquery = (
+        //     function singelMode() {
+        //         let add = function() {}
+        //         let num = function() {}
+        //         return {
+        //             add,
+        //             num
+        //         }
+        //     }
+
+        // )()
+
+        // 惰性函数
+        // let btn = document.querySelector('button')
+        // console.log('btn.getBoundingClientRect()', btn.getBoundingClientRect());
+        /**
+                                                         * DOMRect
+                                                         * {
+                                                          bottom: 308
+                                                            height: 300
+                                                            left: 8
+                                                            right: 208
+                                                            top: 8
+                                                            width: 200
+                                                            x: 8
+                                                            y: 8
+                                                         }
+                                                         *
+                                                         */
+        //  多次执行
+        // var t;
+
+        // function foo() {
+        //     if (t) return t
+        //     t = new Date()
+        //     return t
+        // }
+        // console.log(foo())
+        /*
+                                                        基于惰性函数记性改造
+                                                        */
+        // function foo() {
+        //     var t = new Date()
+        //     foo = function() {
+        //         return t
+        //     }
+        //     return foo()
+        // }
+        // console.log('第二次的foo', foo());
+        // function fn() {
+        //     console.log('我是函数');
+        // }
+        // fn.toString = function() {
+        //     return '我被调用了'
+        // }
+        // console.log(fn.toString());
+        //console.log(fn); //ƒ 我被调用了
+
+        //柯里化函数的思想
+        // const curring = () => {
+        //     let arr = [];
+        //     let add = (...params) => {
+        //         console.log("获取的params", ...params);
+        //         arr.push(...params);
+        //         console.log("获取的arr", arr);
+        //         return add;
+        //     };
+        //     return add;
+        // };
+
+        // let add = curring();
+        // console.log("add的数据", add(1)(2)(3));
+        // // let res = add(1)(2)(3);
+        // // add = curring();
+        // // res = add(1, 2, 3)(4);
+        // // console.log(res); //10
+        // // add = curring();
+        // res = add(1)(2)(3);
+        // console.log(res); //15;
+        function add(a) {
+            function sum(b) {
+                a = a + b;
+                return sum;
+            }
+            sum.toString = function() {
+                console.log(a);
+                return a;
+            };
+            return sum;
+        }
+
+        console.log(add(1)(2)(3));
+        //组合函数的应用
+        // 实现array.reduce
+        // let arr = [1, 2, 3]
+        // arr.reduce((acc, cur, index, array) =>
+        //     console.log('acc,cur,index,array', acc, cur, index, array), 0)
+
+        //基于柯里化函数实现reduce函数
+
+        Array.prototype.reduce2 = function(callback, initIndex) {
+            let self = this,
+                len = this.length,
+                k = 0;
+            console.log(this);
+            if (typeof initIndex === "undefined") {
+                initIndex = 0;
+            }
+            // k = initIndex
+            for (; k < len; k++) {
+                initIndex = callback(initIndex, self[k], k);
+            }
+            return initIndex;
+        };
+        let total = [1, 2, 3, 4, 5].reduce2((item, cur) => item + cur);
+        console.log(total);
+        let total1 = [1, 2, 3, 4, 5].reduce((item, index) => item + index);
+        console.log(total1);
+    </script>
+</body>
+
+</html>

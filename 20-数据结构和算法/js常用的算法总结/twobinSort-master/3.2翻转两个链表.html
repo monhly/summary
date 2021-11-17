@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //给定单链表的head,请你翻转过来,并返回反转后的连表;
+        /*
+
+        输入：head = [1,2,3,4,5]
+        输出：[5,4,3,2,1]
+        */
+        var reverseList = function (head) {
+            let [pre, node] = [null, head]
+            while (node) {
+                const temp = node.next;
+                node.next = pre;
+                pre = node;
+                node = temp
+            }
+            return pre
+        }
+    </script>
+</body>
+
+</html>

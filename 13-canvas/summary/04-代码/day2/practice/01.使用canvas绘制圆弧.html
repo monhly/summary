@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" ></canvas>
+    <script>
+        var ctx=document.getElementById('canvas').getContext('2d')
+        ctx.beginPath();
+        // 绘制一个○
+        // ctx.moveTo(100,100)
+        ctx.arc(100, 100, 20, 0,  Math.PI*2);
+        // ctx.closePath();
+
+        ctx.stroke();
+        //ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+    </script>
+</body>
+</html>

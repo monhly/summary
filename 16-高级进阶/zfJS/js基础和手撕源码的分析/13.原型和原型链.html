@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 原型和原型链
+        /*
+        1.大部分函数数据类型的值都具备prototype属性,属性值本身是一个对象==>prototype
+        是一个对象[浏览器会默认为其开辟个堆内存,存储当前类的实例可以调用的公共属性和方法],prototype:{
+            constructor:属性值是当前函数/类的本身
+        }
+
+        */
+        /*
+        箭头函数没有prototype
+        属性
+        //对象中es6函数的写法
+
+        */
+        // const fn = () => { }
+        // const obj = {
+        //     children: function () { }
+        // }
+        // console.dir(obj.children)
+        // 2.每一个对象数据类型的值,都具备一个属性__proto__(原型链/隐式原型),属性值指向自己所属类的原型prototype
+        // let obj = {}
+        // // Object.prototype.__proto__ ===>null
+        // console.log(Array.prototype.__proto__)
+        let arr = [];
+        console.log(arr.hasOwnProperty('push'))
+    </script>
+</body>
+
+</html>

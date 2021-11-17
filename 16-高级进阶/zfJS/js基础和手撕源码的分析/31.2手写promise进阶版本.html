@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //手写promise进阶版本:思路的分析
+        /*
+        1.创建[promise的实例,传入executor函数]
+        2.立即执行executor函数,传入两个resolve和reject两个函数作为参数,用来更改state和result这两个promise的属性
+        3.构建公共方法 then,catch和私有的方法 resolve,reject,all
+        4.then执行后返回一个promise,根据resolve和reject中修改的状态进行返回
+        */
+        (function() {
+
+            function Promise(executor) {
+
+                //参数校验
+
+                let self = this,
+                    change;
+                if (!(self instanceof Promise)) throw new TypeError('undefined is not a promise')
+
+                if (typeof executor !== 'function') throw new TypeError('Promise resolver ' + executor + ' is not a function!')
+
+                self.state = 'pending';
+                self.result = undefined;
+                self.resolveList = [];
+                self.rejectList = []
+                change = (type, result) => {
+                    //状态更改后不更在进行更改\
+                    let callbacks = []
+                    if (self.state !== 'pending') return
+                    self.state = type;
+                    self.result = result
+                    type === 'resolve' ? callbacks = self.resolveList : callbacks = self.rejectList;
+                    console.log('获取的callbacks', callbacks);
+                    if (callbacks.length > 0) {
+                        callbacks.forEach(item => {
+                            setTimeout(() => {
+                                console.log(item);
+                                item(self.result)
+                            }, 0);
+                        })
+                    }
+                }
+                executor((result) => {
+                    change('resolve', result)
+                }, (reject) => {
+                    change('reject', reject)
+                })
+            }
+            Promise.prototype = {
+                constructor: Promise,
+                then: function(onFilled, onReject) {
+                    let p = null,
+                        self = this,
+                        {
+                            state,
+                            result,
+                            resolveList,
+                            rejectList
+                        } = self;
+                    //判断之前的状态
+                    p = new Promise((resolve, reject) => {
+                        //根据之前的状态进行返回
+                        switch (state) {
+                            case 'resolve':
+
+                                setTimeout(() => {
+                                    onFilled(result);
+                                }, 0);
+                                break
+                            case 'reject':
+                                setTimeout(() => {
+                                    onReject(result)
+                                }, 0);
+                                break
+
+                            default:
+                                //此时不知道实例的状态
+
+                                resolveList.push(onFilled)
+                                rejectList.push(onReject)
+                                break;
+                        }
+                    })
+                    return p
+                },
+                catch: function(reject) {
+                    let self = this;
+                    return self.then(null, reject)
+                }
+            }
+
+            Promise.reject = function(err) {
+                return new Promise((_, reject) => {
+                    reject(err)
+                })
+            };
+            Promise.resolve = function(result) {
+                return new Promise(resolve => {
+                    resolve(result)
+                })
+            }
+
+            function isPromise(p) {
+                if (p == null) return false;
+                if (/^(object|function)$/.test(typeof p)) {
+
+                    //如果p.then是函数,则认为当前的对象是promise
+                    if (typeof p.then === 'function') {
+                        return true
+                    }
+                }
+                return false
+            };
+            Promise.all = function(promiseList) {
+
+                var results = [],
+
+                    if (!Array.isArray(promiseList)) throw new TypeError(`${promiseList} is not iterator`);
+                promiseList = promiseList.map(p => {
+                    if (!isPromise(p)) {
+                        return Promise.resolve(p)
+                    }
+                    return p
+                });
+                return new Promise((resolve, reject) => {
+                    promiseList.forEach((promise, index) => {
+                        promise.then(result => {
+                            index++;
+                            results[index] = result
+                            if (index >= promiseList.length) {
+
+                                resolve(results)
+                            }
+                        }).catch(reason => {
+                            reject(reason)
+                        })
+                    })
+                })
+            }
+
+            if (typeof Symbol !== 'undefined') Promise.prototype[Symbol.toStringTag] = 'Promise'
+
+            if (typeof window !== 'undefined') window.Promise = Promise
+            if (typeof module === 'object' && typeof module.exports === 'object') {
+                module.exports = Promise
+            }
+        })()
+        // let p=new Promise(resolve=>{
+        //     resolve('sadas')
+        // })
+        // let p2='sad撒'
+        // let p3=new Promise(resolve=>{
+        //     resolve('sad接口和')
+        // })
+        let p = new Promise((resolve, reject) => {
+            console.log('哈哈')
+            resolve([1, 2, , 3, 4])
+        })
+        let p2 = 30;
+        let p3 = Promise.resolve('哈哈')
+        Promise.all([p, p2, p3]).then(res => {
+            console.log('huoqu de all', res);
+        })
+    </script>
+</body>
+
+</html>

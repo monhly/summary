@@ -1,0 +1,2 @@
+我是raw-loader的测试插件
+在webpack5中已经放弃使用 

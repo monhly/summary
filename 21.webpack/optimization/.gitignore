@@ -1,0 +1,7 @@
+node_modules/
+index.esm.js
+upload/
+.idea
+.vscode
+.DS_Store
+*.zip

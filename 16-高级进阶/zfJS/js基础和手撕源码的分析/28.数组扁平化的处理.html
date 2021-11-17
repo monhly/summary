@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1.基于数组的flat方法实现数组扁平化的处理
+        let arr = [1, 2, 3, [1, 2, 3, [4, 5, 6, [7, 8, 9, [10, 22]]]]]
+        let newArr = arr.flat(5)
+        console.log(newArr);
+
+
+        // 2. 基于es5和递归实现数组的方法
+        function deepBreak(arr) {
+            var res = [],
+                i = 0;
+            for (; i < arr.length; i++) {
+                if (Array.isArray(arr[i])) {
+                    console.log(arr[i])
+                    res = res.concat(deepBreak(arr[i]))
+                } else {
+                    res.push(arr[i])
+                }
+            }
+            return res
+        }
+        deepBreak(arr)
+
+        // 3. 基于数组的reduce
+        function deepBreak(arr) {
+            return arr.reduce((res, item) => {
+                return res.concat(Array.isArray(item) ? deepBreak(item) : item)
+            }, [])
+        }
+
+        // 4. 基于Tostring和split实现数组的扁平化
+        function deepBreak(arr) {
+            return arr.toString().split(',')
+                .map(item => {
+                    return Number(item)
+                })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+.present{
+  position: relative;
+}
+.text{
+    font-size: 50px;
+    color: red;
+    width: 210px;
+    text-align: center;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+#canvas{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 11;
+    cursor: pointer;
+}

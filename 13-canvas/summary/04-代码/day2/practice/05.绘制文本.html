@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    canvas{
+        border: 1px solid #ccc;
+    }
+</style>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+     var ctx=document.getElementById('canvas').getContext('2d')
+
+        //设置文本大小
+        ctx.font = "48px serif";
+        ctx.textAlign="left"
+        ctx.strokeText('text', 100, 100);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //常见的vue面试:
+        // 一.计算属性和watch属性的区别
+        
+        /**
+         * watch监听属性的使用
+         * watch 当一个属性被多个值依赖的时候,此时会产生大量的开销,此时使用watch会比较合适
+         * 
+         */
+        // 监听某个属性watch的使用
+        // 1.,
+        // watch:{
+        //     obj(newName,oldName){
+        //         ....
+        //     }
+        // }
+        
+        //2.对象的写法
+        // watch:{
+        //     obj:{
+        //         handel(newName,oldName){},
+        //         immediate:true //是否立即执行函数
+
+        //     }
+        // }
+        
+        //3.监听属性内部的属性的变化
+        // watch:{
+        //     'obj.name':{
+        //         handel(){},
+        //         deep:true //deep的设置,当对象的属性值比较多的时候都会执行到handel.如果只是监听对象中的一个属性值,可以使用字符串的形式进行对象的属性监听
+
+        //     }
+        // }
+        
+
+
+        /**
+         * computed
+         * computed是计算属性.,只有在它依赖发生变化的时候才会重新去求值
+         * 一个值依赖多个值的变化,此时可以使用computed属性
+         * 
+         * 
+         * 
+        */
+        //    1. 计算属性默认只有getter,这种方法默认就是返回的就是getter
+    //    computed:{
+    //        now(){
+
+    //        }
+    //    }
+
+    // 2. getter 和setter 的使用
+        // computed:{
+        //     now:{
+        //         get:function(){},
+        //         set:function(){}
+        //     }
+        // }
+        
+
+        //当我们对计算属性进行修改的时候需要通过set函数进行修改,否则内部会出现报错
+
+
+        
+        //二.源码解读vue中的$nextTick方法
+        // 参考链接 https://juejin.cn/post/6963542300073033764
+        
+        /***
+         * nexttick方法借鉴了浏览器中的event loop事件循环做到了异步的更新
+         * 将碰到的异步任务推送到一个异步的队列当中,
+        */
+
+    </script>
+</body>
+</html>

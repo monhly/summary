@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 常见的排序
+        /***1. 冒泡排序:
+         *  冒泡排序只会操作相邻的两个数据,每次冒泡操作都会对相邻的两个元素进行比较不满足就会进行位置的互换
+         *
+         *
+        */
+        // function bubbleSort(arr, n) {
+        //     if (n <= 1) return
+        //     for (let index = 0; index < arr.length; index++) {
+
+        //         for (let indey = 0; indey < n - index - 1; indey++) {
+        //             if (arr[indey] > arr[indey + 1]) {
+        //                 let temp = arr[indey]
+        //                 arr[indey] = arr[indey + 1]
+        //                 arr[indey + 1] = temp;
+        //                 flag = true
+        //             }
+
+        //         }
+        //     }
+        // }
+
+        //1.重构实现冒泡排序
+        function bubbleSort(arr) {
+            if (arr && arr.length <= 1) {
+                return arr
+            }
+            for (let index = 0; index < arr.length; index++) {
+                for (let indey = 0; indey < arr.length - index; indey++) {
+                    if (arr[indey] < arr[indey + 1]) {
+                        var temp = arr[indey]
+                        arr[indey] = arr[indey + 1];
+                        arr[indey + 1] = temp
+                    }
+                }
+
+            }
+            return arr
+        }
+        let arr = [1, 2, 34, 24, 234, 32, 4, 324, 54, 35];
+        bubbleSort(arr)
+        //3.选择排序
+        /*
+        选择排序和冒泡排序的原理差不多,但不是两两进行比较,立即就换位置,而是执行完一轮以后,再进行位置的互换
+        [3,4,5,1,7]，假设第0位3是最小的数，与后一位比较3 < 4，再往后 3 < 5, 再往后 3 > 1, 到这里，最小的数的位置应该变成第3位，把这个位置记下来，然后继续往后比较 1 < 7,到这里就比较结束了，现在需要互换位置了，现在最小的数的位置在第3位，应该转换成[1,4,5,3,7]，也就是“假定最小的”和真实最小的互换位置。第0位已经是最小的数了。第二轮，从第1位开始算起，以此类推，完成排序
+        */
+
+        // 选择排序
+        function selectionSort(arr) {
+            let len = arr.length,
+                min;
+            for (let index = 0; index < len; index++) {
+                //假设当前的就是最小值
+                min = index;
+                for (let indey = index + 1; indey < len; indey++) {
+                    //进行判断
+                    if (arr[indey] < arr[min]) {
+                        //当前最小值=当前的位置
+                        min = indey
+                    }
+
+                }
+                //
+                if (index !== min) {
+                    //进行换位置
+                    var temp = arr[min]
+                    arr[min] = arr[index]
+                    arr[index] = temp
+                }
+
+            }
+            return arr
+        }
+
+
+
+
+        //2.插入排序
+        /**
+         * 插入排序的算法核心是取未排序区间中的元素,在已排序区间中寻找位置将其插入,并保证已排序区间的数据一直都是有序的.重复这个过程,直到未排序区间中的元素为空,算法结束
+         *
+         * 插值排序：(斗地主的时候，左手里面的牌，是不是排好序的？右手随意起牌，差到左手里已经排好序的牌中，这个过程就是插值排序)
+         *
+        */
+        //简易版本
+        //重写插入排序
+        function insertSort(arr) {
+            var len = arr.length,
+                index = 0,
+                indey,
+                temp
+            for (; index < len; index++) {
+                for (indey = index; (indey > 0) && (arr[indey] < arr[indey - 1]); indey--) {
+                    temp = arr[indey]
+                    arr[indey] = arr[indey - 1]
+                    arr[indey - 1] = temp
+
+                }
+
+            }
+            return arr
+
+        }
+
+        // //终极版本
+        // function insertSort(arr) {
+        //     var len = arr.length;
+        //     var temp;
+        //     for (var i = 1; i < len; i++) {
+        //         temp = arr[i]
+        //         for (var j = i; j > 0 && temp < arr[j - 1]; j--) {
+        //             // 当前值和之前的每个值进行比较，发现有比当前值小的值就进行重新赋值
+        //             arr[j] = arr[j - 1];
+        //         }
+        //         arr[j] = temp;
+        //     }
+        //     return arr;
+        // }
+
+
+
+
+
+        //4.快速排序
+        /*
+        快速排序，先找到一个中间值，然后遍历，把比中间值小的放在左边数组，把比中间值大的放在右边数组，然后再分别按这种思路对两个新数组比较，以此类推，直到结束。
+        */
+        //基于数组实现快速排序
+        // function quickSort(arr) {
+        //     let len = arr.length;
+        //     if (len <= 1) return arr;
+        //     let left = [],
+        //         right = [],
+        //         index = 1,
+        //         middleVal = arr[0];
+        //     for (; index < len; index++) {
+        //         if (arr[index] < middleVal) {
+        //             left.push(arr[index])
+        //         } else {
+        //             right.push(arr[index])
+        //         }
+
+        //     }
+        //     return quickSort(left).concat([middleVal], quickSort(right))
+        // }
+
+
+        // //指针法: 基于指针法进行重构
+
+
+        //重写quickSort
+        // 重写快速排序
+        // const quickSort = (arr, left = 0, right = arr.length - 1) => {
+        //     // 判断传入的arr.
+        //     if (left > right) return
+        //     let i = left,
+        //         j = right,
+        //         baseVal = arr[j] //取无序数组的最后一个数值
+        //     while (i < j) {
+        //         //判断左侧
+        //         while (arr[i] <= baseVal && i < j) {
+        //             i++
+        //         }
+        //         arr[j] = arr[i]
+        //         while (arr[j] >= baseVal && i < j) {
+        //             j--
+        //         }
+        //         arr[i] = arr[j]
+        //     }
+        //     arr[i] = baseVal; //将基准值放到中间的位置完成一次循环
+        //     quickSort(arr, left, i - 1)
+        //     quickSort(arr, i + 1, right)
+        // }
+        // 手动实现快速排序
+        function quickSort(arr, start = 0, end = arr.length - 1) {
+            if (start > end) return//防止死递归
+            let i = start, j = end, baseValue = arr[j];
+            while (i < j) {
+                while (i < j && arr[i] <= baseValue) {
+                    i++
+                }
+                arr[j] = arr[i]
+                while (i < j && arr[j] > baseValue) {
+                    j--
+                }
+                arr[i] = arr[j]
+            }
+            arr[i] = baseValue
+            quickSort(arr, start, i - 1)
+            quickSort(arr, i + 1, end)
+
+        }
+        let arr1 = [2, 3, 41.1, 2, 3, 4, 42., 4, 4]
+        quickSort(arr1, 0, arr1.length - 1);
+        console.log('newArr,', arr1);
+        //5.二分查找法
+        /*
+        arr:数组,
+        key :要查找的数组
+        */
+        function search(arr, key) {
+            var low = 0,
+                high = arr.length - 1;
+            while (low <= high) {
+                var mid = parseInt((high + low) / 2)
+                if (key === arr[mid]) return mid
+                else if (key > arr[mid]) low = mid + 1;
+                else if (key < arr[mid]) high = mid - 1;
+                else return -1
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

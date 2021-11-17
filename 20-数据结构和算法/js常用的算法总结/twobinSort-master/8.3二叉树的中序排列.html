@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //二叉树的中序排列
+
+        //1.基于二叉树实现
+        function inOrder(root) {
+            let arr = [];
+            function rootDeep(node) {
+                if (node) {
+                    rootDeep(node.left)
+                    arr.push(node.val)
+                    rootDeep(node.right)
+                }
+            }
+            rootDeep(root)
+            return arr
+        }
+
+
+        //2.基于迭代算法实现
+        var postorderTraversal = function (root) {
+            let arr = [];
+            stack = [],
+                node = root;
+            while (stack.length > 0 || node) {
+                while (node) {
+                    stack.push(node)
+                    node = node.left
+                }
+                //此时循环结束,表示左侧的值已经找完
+                node = stack.pop()
+                arr.push(node.val)
+                node = node.right
+
+            }
+            return arr
+        };
+
+    </script>
+</body>
+
+</html>

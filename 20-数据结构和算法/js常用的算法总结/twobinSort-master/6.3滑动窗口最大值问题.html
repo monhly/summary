@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //获取窗口最大值的问题
+        function maxLength(num, length) {
+            let nums = num,
+                i = 0,
+
+                maxList = [];
+            for (; i < nums.length; i++) {
+                let newList = nums.slice(i, length + i)
+                console.log(newList)
+                if (newList.length === length) {
+                    maxList.push(Math.max(...newList))
+                }
+            }
+            return maxList
+        }
+
+        //此方法获取的时间超时处理
+
+
+
+        //方法2bundleRenderer.renderToStream
+        // function maxLength(num, k) {
+        // if (k === 1) return num;
+        // let result = [],
+        //     arr = [],
+        //     i = 0;
+        // for (; i < num.length; i++) {
+        //     arr.push(num[i])
+        //     if (i >= k - 1) {
+        //         result.push(Math.max(...arr))
+        //         if (nums[i - k + 1] === arr[0]) {
+        //             arr.shift()
+        //         }
+
+        //     }
+        // }
+        // return result
+        // }
+
+
+        // 方法三未超时
+        var maxSlidingWindow = function (nums, k) {
+            const deque = []
+            const result = []
+            for (let i = 0; i < nums.length; i++) {
+                // 把滑动窗口之外的踢出
+
+                if (i - deque[0] >= k) {
+                    deque.shift()
+                }
+                while (nums[deque[deque.length - 1]] <= nums[i]) {
+                    deque.pop()
+                }
+                deque.push(i)
+                if (i >= k - 1) {
+                    result.push(nums[deque[0]])
+                }
+            }
+            return result
+        };
+    </script>
+</body>
+
+</html>

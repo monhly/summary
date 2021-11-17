@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //实现一个str函数
+        /*
+        实现一个str函数,给定两个字符串,函数,一个是haystack,needle,请在haystack中找出needle出现的第一个位置,如果不存在,则返回-1
+
+        示例 1：
+
+        输入：haystack = "hello", needle = "ll"
+        输出：2
+        示例 2：
+
+        输入：haystack = "aaaaa", needle = "bba"
+        输出：-1
+        示例 3：
+
+        输入：haystack = "", needle = ""
+        输出：0
+
+
+        提示：
+
+        0 <= haystack.length, needle.length <= 5 * 104
+        haystack 和 needle 仅由小写英文字符组成
+        */
+        var strStr = function (haystack, needle) {
+            if (needle === '') return 0;
+            for (let index = 0; index < haystack.length; index++) {
+                if (haystack[i] === needle[0]) {
+                    if (haystack.substring(index, i + needle.length) === needle) {
+                        return index
+                    }
+                }
+
+            }
+            return -1
+        }
+
+    </script>
+</body>
+
+</html>

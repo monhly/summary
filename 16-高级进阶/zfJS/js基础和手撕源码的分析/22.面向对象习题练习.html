@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function Fn() {
+        //     let a = 1;
+        //     this.a = a;
+        // }
+        // Fn.prototype.say = function () {
+        //     this.a = 2;
+        // }
+        // Fn.prototype = new Fn;
+        // Fn.constructor = Fn
+        // let f1 = new Fn;
+
+        // Fn.prototype.b = function () {
+        //     this.a = 3;
+        // };
+        // console.log(f1)
+        // console.log(f1.a);///
+        // console.log(f1.__proto__);//f 1
+        // console.log(f1.b);
+        // console.log(f1.hasOwnProperty('b'));
+        // console.log('b' in f1);
+        // console.log(f1.constructor == Fn);
+
+
+        // hasOwnProperty 是否存在私有属性
+        // in 查找机制是从当前开始查找,如果没有则会默认按照原型链一层一层查找
+
+
+        //封装一个函数实现判断一个属性是否属于公有属性
+        // 1. 基于原型链的查找实现
+        // function getPubProperty(obj, params) {
+        //     let self = obj,
+        //         prototy = obj.__proto__
+        //     while (prototy) {
+        //         if (prototy.hasOwnProperty(params)) {
+        //             return true
+        //         }
+        //         prototy = prototy.__proto__
+        //     }
+        //     return false
+        // }
+        // // 2.使用in
+        // function getPubProperty(obj, params) {
+        //     let self = obj,
+        //         prototy = self.__proto__
+        //     return params in prototy
+        // }
+
+
+        //练习题2
+        // function Modal(x, y) {
+        //     this.x = x;
+        //     this.y = y;
+        // }
+        // Modal.prototype.z = 10;
+        // Modal.prototype.getX = function () {
+        //     console.log(this.x);
+        // }
+        // Modal.prototype.getY = function () {
+        //     console.log(this.y);
+        // }
+        // Modal.n = 200;
+        // Modal.setNumber = function (n) {
+        //     this.n = n;
+        // };
+        // class Model {
+        //     constructor(x, y) {
+        //         this.x = x;
+        //         this.y = y
+        //     }
+        //     static n = 200
+        //     static setNumber = function (n) {
+        //         this.n = n;
+        //     };
+        //     getX = function () {
+        //         console.log(this.x);
+        //     }
+        //     getY = function () {
+        //         console.log(this.y);
+        //     }
+        // }
+        // Modal.prototype.z = 10;
+        // let m = new Model(10, 20);
+    </script>
+</body>
+
+</html>

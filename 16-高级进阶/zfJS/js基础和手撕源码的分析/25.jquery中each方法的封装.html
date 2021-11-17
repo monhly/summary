@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // each: function (obj, callback) {
+        // 			var length, i = 0;
+
+        // 			if (isArrayLike(obj)) {
+        // 				length = obj.length;
+        // 				for (; i < length; i++) {
+        // 					if (callback.call(obj[i], i, obj[i]) === false) {
+        // 						break;
+        // 					}
+        // 				}
+        // 			} else {
+        // 				for (i in obj) {
+        // 					if (callback.call(obj[i], i, obj[i]) === false) {
+        // 						break;
+        // 					}
+        // 				}
+        // 			}
+
+        // 			return obj;
+        // 		},
+        function _each(obj, callback) {
+            var length, i = 0
+            //判断当前传入的数据是否是数组
+            if (obj instanceof Array) {
+                length = obj.length;
+                for (; i < length; i++) {
+                    if (callback(obj[i], i) === false) break
+                }
+            } else {
+                for (const key in obj) {
+                    if (callback.call(obj[i], i) === false) break
+                }
+            }
+            return obj
+        }
+    </script>
+</body>
+
+</html>

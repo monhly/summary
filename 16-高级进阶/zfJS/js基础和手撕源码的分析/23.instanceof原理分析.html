@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // instanceof  原理的分析
+        function _instance(obj, ctor) {
+            //判断当前obj传入的数据类型
+            if (obj == null) return false
+
+            if (!/^(object|function)$/.test(typeof obj)) return false
+            let prototype = Object.getPrototypeOf(obj)
+            //先检测是否有Symbol.hasInsatnce这个属性
+            // if (typeof ctor[Symbol.hasInstance] === 'function') return ctor[Symbol.hasInstance]
+            while (prototype) {
+                if (prototype === ctor.prototype) return true
+                prototype = Object.getPrototypeOf(prototype)
+            }
+            return false
+        }
+        // function instance(obj, ctor) {
+        //     if (obj == null) return false
+        //     //判断是否传入的是否是复杂的数据类型
+        //     if (/!(object|function)/.test(typeof obj)) return false
+        //     let proto = Object.getPrototypeOf(obj)
+        //     while (proto) {
+        //         if (proto === ctor, prototype) return true
+        //         proto = Object.getPrototypeOf(proto)
+        //     }
+        //     return false
+        // }
+        //经典面试题:
+
+        console.log(_instance(123, Number),//false
+            _instance(new Number(123), Number),//true
+            _instance(Number(123), Number)//false
+        )
+
+        //instanceof 用来检测一个对象的原型链上是否有该原型的构造函数;
+
+
+
+        /*
+         */
+    </script>
+</body>
+
+</html>

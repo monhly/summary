@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+
+      给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+  输入：nums1 = [1], m = 1, nums2 = [], n = 0
+  输出：[1]
+ */
+        // https://github.com/sisterAn/JavaScript-Algorithms
+        function merge(num1, m, num2, n) {
+            for (let index = 0; index < n; index++) {
+                num1[index + m] = num2[index]
+            }
+            num1.sort((a, b) => a - b)
+        }
+    </script>
+</body>
+
+</html>

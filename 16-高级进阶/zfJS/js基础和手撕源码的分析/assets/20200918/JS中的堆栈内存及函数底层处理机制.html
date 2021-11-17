@@ -1,0 +1,139 @@
+<!DOCTYPE html><html><head><title>JS中的堆栈内存及函数底层处理机制</title><meta charset='utf-8'><link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'><style>
+.note-content  {font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, Song, sans-serif;}
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<h4 id="js中的堆栈内存及函数底层处理机制">JS中的堆栈内存及函数底层处理机制</h4>
+
+<p><strong>JS中的数据类型</strong></p>
+
+<ul><li><p>基本数据类型（值类型、原始类型）</p>
+
+<ul>
+<li><p>number</p>
+
+<ul>
+<li><p>NaN</p></li>
+<li><p>Infinity</p></li></ul></li>
+<li><p>string</p></li>
+<li><p>boolean</p></li>
+<li><p>null</p></li>
+<li><p>undefined</p></li>
+<li><p>symbol</p>
+
+<ul>
+<li><p>static Symbol</p></li>
+<li><p>Symbol.prototype</p></li></ul></li>
+<li><p>bigint</p></li></ul></li>
+<li><p>引用数据类型</p>
+
+<ul>
+<li><p>object </p>
+
+<ul>
+<li><p>普通对象</p></li>
+<li><p>数组对象</p></li>
+<li><p>正则对象</p></li>
+<li><p>日期对象</p></li>
+<li><p>JSON对象</p></li>
+<li><p>Set</p></li>
+<li><p>Map</p></li>
+<li><p>……</p></li></ul></li>
+<li><p>function</p>
+
+<ul>
+<li><p>普通函数</p></li>
+<li><p>构造函数</p></li>
+<li><p>箭头函数</p></li>
+<li><p>生成器函数</p></li>
+<li><p>……</p></li></ul></li></ul></li>
+</ul>
+
+<p><strong>栈内存 Stack  &amp;  堆内存 Heap</strong></p>
+
+<ul><li><p>declare &amp; defined</p></li>
+<li><p>ECStack（Execution [ˌeksɪˈkjuːʃn] Context Stack）和 EC（Execution Context ）</p></li>
+<li><p>GO（Global Object）</p></li>
+<li><p>VO（Varibale Object）</p></li>
+</ul>
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">var</span> a = <span class="hljs-number">12</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> b = a;
+</div><div class="hljs-line">b = <span class="hljs-number">13</span>;
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">-----------------
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> a = {<span class="hljs-attr">n</span>: <span class="hljs-number">12</span>};
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> b = a;
+</div><div class="hljs-line">b[<span class="hljs-string">'n'</span>] = <span class="hljs-number">13</span>;
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a.n);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">-----------------
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> a = {<span class="hljs-attr">n</span>: <span class="hljs-number">12</span>};
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> b = a;
+</div><div class="hljs-line">b = {<span class="hljs-attr">n</span>: <span class="hljs-number">13</span>};
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a.n);
+</div></code></pre>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">var</span> a = {<span class="hljs-attr">n</span>: <span class="hljs-number">1</span>};
+</div><div class="hljs-line"><span class="hljs-keyword">var</span> b = a;
+</div><div class="hljs-line">a.x = a = {<span class="hljs-attr">n</span>: <span class="hljs-number">2</span>};
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(a.x);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(b);
+</div></code></pre>
+
+<p><strong>函数的底层处理机制</strong></p>
+
+<ul><li><p>EC（Execution Context ）</p></li>
+<li><p>AO（Active Object）</p></li>
+<li><p>SCOPE</p></li>
+<li><p>SCOPE-CHAIN</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">var</span> x = [<span class="hljs-number">12</span>, <span class="hljs-number">23</span>];
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">y</span>) </span>{
+</div><div class="hljs-line">    y[<span class="hljs-number">0</span>] = <span class="hljs-number">100</span>;
+</div><div class="hljs-line">    y = [<span class="hljs-number">100</span>];
+</div><div class="hljs-line">    y[<span class="hljs-number">1</span>] = <span class="hljs-number">200</span>;
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(y);
+</div><div class="hljs-line">}
+</div><div class="hljs-line">fn(x);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(x);
+</div></code></pre>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> x = <span class="hljs-number">5</span>;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">x</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">y</span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(y + (++x));
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> f = fn(<span class="hljs-number">6</span>);
+</div><div class="hljs-line">f(<span class="hljs-number">7</span>);
+</div><div class="hljs-line">fn(<span class="hljs-number">8</span>)(<span class="hljs-number">9</span>);
+</div><div class="hljs-line">f(<span class="hljs-number">10</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(x);
+</div></code></pre>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> a=<span class="hljs-number">0</span>,
+</div><div class="hljs-line">    b=<span class="hljs-number">0</span>;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">A</span>(<span class="hljs-params">a</span>)</span>{
+</div><div class="hljs-line">    A=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">b</span>)</span>{
+</div><div class="hljs-line">        alert(a+b++);
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    alert(a++);
+</div><div class="hljs-line">}
+</div><div class="hljs-line">A(<span class="hljs-number">1</span>);
+</div><div class="hljs-line">A(<span class="hljs-number">2</span>);
+</div></code></pre></div></body></html>

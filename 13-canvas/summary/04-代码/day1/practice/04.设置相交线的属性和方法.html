@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400">123456</canvas>
+<script>
+    var myCanvas = document.querySelector('canvas');
+    var ctx = myCanvas.getContext('2d');
+    ctx.fillStyle = "green"
+    ctx.fillRect(10, 10, 100, 100);
+    // ctx.stroke()
+//     /*画平行线*/
+//     ctx.beginPath();
+//     ctx.moveTo(100,100);
+//     ctx.lineTo(200,20);
+//     // ctx.lineTo(500,50)
+//     ctx.lineWidth=10
+//     // 设置线段的样式
+//     // ctx.lineCap="round"//环绕
+//     // ctx.lineCap="square"//平行
+//     ctx.lineCap="butt"//增高
+//     //设置虚线和实线的宽度大小,里面传入数组,一个数是虚线个实线的距离,
+//     ctx.setLineDash([5,10,15])
+//   console.log(  ctx.getLineDash());
+
+//     // ctx.closePath()
+//     // // 设置相交线拐点的样式
+//     // ctx.lineJoin="round"//环绕
+//     // ctx.lineJoin="bevel"//
+//     ctx.stroke()
+
+</script>
+</body>
+</html>

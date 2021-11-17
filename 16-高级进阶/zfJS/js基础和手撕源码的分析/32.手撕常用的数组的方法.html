@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 数组中常用的方法分析
+         * 
+         */
+        // 1. forEach的实现
+        Array.prototype.forEach = function(callback, thisArg) {
+            // callback传入的回调,thisArg改变的this
+            if (this == null) throw new TypeError('this is null or not undefined')
+            if (typeof callback !== 'function') throw new TypeError(`${calllback} is not a function`)
+            const o = Object(this),
+                len = o.length
+            let k = 0;
+            // while (k < len) {
+            //     if (k in o) callback.call(thisArg, o[k], k, o)
+            //     k++
+            // }
+            for (; k < len; k++) {
+                callback.call(thisArg, o[k], k, o)
+            }
+
+        }
+
+        //2.arr.map的实现
+        Array.prototype.map = function(callback, thisArg) {
+            if (this == null) throw new TypeError('this is null or not undefined')
+            if (typeof callback !== 'function') throw new TypeError(`${calllback} is not a function`)
+            const o = Object(this),
+                len = o.length
+            let k = 0,
+                res = []
+                // while (k < len) {
+                //     if (k in o) callback.call(thisArg, o[k], k, o)
+                //     k++
+                // }
+            for (; k < len; k++) {
+                res[k] = callback.call(thisArg, o[k], k, o)
+            }
+            return res
+        }
+
+        //3.arr.filter的实现
+        Array.prototype.filter = function(callback, thisArg) {
+            if (this == null) throw new TypeError('this is null or not undefined')
+            if (typeof callback !== 'function') throw new TypeError(`${calllback} is not a function`)
+            const o = Object(this),
+                len = o.length
+            let k = 0,
+                res = [],
+                item = null
+                // while (k < len) {
+                //     if (k in o) callback.call(thisArg, o[k], k, o)
+                //     k++
+                // }
+            for (; k < len; k++) {
+                item = callback.call(thisArg, o[k], k, o)
+                if (item) {
+                    res.push(o[k])
+                }
+            }
+            return res
+        }
+
+        //4.arr.reduce的实现
+        Array.prototype.reduce = function(callback, initIndex) {
+            let self = this,
+                len = this.length,
+                k = 0;
+            if (typeof initIndex == 'undefined') initIndex = 0;
+            for (; k < len; k++) {
+                initIndex = callback(initIndex, self[k], k, self)
+
+            }
+            return initIndex
+        }
+
+        //5.arr.some的实现:数组中有一个元素通过了测试,返回的就是true
+        Array.prototype.some = function(callback, thisArg) {
+            if (this == null) throw new TypeError('this is null or not undefined')
+            if (typeof callback !== 'function') throw new TypeError(`${calllback} is not a function`)
+            const o = Object(this),
+                len = o.length
+            let k = 0,
+                res = [],
+                item = false
+
+            // while (k < len) {
+            //     if (k in o) callback.call(thisArg, o[k], k, o)
+            //     k++
+            // }
+            for (; k < len; k++) {
+                item = !!callback.call(thisArg, o[k], k, o)
+                if (item) break
+            }
+            return item
+        }
+
+        //6..arr.every的实现 : 所有的值是否都通过了指定的测试 ,返回一个布尔值
+        Array.prototype.every = function(callback, thisArg) {
+                if (this == null) throw new TypeError('this is null or not undefined')
+                if (typeof callback !== 'function') throw new TypeError(`${calllback} is not a function`)
+                const o = Object(this),
+                    len = o.length
+                let k = 0,
+                    item = true
+                    //此处默认为true,every需要全部满足,一旦有一个不满足,就跳出循环返回false
+                if (o.length === 0) return true
+                for (; k < len; k++) {
+                    item = !!callback.call(thisArg, o[k], k, o)
+                    if (!item) {
+                        return false
+                    }
+
+                }
+                return item
+            }
+            //7.arr.slice()的实现 :返回新的数组对象,
+        Array.prototype.slice = function(start = 0, end = this.length) {
+            const res = [],
+                len = this.length;
+            //判断开始的边界值
+            if (start > len) return res;
+            if (start < 0) {
+                start = start + len < 0 ? 0 : start + len
+            }
+            if (end < 0) {
+                end = end + len < 0 ? 0 : end + len
+            }
+            for (let i = start; i < end; i++) {
+                res.push(this[i])
+            }
+            return res
+        }
+
+        //8.arr.findIndex方法的实现,
+        Array.prototype.findIndex=function(callback){
+            if (this == null) throw new TypeError('this is null or not undefined')
+                if (typeof callback !== 'function') throw new TypeError(`${calllback} is not a function`)
+                const o = Object(this),
+                    len = o.length
+                let k = 0;
+                for (; k < len; k++) {
+                   if(callback(o[k],k,o)){
+                       return k
+                   }
+                }
+                return -1
+        }
+    </script>
+</body>
+
+</html>

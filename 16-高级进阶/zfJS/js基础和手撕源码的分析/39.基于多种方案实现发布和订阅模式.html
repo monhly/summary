@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        (function(){
+            let sub=function(){
+                //自定义一个事件池
+                let pond=[];
+                
+
+                //订阅
+                const on=function (func){
+                    for (let index = 0; index < pond.length; index++) {
+                       if(pond[index]===func)return 
+                        
+                    }
+                    pond.push(func)
+
+                }
+
+                //移除事件
+                const off=function(func){
+                    for (let index = 0; index < pond.length; index++) {
+                      if(pond[index]===func){
+                          pond[i]=null;break
+                      }
+                        
+                    }
+                }
+                const fire=function(...params){
+                    for (let index = 0; index < pond.length; index++) {
+                       let item=pond[index]
+                       if(typeof item!=='function'){
+                           pond.splice(index,1)
+                           i--
+                           continue
+                       }
+                       item(params)
+                        
+                    }
+                }
+
+
+            }
+
+
+
+        })()
+
+
+    </script>
+</body>
+</html>

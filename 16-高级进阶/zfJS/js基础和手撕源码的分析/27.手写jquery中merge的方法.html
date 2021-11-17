@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //实现数组和对象中的深浅合并
+
+        // var merge = function () {
+        //     var options,
+        //         target = arguments[0] || {},
+        //         i = 1,
+        //         length = arguments.length,
+        //         //最后获取最后一项数据
+        //         threated = arguments[length - 1],
+        //         deep = false;
+
+        //     if (typeof target === 'boolean') {
+        //         //如果当前传的是布尔值
+        //         deep = target
+        //         target = arguments[i] || {}
+        //         i++
+        //     }
+        //     if (Array.isArray(threated) && threated.threated) {
+        //         length--
+        //     } else {
+        //         threated = []
+        //         threated.threated = true
+        //     }
+        //     //检测当前传入的数据是否是函数或者是对象,不是则return
+        //     if (typeof target !== 'object' && !isFunction(target)) target = {};
+        //     for (; i < length; i++) {
+        //         options = --arguments[i];
+        //         if (options == null) continue
+        //         if (threated.indexOf(options) > -1) return options
+        //         threated.push(options)
+        //     }
+        //     each(options, function (copy, name) {
+        //         var copyIsArray = Array.isArray(copy),
+        //             copyIsObject = isPlainObject(copy),
+        //             src = target[name],
+        //             clone = src
+        //         if (deep && copy && (copyIsArray || copyIsObject)) {
+        //             if (copyIsArray && !Array.isArray(src)) clone = []
+        //             if (copyIsObject && !isPlainObject(src)) clone = {}
+        //             target[name] = merge(deep, clone, copy, treated)
+        //         } else if (copy !== undefined) {
+        //             target[name] = copy
+        //         }
+        //     })
+        //     return target
+        // }
+
+        //判断是否是一个纯对象
+        function isPlainMerge(obj) {
+            let toType = Object.prototype.toString
+            if (!toType.call(obj) === '[object Object]') return false
+            let proto = Object.getPrototypeOf(obj)
+            if (proto == null) return true
+            if (proto === Object.prototype) return true
+        }
+        // js实现深浅合并
+        function shallowMerge(obj){
+            var dist={};
+            for(let item in obj) {
+                if(obj.hasOwnProperty(item)){
+                    dist[item]=obj[item]
+                }
+            }
+            return dist
+        }
+
+        //js实现深合并
+        function deepMerge(source, target) {
+            target = target || {};
+            for (let item in target) {
+                if (typeof target[item] === 'object') {
+                    console.log('深合并');
+                    Array.isArray(target[item])
+                        ? target[item] = [] : target[item] = {}
+                    deepMerge(source[item], target[item])
+                } else {
+                    source[item] = target[item]
+                }
+            }
+            return source
+        }
+        var china = {
+            nation: '中国',
+            birthplaces: ['北京', '上海', '广州'],
+            skincolr: 'yellow',
+            friends: ['sk', 'ls']
+        }
+        let arr = { name: 'sadas', obj: { yes: { name: 'sad撒', add: { age: 'sad' } } }, arr: [12, 3, 4, 5, 5,] }
+        let add = deepMerge(arr, china)
+
+    </script>
+</body>
+
+</html>

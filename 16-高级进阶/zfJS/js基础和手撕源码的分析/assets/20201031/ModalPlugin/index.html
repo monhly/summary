@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>珠峰在线Web高级</title>
+    <!-- IMPORT CSS -->
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/modalplugin.min.css">
+    <style>
+        .box .from {
+            height: 40px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .box .from span {
+            margin-right: 3%;
+            width: 30%;
+            text-align: right;
+        }
+
+        .box .from input {
+            box-sizing: border-box;
+            padding: 0 5px;
+            width: 100%;
+            height: 30px;
+            border: 1px solid #EEE;
+        }
+    </style>
+</head>
+
+<body>
+    <!--  
+    <div class="drag_modal"></div>
+    <div class="drag_content">
+        <div class="drag_head">
+            系统温馨提示
+            <a href="javascript:;" class="drag_close"></a>
+        </div>
+        <div class="drag_main">
+            哈哈哈
+        </div>
+        <div class="drag_foot">
+            <a href="javascript:;" class="drag_button">取消</a>
+            <a href="javascript:;" class="drag_button">确定</a>
+        </div>
+    </div>
+    -->
+
+    <button id="btn">点我哈</button>
+
+    <!-- IMPORT JS -->
+    <script src="../webpack/dist/modalplugin.min.js"></script>
+    <script>
+        btn.onclick = function () {
+            let m1 = M({
+                title: '登录管理系统',
+                template: `<div class="box">
+                    <div class="from">
+                        <span>用户名：</span>
+                        <input type="text" id="username">
+                    </div>
+                    <div class="from">
+                        <span>密码：</span>
+                        <input type="password" id="userpass">
+                    </div>
+                </div>`,
+                buttons: [{
+                    text: 'cancle',
+                    click(self) {
+                        self.close();
+                    }
+                }, {
+                    text: 'confirm',
+                    click(self) {
+                        let username = document.querySelector('#username'),
+                            userpass = document.querySelector('#userpass');
+                        console.log(username.value, userpass.value);
+                        self.close();
+                    }
+                }]
+            });
+        };
+    </script>
+
+    <script>
+        /*
+         * 我们实现的Modal对话框(模态框)具备样式，涉及插件中如何管控样式
+         *    + 在插件内部，把所有的样式都基于“行内”的方式赋值给元素 
+         *      + 优势：不用单独导入样式，只要导入插件的JS，在JS内部赋予了对应的样式，调用起来方便
+         *      + 弊端：无法实现样式的公共提取；实现及后期维护的时候，因为JS和CSS没有分离，所以会混乱一些；不方便用户自定义修改样式；...
+         *    + 把所有的样式都写在样式表中
+         *      + 优势：CSS和JS分离有利于代码的维护；样式可以实现公共的提取；用户自己可以根据查看元素的样式类以及插件的默认样式，自定义修改成为自己想要的样式； .drag_modal{xxx:xxx !important}  这种模式是目前UI组件/插件开发经典的方案
+         *      + 弊端：需要用户使用插件的时候，单独导入一个样式表「特殊：样式表中尽可能不要导入外部的图片，因为这样，后期使用插件的时候还需要把需要的图片素材导入进来，并且指定好结构顺序 ->如果真的需要图片：可以使用字体图标，更好的方式是图片BASE64... ->写好的插件内容都需要基于webpack编译」
+         *      =>进阶方案：把插件的CSS挂在到外网服务器上(CDN)，不需要用户自己导入，导入插件的JS时候，JS内部会帮助用户自动导入CSS资源 「前提：用户环境需要联网」
+         */
+
+        /*
+         * 编写的插件尽可能不要有太多的依赖（零依赖是最好的），但是往往开发一个复杂插件的时候，我们总需要一些其他方法的辅助「例如：工具类方法等」；但是我们总不能让用户自己单独下载依赖，单独导入，这样用户使用起来太麻烦，我们需要把所有的依赖及自己开发的，最后合并打包在一起（且进行压缩），最后用户只需要导入我们合并打包的文件的即可！！ -> 开发插件的时候，我们是需要基于类似于webpack等工程化部署工具的
+         */
+    </script>
+</body>
+
+</html>

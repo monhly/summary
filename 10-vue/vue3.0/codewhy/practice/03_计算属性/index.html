@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <template id="haha">
+        <div>
+            {{getFullname}}
+            {{getFullname}} {{getFullname}}
+            <h1>{{increament()}}</h1>
+            <h1>{{increament()}}</h1>
+            <h1>{{increament()}}</h1>
+            <h1>{{increament()}}</h1>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const why = {
+            template: `#haha`,
+            data() {
+                return {
+                    count: 1,
+                    info: {
+                        name: '啦啦',
+                        age: 'asdas',
+                    }
+                }
+            },
+            methods: {
+                increament() {
+                    console.log('methods')
+                    return this.info.name + '' + this.info.age
+                }
+            },
+            computed: {
+                getFullname() {
+                    console.log('computed')
+                    return this.info.name + '' + this.info.age
+                }
+            },
+        };
+        const app = Vue.createApp(why);
+        app.mount('#app')
+        //
+        /* vue中的计算属性;
+           官方中没有给出直接的解释,而是说:对于任何包含响应式数据的复杂逻辑,都应该使用计算属性;
+        计算属性将被混入到组件的实例中,所有的getter和setter的this上下文自动地绑定为组件的实例
+        computed在多次调用的时候,会被缓存里面的代码只会执行一次,methods方法被调用的时候会多次执行
+        */
+        //源码中关于计算属性的解析
+        for (const key in computedOptions) {
+            const opt = (computedOptions)[key]
+            const get = isFunction(opt)
+                ? opt.bind(publicThis, publicThis)
+                : isFunction(opt.get)
+                    ? opt.get.bind(publicThis, publicThis)
+                    : NOOP
+            if (__DEV__ && get === NOOP) {
+                warn(`Computed property "${key}" has no getter.`)
+            }
+            const set =
+                !isFunction(opt) && isFunction(opt.set)
+                    ? opt.set.bind(publicThis)
+                    : __DEV__
+                        ? () => {
+                            warn(
+                                `Write operation failed: computed property "${key}" is readonly.`
+                            )
+                        }
+                        : NOOP
+            const c = computed({
+                get,
+                set
+            })
+            Object.defineProperty(ctx, key, {
+                enumerable: true,
+                configurable: true,
+                get: () => c.value,
+                set: v => (c.value = v)
+            })
+            if (__DEV__) {
+                checkDuplicateProperties(OptionTypes.COMPUTED, key)
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+    <script src="./js/vnode.js"></script>
+    <script>
+        //1.通过h函数来创建一个新的vnode;
+        const vnode = h('div', { class: 'why' }, [
+            h('h2', null, '我是h2')
+        ])
+        //2.通过mount函数,将vnode挂载到div#aap的上面
+        mount(vnode, document.getElementById('app'))
+
+
+        // vue中block tree的分析
+        function render(info) {
+            with (info) {
+                // 相当于对info进行结构,可以直接能够获取到info上的属性
+            }
+        }
+        /**
+         * with(){
+         * }
+         */
+    </script>
+</body>
+
+</html>

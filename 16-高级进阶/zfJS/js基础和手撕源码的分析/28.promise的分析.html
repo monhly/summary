@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // promise的类型分析
+        let p = new Promise(() => { })
+        console.log('获取的p', p)
+        /*
+        获取的内置属性
+        [[PromiseState]] 实例的状态:pending准备状态 fulfilled/resolved成功状态
+        rejected 失败的状态
+        [[PromiseResult]] 实例的值
+
+        公共的属性和的方法 Promise.prototype
+        then
+        catch
+        finally
+        Symbol(Symbol.toStringTag)
+
+
+
+        */
+    </script>
+</body>
+
+</html>

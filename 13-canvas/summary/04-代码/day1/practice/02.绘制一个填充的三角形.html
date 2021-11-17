@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="600" height="900" id="canvas"></canvas>
+    <script>
+        var  canvas=document.getElementById('canvas')
+        var ctx=canvas.getContext('2d')
+        ctx.moveTo(100,100);
+        ctx.lineTo(200,100);
+        ctx.lineTo(200,300)
+        // ctx.lineTo(100,100)
+        // 自动闭合
+        ctx.closePath();
+
+        // ctx.stroke();
+        // 填充
+        ctx.fill();
+
+
+
+
+    </script>
+</body>
+</html>

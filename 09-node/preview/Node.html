@@ -1,0 +1,1976 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:Node</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<h1 id="node-js">Node.js</h1>
+<h1 id="node-js-">Node.js 介绍</h1>
+<h2 id="-node-js">什么是 Node.js</h2>
+<ul>
+<li>Node.js 是一个 JavaScript 运行时环境，可以像浏览器一样解析和执行 JS 代码，让 JS 代码脱离浏览器运行</li>
+<li>Node.js 构建于 Chrome V8 引擎之上：Node.js 的作者把 Google Chrome 中的 V8 引擎移植了出来，开发了一个独立的 JS 运行时环境</li>
+</ul>
+<h2 id="node-js-">Node.js 的特性</h2>
+<ul>
+<li>事件驱动</li>
+<li>非阻塞 I/O 模型（异步）</li>
+<li>轻量和高效</li>
+</ul>
+<h2 id="node-js-">Node.js 学习目标</h2>
+<ul>
+<li>B/S 编程模型</li>
+<li>模块化编程</li>
+<li>Node 常用 API</li>
+<li>异步编程</li>
+<li>Express 开发框架</li>
+<li>ECMAScript6</li>
+</ul>
+<h1 id="node-">Node 起步</h1>
+<h2 id="vscode-">VSCode 设置</h2>
+<h3 id="-">代码自动提示</h3>
+<ol>
+<li>安装 typings ：<code>npm install typings --global</code></li>
+<li>检查是否安装成功：<code>typings -v</code></li>
+<li>切换到 Node 项目中：<code>cd C:\Users\lyy\Desktop\NodeJS</code></li>
+<li><p>安装对应插件的提示工具：</p>
+</li>
+<li><ol>
+<li><code>typings install dt~node --global --save</code></li>
+<li><code>typings install dt~express --global</code></li>
+<li><code>typings install dt~lodash --global</code></li>
+</ol>
+</li>
+<li><p>启用提示功能：<code>///</code></p>
+</li>
+</ol>
+<h2 id="-node-">简单上手 Node 程序</h2>
+<h3 id="-javascript">解析执行 JavaScript</h3>
+<pre><code>// test.js
+console.log(&quot;Hello world!&quot;);
+</code></pre><p>在 cmd 窗口对应文件夹下执行：</p>
+<pre><code>node test.js    // 结果：Hello world!
+</code></pre><p>注意：文件名不能为<code>node.js</code>，最好也不要在文件名中出现中文</p>
+<h3 id="-">读写文件</h3>
+<p><strong>
+</strong></p>
+<p>读文件：</p>
+<pre><code>readFile(&#39;要读取的文件路径&#39;,function(error, data){});
+</code></pre><p>写文件：</p>
+<pre><code>writeFile(&#39;要写入的文件路径&#39;,&#39;要写入的文件内容&#39;,function(error){});
+</code></pre><pre><code class="lang-js">// 加载文件模块
+var fs = require(&quot;fs&quot;);
+// writeFile:写入文件
+// 第一个参数是要写入的文件路径
+// 第二个参数是要写入的文件内容
+// 第三个参数是一个回调函数
+fs.writeFile(&#39;./data/test.txt&#39;, &#39;江苏海洋大学&#39;, function(error) {
+    console.log(&quot;写入文件成功！&quot;);
+})
+// readFile：读取文件
+// 第一个参数是要读取的文件路径
+// 第二个参数是一个回调函数
+fs.readFile(&#39;./data/test.txt&#39;, function(error, data) {
+    if (error) {
+        console.log(&quot;读取文件失败！&quot;);
+    } else {
+        console.log(data.toString());
+    }
+});
+</code></pre>
+<p>注意：要对文件进行操作，需要先使用<code>require(&quot;fs&quot;)</code>加载文件模块</p>
+<h3 id="-http-">简单的 HTTP 服务器</h3>
+<pre><code class="lang-js">/// &lt;reference path=&quot;./typings/index.d.ts&quot; /&gt;
+// 1.加载http模块
+var http = require(&#39;http&#39;);
+// 2.创建一个Server实例
+var server = http.createServer();
+// 3.注册请求和响应事件
+// request：获取客户端的一些请求信息，如请求路径等
+// response：给客户端发送响应消息
+server.on(&#39;request&#39;, function(request, response) {
+    // 返回请求路径
+    console.log(&#39;收到客户端的请求了，请求路径是：&#39; + request.url);
+    // 根据不同的请求路径返回不同的响应结果
+    // write()方法可以向客户端发送响应消息
+    // end()用来结束响应，否则客户端会一直等待
+    // 也可以直接使用end()来发送消息，发送后关闭响应
+    response.setHeader(&#39;Content-Type&#39;, &#39;text/plain;charset=utf-8&#39;); // 设置字符集编码
+    if (request.url === &#39;/&#39;) {
+        response.end(&#39;首页&#39;);
+    } else if (request.url === &#39;/login&#39;) {
+        response.end(&#39;登录页&#39;);
+    } else if (request.url === &#39;/register&#39;) {
+        response.end(&#39;注册页&#39;);
+    } else {
+        response.end(&#39;未找到该页面&#39;);
+    }
+});
+// 4.绑定端口号，启动服务器
+server.listen(8888, function() {
+    console.log(&#39;服务器启动成功，可以通过 http://127.0.0.1:8888/ 来访问！&#39;);
+})
+</code></pre>
+<h2 id="node-javascript">Node 中的 JavaScript</h2>
+<p><strong>浏览器中的 JS 和 Node.js 中的 JS 区别</strong></p>
+<ul>
+<li><p>浏览器中的 JS：</p>
+</li>
+<li><ul>
+<li>由 ECMAScript、BOM 和 DOM 组成</li>
+<li>没有文件操作能力</li>
+</ul>
+</li>
+<li><p>Node.js 中的 JS：</p>
+</li>
+<li><ul>
+<li>仅由 ECMAScript 组成，没有 BOM 和 DOM</li>
+<li>可以操作文件</li>
+</ul>
+</li>
+</ul>
+<h1 id="-">模块</h1>
+<h2 id="-">什么是模块</h2>
+<p>在 Node 环境中，一个.js文件就称之为一个模块（module），Node 中的模块有3种：</p>
+<ul>
+<li>核心模块</li>
+<li>用户自定义模块</li>
+<li>第三方模块</li>
+</ul>
+<h2 id="-">使用模块的好处</h2>
+<p><strong>
+</strong></p>
+<ul>
+<li>大大提高了代码的可维护性</li>
+<li>可以避免函数名和变量名冲突。相同名字的函数和变量完全可以分别存在不同的模块中，因此，我们自己在编写模块时，不必考虑名字会与其他模块冲突</li>
+</ul>
+<h2 id="-">核心模块</h2>
+<p>Node 为 JS 提供了很多服务器级别的 API，这些 API 绝大多数都被包装到一个具名的核心模块中</p>
+<p>常用的核心模块有：</p>
+<ul>
+<li>文件操作：fs</li>
+<li>HTTP服务构建：http</li>
+<li>路径操作：path</li>
+<li>操作系统信息：os</li>
+</ul>
+<p>要想使用核心模块，必须使用<code>require</code>先加载该模块</p>
+<pre><code>var os = require(&quot;os&quot;); // 加载操作系统模块
+console.log(os.cpus()); // 获取cpu信息
+</code></pre><h2 id="-">用户自定义模块</h2>
+<p><strong>什么是用户自定义模块</strong></p>
+<p>由于在 Node 中，使用<code>node xx.js</code>执行 JS 文件时，一次只能执行一个 JS 文件，不能像浏览器中的 JS 那样通过<code>script</code>标签引入其他 JS 文件来同时执行，但是在 Node 中，可以通过<code>require(&#39;文件路径&#39;)</code>的方式来引入其他的 JS 文件，被引入的 JS 文件就叫做用户自定义模块</p>
+<pre><code>// test2.js
+console.log(&quot;这是来自test2.js中的消息&quot;);
+
+// test.js
+require(&#39;./test2.js&#39;);  
+</code></pre><p>在终端中执行<code>node .\test.js</code>的结果为：这是来自test2.js中的消息</p>
+<p>注意：</p>
+<ul>
+<li>相对路径必须加<code>./</code></li>
+<li>在加载用户自定义模块时，可以省略文件后缀名，<code>require(&#39;./test2&#39;);</code></li>
+</ul>
+<p><strong>模块作用域</strong></p>
+<p><strong>
+</strong></p>
+<p>由于在 Node 中，没有全局作用域，只有模块作用域，所以 JS 文件不能直接访问被引用模块内部的成员</p>
+<pre><code>// test2.js
+var a = 1;
+
+// test.js
+require(&#39;./test2&#39;); 
+console.log(a);
+</code></pre><p>以上代码执行的结果会报错：“ReferenceError: a is not defined”</p>
+<p>但是有时候，加载模块不仅仅是为了执行其中的代码，还想要能够访问到被加载模块内部的成员，这时，可以使用<code>exports</code></p>
+<p><code>exports</code>是每个文件模块中都会提供的一个对象，这个对象默认为空，当使用<code>require</code>加载模块的时候，其实这个对象也被加载过来了，只需要把需要访问的成员挂载到<code>exports</code>这个对象上，就可以访问了</p>
+<pre><code class="lang-js">// test2.js
+exports.a = &#39;hello&#39;; // 将a挂载到exports对象中
+
+// test.js
+var test2Export = require(&#39;./test2&#39;);   // 获取exports对象
+console.log(test2Export);   // 打印exports对象
+console.log(test2Export.a); // 打印exports对象中的成员a
+</code></pre>
+<p>以上代码执行结果为：</p>
+<pre><code class="lang-js">{ a: &#39;hello&#39; }
+hello
+</code></pre>
+<h2 id="-">其他模块</h2>
+<ul>
+<li><p>__dirname:表示当前文件的目录</p>
+</li>
+<li><p>__filename:表示的是当前文件的绝对路径</p>
+<p>两个目录都是动态的获取文件的路径</p>
+</li>
+</ul>
+<h2 id="-">第三方模块</h2>
+<h1 id="web-">Web 服务器开发</h1>
+<h2 id="ip-">IP 地址和端口号</h2>
+<p><strong>IP 地址</strong></p>
+<p>用来定位计算机</p>
+<p><strong>端口号</strong></p>
+<p>用来定位具体的应用程序</p>
+<ul>
+<li>一切需要联联网通信的软件都会占用一个端口号</li>
+<li>端口号的范围：0~65535</li>
+</ul>
+<p>关于分号的问题</p>
+<p>3种需要在开头加分号的情况：</p>
+<ul>
+<li><code>（</code></li>
+<li><code>[</code></li>
+<li>`<code></code></li>
+</ul>
+<pre><code class="lang-js">;(function(){})
+
+;[&#39;apple&#39;,&#39;orange&#39;,&#39;banana&#39;].each(function(){})
+
+;`江苏海洋大学`.length
+</code></pre>
+<p>其余情况可以不用加分号</p>
+<h2 id="-apache-">初步实现Apache功能</h2>
+<pre><code class="lang-js">// 初步实现Apache功能
+// 1. 加载模块
+var http = require(&#39;http&#39;); // 加载http模块
+var fs = require(&#39;fs&#39;); // 加载文件操作模块
+// 2.创建一个Server实例
+var server = http.createServer();
+var wwwDir = &#39;C:/Users/lyy/Desktop/NodeJS/www&#39;;
+// 3.注册请求和响应事件
+server.on(&#39;request&#39;, function(req, res) {
+    var url = req.url; // 获取请求路径
+    var filePath = &#39;/index.html&#39;; // 文件路径
+    // 如果获取的 url 不是 &#39;/&#39;，则将改 url 赋值给文件路径
+    if (url !== &#39;/&#39;) {
+        filePath = url;
+    }
+    // 响应客户端请求
+    //res.setHeader(&#39;Content-Type&#39;, &#39;text/plain;charset=utf-8&#39;); // 设置字符集编码
+    fs.readFile(wwwDir + filePath, function(err, data) {
+        if (err) {
+            return res.end(&#39;404 Not Found.&#39;);
+        }
+        return res.end(data);
+    })
+});
+// 4.绑定端口号，启动服务器
+server.listen(8888, function() {
+    console.log(&#39;Server is running, you can visitied by http://127.0.0.1:8888/ &#39;);
+})
+</code></pre>
+<h2 id="-">服务端渲染与客户端渲染</h2>
+<p>服务端渲染就是在服务端使用模板引擎，模板引擎最早诞生于服务端，后来才发展到了前端</p>
+<p>客户端渲染是异步的，很难被爬虫抓取到，所以不利于 SEO 搜索引擎优化</p>
+<p>网站一般采用异步和服务器渲染结合的方式</p>
+<h1 id="node-">Node 中的模块系统</h1>
+<h2 id="commonjs-">CommonJS 模块规范</h2>
+<p>在 Node 中的 JavaScript 有一个很重要的概念：模块系统</p>
+<ul>
+<li>模块作用域</li>
+<li>使用 <code>require</code> 方法来加载模块</li>
+<li>使用 <code>exports</code> 接口对象来到处模块中的成员</li>
+</ul>
+<h3 id="-require">加载<code>require</code></h3>
+<p>语法：</p>
+<pre><code>var 自定义变量名称 = require(&#39;模块&#39;)
+</code></pre><p>两个作用：</p>
+<ul>
+<li>执行被加载模块中的代码</li>
+<li>得到被加载模块中的<code>exports</code>导出接口对象</li>
+</ul>
+<h3 id="module-">module对象</h3>
+<blockquote>
+<p>在每个 .js 自定义模块中都有一个 module 对象，它表示当前这个具体的 .js 模块。module 对象上存储了和当前模块有关的信息。</p>
+</blockquote>
+<p>打印每个模块的module之后,我们得到的信息是:</p>
+<p><img src="./assets/1.png" alt=""></p>
+<h3 id="module-exports-">module.exports对象</h3>
+<blockquote>
+<p>在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。
+外界用 require() 方法导入自定义模块时，得到的就是 module.exports 所指向的对象。</p>
+</blockquote>
+<p>使用 require() 方法导入模块时所得到的对象，永远以module.exports 指向的对象为准</p>
+<p>module.exports导出的是一个对象,重新赋值以后,导出的就是一新的对象</p>
+<pre><code class="lang-js">let a = &#39;你好&#39;
+module.exports.a = a
+console.log(module)
+//此时module.exports导出的就是{a:&#39;你好}
+
+</code></pre>
+<p>//此时module.exports等于新对象</p>
+<pre><code class="lang-js">let a = &#39;你好&#39;
+module.exports = {
+  a: &#39;我不在了&#39;,
+  b: &#39;hello&#39;,
+}
+console.log(module)
+/*此时获取的module.exports是
+{ a: &#39;我不在了&#39;, b: &#39;hello&#39; },
+*/
+</code></pre>
+<h3 id="-exports">导出<code>exports</code></h3>
+<ul>
+<li>Node 中的模块作用域，默认文件中的所有成员只在当前文件模块有效</li>
+<li>对于希望可以被其他模块访问的成员，只需要把这些公开的成员都挂载到<code>exports</code>接口对象中就可以了</li>
+</ul>
+<p>导出多个成员（必须在对象中）：</p>
+<pre><code class="lang-js">exports.a = 123
+exports.b = &#39;hello&#39;
+exports.c = function(){
+  console.log(&#39;ccc&#39;)
+}
+exports.d = {
+  foo:&#39;bar&#39;
+}
+</code></pre>
+<p>导出单个成员（拿到的就是函数、字符串）：</p>
+<pre><code>module.exports = &#39;hello&#39;
+</code></pre><p>以下情况会覆盖：</p>
+<pre><code>module.exports = &#39;hello&#39;
+
+module.exports = function(x,y){
+  return x + y
+}
+</code></pre><p>也可以这样来导出多个成员：</p>
+<pre><code>module.exports = {
+    add:function(){
+     return x + y
+  },
+  str = &#39;hello&#39;
+}
+</code></pre><h3 id="module-exports-exports-">module.exports和exports的区别是?</h3>
+<p>当出现exports和module.exports的时候,<code>永远以module.exports为准</code></p>
+<p><img src="./assets/2.png" alt=""></p>
+<h2 id="npm">npm</h2>
+<h3 id="-npm">什么是 npm</h3>
+<p>npm（node package manager）是 Node.js 的包管理工具</p>
+<p>npm 可以根据依赖关系，把所有依赖的包都下载下来并管理起来</p>
+<ul>
+<li>检查 npm 版本：<code>npm -v</code></li>
+<li>安装包：<code>npm install art-template</code> （install 可以简写为 i）</li>
+<li>安装多个包（中间用空格隔开）：<code>npm i art-template jquery bootstrap</code></li>
+<li>初始化项目(会自动生成一个package.json 文件)：<code>nmp init</code> （<code>npm init -y</code> 全部选项默认）</li>
+</ul>
+<pre><code>{
+  &quot;name&quot;: &quot;npm-demo&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;description&quot;: &quot;这是一个测试项目&quot;,
+  &quot;main&quot;: &quot;main.js&quot;,
+  &quot;dependencies&quot;: {
+    &quot;art-template&quot;: &quot;^4.13.2&quot;
+  },
+  &quot;devDependencies&quot;: {},
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;author&quot;: &quot;lyy&quot;,
+  &quot;license&quot;: &quot;ISC&quot;
+}
+</code></pre><ul>
+<li>将安装依赖写入 package.json 文件：<code>npm i --save jquery</code></li>
+</ul>
+<h3 id="devdependencies">devDependencies</h3>
+<p>如果某些包只在项目开发阶段会用到，在项目上线之后不会用到，则建议把这些包记录到 devDependencies 节点中。
+与之对应的，如果某些包在开发和项目上线之后都需要用到，则建议把这些包记录到 dependencies 节点中。</p>
+<h3 id="-npm-">解决 npm 被墙问题</h3>
+<p>由于 nmp 存储包文件的服务器在国外，所以下载包会很慢，这时可以使用<a href="http://npm.taobao.org/">淘宝镜像</a></p>
+<p><strong>方法一</strong></p>
+<ol>
+<li>安装淘宝镜像的 <code>cnpm</code></li>
+</ol>
+<pre><code>npm install --global cnpm
+</code></pre><ul>
+<li>在任意目录执行都可以</li>
+<li><code>--global</code> 表示安装到全局，而非当前目录</li>
+</ul>
+<ol>
+<li>使用 <code>cnpm</code> 安装包</li>
+</ol>
+<pre><code># 通过淘宝的服务器来下载 jQuery
+cnpm install jquery
+</code></pre><p>注意：安装 <code>cnpm</code> 之后，<code>npm</code> 还是可以继续使用</p>
+<p><strong>方法二</strong></p>
+<p>如果不想安装 <code>cnpm</code> ，但是又想使用淘宝镜像，可以通过以下方式：</p>
+<pre><code class="lang-html">npm install jquery --registry=https://registry.npm.taobao.org
+</code></pre>
+<p>但是这样需要每次都手动添加 <code>--registry=https://registry.npm.taobao.org</code> 参数，可以将参数写到配置文件中：</p>
+<pre><code>npm config set registry https://registry.npm.taobao.org
+</code></pre><p>查看 npm 配置信息：<code>npm config list</code></p>
+<p>注意：写入配置文件后，以后使用 <code>npm install</code> 都会通过淘宝镜像来下载</p>
+<p><strong>方法三</strong></p>
+<p>使用nrm来进行包的下载</p>
+<p>为了更方便的切换下包的镜像源，我们可以安装nrm 这个小工具，利用 nrm 提供的终端命令，可以快速查看和切换下
+包的镜像源。</p>
+<p><img src="./assets/3.png" alt=""></p>
+<h4 id="-">包的分类</h4>
+<ol>
+<li><p>项目包
+那些被安装到项目的 node_modules 目录中的包，都是项目包。
+项目包又分为两类，分别是：
+⚫ 开发依赖包（被记录到 devDependencies 节点中的包，只在开发期间会用到）
+⚫ 核心依赖包（被记录到 dependencies 节点中的包，在开发期间和项目上线之后都会用到）</p>
+<p><img src="./assets/4.png" alt=""></p>
+<ol start="2">
+<li>全局包
+在执行 npm install 命令时，如果提供了 -g 参数，则会把包安装为全局包。
+全局包会被安装到 C:\Users\用户目录\AppData\Roaming\npm\node_modules 目录下。</li>
+</ol>
+<p><img src="./assets/5.png" alt=""></p>
+</li>
+</ol>
+<h4 id="package-json-package-lock-json-">package.json和package-lock.json的区别</h4>
+<pre><code class="lang-txt">npm5的版本以后安装文件的时候都会自动生成成package-lock.json的这个文件
+</code></pre>
+<ul>
+<li>5以后的版本不用加--save,会自动保存的依赖信息</li>
+<li></li>
+</ul>
+<h2 id="express">Express</h2>
+<h3 id="-express">什么是 Express</h3>
+<p>原生的 http 在某些方面表现不足以应对我们的开发需求，所以我们就需要使用框架来加快我们的开发效率，框架的目的就是提高效率，让我们的代码更高度统一</p>
+<p>在 Node 中，有很多 Web 开发框架，express 是其中很重要的一个</p>
+<p><a href="http://expressjs.com/">Express官网</a></p>
+<h3 id="-express">安装 express</h3>
+<pre><code>npm install --save express
+</code></pre><p>简写：</p>
+<pre><code>npm i -S express
+</code></pre><h3 id="hello-world">Hello World</h3>
+<pre><code class="lang-js">var express = require(&#39;express&#39;); // 加载 express
+var app = express(); // 创建服务器应用程序
+app.use(&#39;/public/&#39;, express.static(&#39;./public/&#39;)); // 公开 public 目录
+// 当服务器收到 / 请求时，执行的操作
+app.get(&#39;/&#39;, function(req, res) {
+    res.send(&#39;hello express!&#39;)
+});
+// 当服务器收到 /about 请求时，执行的操作
+app.get(&#39;/about&#39;, function(req, res) {
+    res.send(&#39;你好，我是 express!&#39;)
+});
+// 绑定端口号
+app.listen(8888, function() {
+    console.log(&#39;app is running...&#39;);
+})
+</code></pre>
+<h2 id="express-">Express的基本操作</h2>
+<h4 id="app-get-">app.get的使用</h4>
+<pre><code class="lang-js">app.get(//请求的路径,function(req,res){
+    console.log(res.query)
+    //query默认是一个空对象.在客户端的时候能够获取到get方式提交的参数?name=&#39;不知道&#39;&amp;age=22
+    } )
+//:参数名的形式可以匹配动态的参数值
+app.get(&#39;/:id&#39;,(req,res)=&gt;{
+    console.log(req.params)
+    //params里面存放的是动态匹配的参数值
+
+})
+
+</code></pre>
+<h4 id="post-">post的使用</h4>
+<pre><code class="lang-js">app.post(url,function(req,res){
+   res.send(&#39;hello 世界&#39;)
+    } )
+</code></pre>
+<h4 id="-">托管静态的资源</h4>
+<pre><code class="lang-js">//使用express.static的方法创建静态资源的服务器
+app.use(express.static(&#39;data&#39;))
+//此时访问的目录不会出现在url中
+
+//托管虚拟的路径
+app.use(&#39;/api&#39;,express.static(&#39;data&#39;))
+//此时访问data数据的时候前面需要加上/api来进行访问
+
+</code></pre>
+<h2 id="express-">express路由</h2>
+<h4 id="-">概念:</h4>
+<p>路由是由三部分组成的,分别是请求的类型,请求的URL地址,处理函数</p>
+<pre><code class="lang-js">//如
+app.get()/app.post()
+</code></pre>
+<h4 id="-">模块化路由的使用</h4>
+<p>① 创建路由模块对应的 .js 文件
+② 调用 express.Router() 函数创建路由对象
+③ 向路由对象上挂载具体的路由
+④ 使用 module.exports 向外共享路由对象
+⑤ 使用 app.use() 函数注册路由模块</p>
+<pre><code class="lang-js">// 导入express文件
+const express = require(&#39;express&#39;);
+// 创建路由的对象
+const router = express.Router()
+router.get(&#39;/&#39;, (req, res) =&gt; {
+    console.log(req.params);
+    console.log(req.query);
+})
+
+// 挂载出去
+module.exports = router
+
+</code></pre>
+<pre><code class="lang-js">//使用路由的板块
+// 访问路由的文件
+const router = require(&#39;./08.luyou的挂载&#39;)
+// 注册路由
+app.use(router)
+//也可以为路由添加前后缀
+app.use(&#39;/api&#39;,router)
+</code></pre>
+<h3 id="nodemon-">nodemon 自动重启服务器</h3>
+<p>使用第三方命令行工具 <code>nodemon</code> 可以帮我们解决频繁修改代码服务器重启问题</p>
+<ol>
+<li>安装 <code>nodemon</code> ：<code>npm install --global nodemon</code></li>
+<li>使用 <code>nodemon</code> : <code>nodemon app.js</code></li>
+</ol>
+<p>使用 <code>nodemon</code> 启动的服务器程序，修改代码之后，通过 <code>Ctrl+S</code> 会自动重启服务器</p>
+<p><a href="https://blog.csdn.net/Yamx_/article/details/100900360">nodemon无法使用的解决方案</a></p>
+<h3 id="-express-art-template-">在 Express 中配置使用 <img src="" alt="">art-template模板</h3>
+<p><a href="https://aui.github.io/art-template/express/">art-template express 官方文档</a></p>
+<ol>
+<li>安装</li>
+</ol>
+<pre><code>npm install --save art-template express-art-template
+</code></pre><ol>
+<li>配置</li>
+</ol>
+<pre><code>// 配置使用 art-template 模板引擎
+app.engine(&#39;html&#39;, require(&#39;express-art-template&#39;));
+</code></pre><ol>
+<li>使用</li>
+</ol>
+<pre><code class="lang-js">// 处理 / 请求
+app.get(&#39;/&#39;, function(req, res) {
+    res.render(&#39;index.html&#39;,{
+        title:&#39;hello world&#39;
+    });
+});
+</code></pre>
+<p>如果希望修改默认的 views 试图渲染存储目录，可以使用：</p>
+<pre><code>app.set(&#39;views&#39;,目录路径)
+</code></pre><h3 id="-express-post-">在 Express 中获取表单 post 请求体数据</h3>
+<p>在 Express 中没有内置获取表单 post 请求的 API，需要使用一个第三方包：<a href="http://expressjs.com/en/resources/middleware/body-parser.html">body-parser</a></p>
+<p>注意：Express 内置的 express.urlencoded 中间件，就是基于 body-parser 这个第三方中间件进一步封装出来的。</p>
+<pre><code class="lang-js">//在最新的express4.16.0的版本中express封装了相同的方法
+app.use(express.urlencoded({extended:false))
+
+</code></pre>
+<ol>
+<li>安装</li>
+</ol>
+<pre><code>npm install --save body-parser
+</code></pre><ol>
+<li>配置</li>
+</ol>
+<pre><code class="lang-js">var express = require(&#39;express&#39;)
+var bodyParser = require(&#39;body-parser&#39;)
+
+var app = express()
+
+// 配置 body-parser
+app.use(bodyParser.urlencoded({ extended: false }))
+//extended: false：表示使用系统模块querystring来处理，也是官方推荐的
+//extended: true：表示使用第三方模块qs来处理
+</code></pre>
+<ol>
+<li>使用</li>
+</ol>
+<pre><code class="lang-js">app.use(function (req, res) {
+  res.setHeader(&#39;Content-Type&#39;, &#39;text/plain&#39;)
+  res.write(&#39;you posted:\n&#39;)
+  res.end(JSON.stringify(req.body, null, 2))
+})
+</code></pre>
+<h2 id="express-">Express中的中间件</h2>
+<h4 id="1-">1.</h4>
+<h4 id="-">应用级别的中间件</h4>
+<pre><code class="lang-js">//通过 app.use() 或 app.METHOD() 函数，绑定到 app 实例上的中间件，叫做应用级别的中间件
+//如:
+const express = require(&#39;express&#39;);
+
+const app = express();
+app.use((req, res, next) =&gt; {
+    console.log(&#39;我是中间接&#39;);
+    next()
+
+})
+app.get(&#39;/&#39;, (req, res) =&gt; {
+    console.log(&#39;服务器&#39;);
+    res.send(&#39;你是get&#39;)
+})
+app.listen(5500, () =&gt; {
+    console.log(&#39;服务器开始了&#39;);
+
+})
+</code></pre>
+<h4 id="2-">2.错误的中间件</h4>
+<pre><code class="lang-js">//错误级别的中间件 function 处理函数，必须有 4 个形参，形参顺序从前到后，分别是 (err, req, res, next)。
+</code></pre>
+<pre><code class="lang-js">//如
+const express=require(&#39;exprss&#39;);
+const app=express();
+
+app.use((err,req,res,next)=&gt;{
+   res.send(err.message)
+//注意:错误的中间件一定要放在注册路由的后面  
+})
+app.listen(5500,()=&gt;{
+console.log(&#39;服务器开始了&#39;)
+})
+
+</code></pre>
+<h4 id="3-express-">3.express内置的中间件</h4>
+<ul>
+<li>自 Express 4.16.0 版本开始，Express 内置了 3 个常用的中间件，极大的提高了 Express 项目的开发效率和体验：<ol>
+<li>① express.static 快速托管静态资源的内置中间件，例如： HTML 文件、图片、CSS 样式等（无兼容性）</li>
+<li>② express.json 解析 JSON 格式的请求体数据（有兼容性，仅在 4.16.0+ 版本中可用）</li>
+<li>③ express.urlencoded 解析 URL-encoded 格式的请求体数据（有兼容性，仅在 4.16.0+ 版本中可用）</li>
+</ol>
+</li>
+</ul>
+<pre><code class="lang-js">//使用express.urlencoded能够解析pos条数据的格式
+//ru
+//使用postman发送post的请求
+app.use(express.urlencoded({ extended: false }))
+app.post(&#39;/&#39;, (req, res) =&gt; {
+    console.log(req.body);
+    res.send(req.body)
+})
+
+</code></pre>
+<p>4.第三方的中间件</p>
+<ul>
+<li>非 Express 官方内置的中间件，而是由第三方开发出来的 Express 中间件，叫做第三方中间件。在项目中，大家可以
+按需下载并配置第三方中间件，从而提高项目的开发效率。
+例如：除了使用 express.urlencoded 这个内置中间件来解析请求体数据，还可以使用 body-parser 这个第三方中间
+件，来解析请求体数据。使用步骤如下：<ol>
+<li>① 运行 npm install body-parser 安装中间件</li>
+<li>② 使用 require 导入中间件</li>
+<li>③ 调用 app.use() 注册并使用中间件</li>
+</ol>
+</li>
+</ul>
+<p>5.自定义中间件</p>
+<pre><code class="lang-js">const qs = require(&#39;querystring&#39;)
+// 使用中间件app.use 来自定义一个全局生效的中间件
+app.use((req, res, next) =&gt; {
+    // 定义变量,用来存储客户端发送的请求数据
+    let str = &#39;&#39;;
+    //监听req对象的data 事件(客户端发送的请求体数据)
+    req.on(&#39;data&#39;, (chunk) =&gt; {
+        str += chunk
+    })
+    // 监听end事件
+    res.end(&#39;end&#39;, () =&gt; {
+        console.log(str);
+        //此时的str是url格式的编码,需要进行转换
+        const body = qs.parse(str)
+        // 使用qs自带的方法,转化成对象
+        //最后将body挂载出去
+        req.body = body
+        next()
+    })
+
+})
+</code></pre>
+<h2 id="express-">Express写接口</h2>
+<p>路由的板块</p>
+<pre><code class="lang-js">// 引入express
+const express = require(&#39;express&#39;)
+// 创建路由的实例对象
+const router = express.Router();
+router.get(&#39;/get&#39;, (req, res) =&gt; {
+    var query = req.query
+    res.send({
+        message: 0,
+        data: query
+    })
+})
+router.post(&#39;/post&#39;, (req, res) =&gt; {
+    const body = req.body
+    res.send({
+        message: 0,
+        data: body
+    })
+})
+// 将路由挂载到module上面
+module.exports = router
+</code></pre>
+<p>使用接口的文档</p>
+<pre><code class="lang-js">const express = require(&#39;express&#39;);
+const app = express();
+const router = require(&#39;./07.express.luyou&#39;)
+// 引入中间件cors
+const cors = require(&#39;cors&#39;);
+app.use(express.urlencoded({ extended: false }))
+//extended: false：表示使用系统模块querystring来处理，也是官方推荐的
+//extended: true：表示使用第三方模块qs来处理
+// 使用json的方式发送数据
+app.use(express.json())
+// 配置中间件
+app.use(cors())
+
+app.use(&#39;/api&#39;, router)
+app.listen(5500, () =&gt; {
+    console.log(&#39;server is running&#39;);
+})
+
+</code></pre>
+<h2 id="express-">express中解决跨域的问题</h2>
+<p>1.cors是 Express 的一个第三方中间件。通过安装和配置 cors 中间件，可以很方便地解决跨域问题。
+使用步骤分为如下 3 步：
+① 运行 npm install cors 安装中间件</p>
+<pre><code class="lang-html">npm i cors//安装第三方的插件
+</code></pre>
+<p>② 使用 const cors = require(&#39;cors&#39;) 导入中间件</p>
+<pre><code class="lang-js">const cors = require(&#39;cors&#39;);
+</code></pre>
+<p>③ 在路由之前调用 app.use(cors()) 配置中间件</p>
+<pre><code class="lang-js">app.use(cors())
+</code></pre>
+<p>2.使用jsonp进行跨域</p>
+<p>使用jsonp写接口的步骤:</p>
+<p>① 获取客户端发送过来的回调函数的名字
+② 得到要通过 JSONP 形式发送给客户端的数据
+③ 根据前两步得到的数据，拼接出一个函数调用的字符串
+④ 把上一步拼接得到的字符串，响应给客户端的 <script> 标签进行解析执行</p>
+<pre><code class="lang-js">//定义一个jsonp的请求
+app.get(&#39;/json&#39;, (req, res) =&gt; {
+    const fun = req.query.callback
+    //获取客户端返回的回调函数
+    const data = { name: &#39;我是会&#39;, age: 20 }
+    const str = `${fun}(${JSON.stringify(data)})`
+    //将数据进行拼接,调用回调函数,在外面进行调用,从而获得数据
+    // 此处需要拼接字符串,使用json进行转换,否则得到的数据是错误数据
+    res.send(str)
+})
+</code></pre>
+<h2 id="-">回调函数</h2>
+<ul>
+<li><p>获取异步的数据,需要使用回调函数</p>
+</li>
+<li><p>异步的操作,如定时器,readfile writefile ajax必须通过回调函数使用</p>
+</li>
+<li><p>解决异步函数</p>
+</li>
+<li><pre><code class="lang-js">function add(x, y, callback) {
+    console.log(1);
+    setTimeout(function () {
+        var ret = x + y
+        callback(ret)
+    })
+}
+add(10, 20, function (ret) {
+    console.log(ret);
+})
+//传入一个函数,等到异步函数执行完以后再去执行,
+//使用回调函数可以获取到异步函数中的值,此时我们获取到的ret可以进行随意的使用
+</code></pre>
+</li>
+</ul>
+<h1 id="-">数据库和身份认证</h1>
+<h2 id="-mysql-">配置mysql的环境</h2>
+<ol>
+<li><h3 id="-">数据库的概念:</h3>
+<ol>
+<li>用来组织,存储和管理数据的仓库</li>
+</ol>
+<p><img src="C:\Users\monster\AppData\Roaming\Typora\typora-user-images\image-20200307233329657.png" alt="image-20200307233329657"></p>
+<p>数据库的概念</p>
+<p><img src="C:\Users\monster\AppData\Roaming\Typora\typora-user-images\image-20200307233821233.png" alt="image-20200307233821233"></p>
+</li>
+<li><p>常见的数据库以及分类</p>
+<p>MySQL数据库,community社区版本的免费版</p>
+<p>Oracle数据库</p>
+<p>MongoDB数据库</p>
+<p>其中mysql是传统的数据库,</p>
+<p>mongodb是新型的数据库,在一定程度上弥补了传统型的数据库</p>
+</li>
+<li><p>传统型数据库的数据组织结构</p>
+<p>传统的数据库中,数据的组织结构分为  数据库,数据表 数据行 字段 四个部分组成</p>
+</li>
+<li><p>MySQL server 提供专门的数据存储和服务的软件</p>
+<p>mysql bench MySQL的可视化的工具</p>
+</li>
+</ol>
+<h2 id="mysql-">MySQL的基本使用</h2>
+<p>DataType 数据类型：
+① int 整数
+② varchar(len) 字符串
+③ tinyint(1) 布尔值
+字段的特殊标识：
+① PK（Primary Key）主键、唯一标识
+② NN（Not Null）值不允许为空
+③ UQ（Unique）值唯一
+④ AI（Auto Increment）值自动增长</p>
+<ol>
+<li><p>什么是 SQL
+SQL（英文全称：Structured Query Language）是结构化查询语言，专门用来访问和处理数据库的编程语言。
+三个关键点：</p>
+<p>① SQL 是一门数据库编程语言
+② 使用 SQL 语言编写出来的代码，叫做 SQL 语句
+③ SQL 语言只能在关系型数据库（例如 MySQL、Oracle、SQL Server）中使用。非关系型数据库（例如 Mongodb）
+不支持 SQL 语言</p>
+</li>
+</ol>
+<p>重点掌握 查询数据（select） 、插入数据（insert into） 、更新数据（update） 、删除数据（delete）</p>
+<p>查询数据</p>
+<pre><code class="lang-my">-- SELECT * FROM user.shuju; --
+</code></pre>
+<p>查找单独的文件</p>
+<pre><code class="lang-my">select username form user.shuju
+</code></pre>
+<p>插入数据</p>
+<pre><code class="lang-my">insert into user.shuju (username,password) valus (&#39;你是会&#39;,&#39;50&#39;)
+向use.shuju的数据库中插入数据
+</code></pre>
+<p>更新数据</p>
+<pre><code class="lang-my">update 表的名称 set 列的名称 =新的值  where 列的名称=某值
+
+如把 users 表中 id 为 7 的用户密码，更新为 888888
+update users set password=888888 where id=7
+</code></pre>
+<p>删除数据</p>
+<pre><code class="lang-my">delete from user.shuju where id=7
+删除shuju中id=7的数据
+</code></pre>
+<p>额外需要掌握的 4 种 SQL 语法：
+where 条件、and 和 or 运算符、order by 排序、count(*) 函数</p>
+<p>where条件的使用</p>
+<pre><code class="lang-my">WHERE 子句用于限定选择的标准。在 SELECT、UPDATE、DELETE 语句中，皆可使用 WHERE 子句来限定选择的标准。
+
+如:SELECT * FROM user.shuju where id&gt;10
+
+除此之外还能够使用and和or
+AND 和 OR 可在 WHERE 子语句中把两个或多个条件结合起来
+如:SELECT * FROM user.shuju where id&gt;10 and username=&#39;你笑起来真好看&#39;
+</code></pre>
+<p>order by的使用</p>
+<p>ORDER BY 语句用于根据指定的列对结果集进行排序。
+ORDER BY 语句默认按照升序对记录进行排序。
+如果您希望按照降序对记录进行排序，可以使用 DESC 关键字</p>
+<pre><code class="lang-my">按照username进行升序排列 也可以使用关键字 ASC
+SELECT * FROM user.shuju order by username 
+按照username进行降序排列
+SELECT * FROM user.shuju order by username desc
+多重的排序
+对 user.shuju 表中的数据，先按照 username 字段进行降序排序，再按照 id 的字母顺序，进行升序排序
+SELECT * FROM user.shuju order by username desc ,id ASC
+</code></pre>
+<p>count(*)</p>
+<p>COUNT(*) 函数返回表中的记录数</p>
+<p>如:查询username=&#39;你好&#39;的记录数,</p>
+<pre><code class="lang-my">select count(*) from user.shuju where username=&#39;你好&#39;
+</code></pre>
+<h2 id="-express-mysql">在Express中操作mysql</h2>
+<p>在express中使用mysql需要先引入mysql</p>
+<p>在 Express 中操作数据库的步骤
+① 安装操作 MySQL 数据库的第三方模块（mysql）
+② 通过 mysql 模块连接到 MySQL 数据库
+③ 通过 mysql 模块执行 SQL 语句</p>
+<pre><code class="lang-txt">npm i mysql
+</code></pre>
+<pre><code class="lang-js">//导入第三方的express
+const express = require(&#39;express&#39;)
+
+
+const app = express()
+// 导入mysql数据库
+const mysql = require(&#39;mysql&#39;);
+// 建立和数据的联系
+const db = mysql.createPool({
+    host: &#39;127.0.0.1&#39;,
+    user: &#39;root&#39;,
+    password: &#39;admin123&#39;,
+    database: &#39;user&#39;
+})
+// // 检测是否连接成功
+db.query(&#39;select 1&#39;, (err, data) =&gt; {
+    if (err) return console.log(err.message);
+    console.log(data);
+})
+// 获取用户的请求
+app.get(&#39;/get&#39;, (req, res) =&gt; {
+    // 请求数据库
+    // console.log(req.statusCode);
+    // console.log(req.statusMessage);
+    // 声明sql的请求语句
+    const mysqlstr = &#39;select * from user.shuju where status!=1&#39;
+    // 判断请求数据是否成功
+    db.query(mysqlstr, (err, results) =&gt; {
+        if (err) return res.send({ message: 0, data: err.message })
+        res.send({ message: 200, data: results })
+    })
+})
+//通过id获取用户的信息
+app.get(&#39;/get/:id&#39;, (req, res) =&gt; {
+    // 获取动态的id
+    const params = req.params;
+    // 此处使用?进行占位
+    const mysql = &#39;select * from user.shuju where id=?&#39;
+    db.query(mysql, params.id, (err, results) =&gt; {
+        if (err) return res.send({ message: 0, data: err.message });
+        // 此处还需要进行判断是都有数据
+        // 判断数据是否为空
+        if (results.length === 0) {
+            return res.send({ message: &#39;数据请求失败&#39; })
+        }
+        // 此时获取的data是一个数组加对象的格式,我们只需要获取对象就可以了
+        res.send({ message: 0, data: results[0] })
+    })
+})
+// 引入express.urlencoded
+app.use(express.urlencoded({ extended: false }))
+// 插入数据的使用
+app.post(&#39;/insert&#39;, (req, res) =&gt; {
+    const body = req.body
+    console.log(body);
+    // 判断用户是否插入失败,判断输入的密码和用户名不能是空值
+    if (!body.username || body.username.length &lt; 6) {
+        return res.send({ status: 1, message: &#39;用户名不能为空&#39; })
+    }
+    if (!body.password || body.password.length &lt; 6) {
+        return res.send({ status: 1, message: &#39;密码不能小于六位数&#39; })
+    }
+    // 定义一个sql的语言
+    const sql = &#39;insert into user.shuju  (username,password) values (?,?)&#39;
+    //便捷使用的  
+    const sql=&#39;insert into user.shuju set?&#39;
+    // 导入到数据库里面
+    db.query(sql, [body.username, body.password], (err, results) =&gt; {
+    //快捷的使用方法
+        db.query(sql,body,(err,results)=&gt;{
+        if (err) return console.log(err.message);
+
+
+        if (results.affectedRows !== 1) res.send({ message: 1, data: &#39;插入失败&#39; });
+        if (results.affectedRows === 1) res.send({ message: &#39;成功&#39;, data: results });
+
+    })
+})
+
+
+// 更改数据前引入express第三方件body-parse
+// 发送更改数据
+app.use(express.urlencoded({ extended: false }))
+app.post(&#39;/post&#39;, (req, res) =&gt; {
+    // 获取post发送的数据
+    const body = req.body
+    console.log(body);
+    // 定义更新数据库的变量
+    const sql = &#39;update user.shuju set username=?,password=? where id=? &#39;
+    // 请求数据库
+    db.query(sql, [body.username, body.password, body.id], (err, results) =&gt; {
+        if (err) { return res.send({ message: &#39;错误&#39;, data: err.message }) }
+        //根据affectedRows来进行判断数据的更新情况
+        if (results.affectedRows === 1) { res.send({ message: &#39;成功&#39;, data: results }) }
+    })
+
+})
+
+// 使用删除数据
+app.get(&#39;/delete/:id&#39;, (req, res) =&gt; {
+    const params = req.params
+    //获取的是{id:5}
+    const sql = &#39;delete from user.shuju where id=?&#39;
+    // 使用sql的语句
+    db.query(sql, params.id, (err, results) =&gt; {
+        // 判断状态
+        if (err) return res.send({ status: 1, message: &#39;删除失败&#39; })
+        if (results.affectedRows === 1) return res.send({ status: 0, message: &#39;删除成功&#39; })
+    })
+
+})
+app.listen(8000, () =&gt; {
+    console.log(&#39;server is running&#39;);
+
+})
+</code></pre>
+<p>使用mysql的几点总结:</p>
+<ol>
+<li><pre><code class="lang-js">db.query(mysqlstr, (err, results) =&gt; {
+        if (err) return res.send({ message: 0, data: err.message })
+        res.send({ message: 200, data: results })
+    })
+//在查询数据的时候,results返回的是一个数组,里面有多条对象组成.根据id查询数据的时候,返回的是单条数据,所以此时我们可以直接选取数组results[0],来得到数据,同时根据results的长度来判断是否有数据
+//删除,添加更新数据的响应,是根据results.affectedRows来进行判断的,此时results返回的是一个对象
+</code></pre>
+</li>
+<li><p>查询数据:select * from user.shuju where id=?</p>
+<p>添加数据:insert into user.shuju (username,password) values (?,?)</p>
+<p>便捷方式:insert into user.shuju set?</p>
+<p>更新数据:update user.shuju set username=?,password =? where id=?,</p>
+<p>便捷方法:update user.shuju set ? where id=?</p>
+<p>删除方法:delete  from user.shuju where id=?</p>
+<p>除了增加方法不需要Id以外,其他的都需要根据id来使用,动态获取id,使用req.params来获取.此时获取的params是一个对象{id:5}</p>
+</li>
+<li><p>在插入数据的时候,需要手动判断输入的数据,内容不能为空值,即body的属性不能为undefined</p>
+<p>一般添加数据都需要使用post请求,所以获取post数据的时候,需要使用express的中间件,</p>
+<p>即:app.use(express.urlencoded({extended:false}))</p>
+<pre><code class="lang-js"> // 判断用户是否插入失败,判断输入的密码和用户名不能是空值
+    if (!body.username || body.username.length &lt; 6) {
+        return res.send({ status: 1, message: &#39;用户名不能为空&#39; })
+    }
+    if (!body.password || body.password.length &lt; 6) {
+        return res.send({ status: 1, message: &#39;密码不能小于六位数&#39; })
+    }
+</code></pre>
+</li>
+</ol>
+<h2 id="-node-mysql">在 Node 中操作 MySQL</h2>
+<ul>
+<li>安装</li>
+</ul>
+<pre><code>npm install mysql
+</code></pre><ul>
+<li>操作</li>
+</ul>
+<pre><code class="lang-js">var mysql = require(&#39;mysql&#39;);
+
+// 1 创建连接
+var connection = mysql.createConnection({
+    host: &#39;localhost&#39;,
+    user: &#39;root&#39;,
+    password: &#39;123456&#39;,
+    database: &#39;test&#39;
+});
+
+// 2 连接数据库
+connection.connect();
+
+// 3 执行数据操作
+// 插入数据
+connection.query(`insert into users values(null,&quot;sss&quot;,&quot;123321&quot;)`, function(error, results, fields) {
+    if (error) throw error;
+    console.log(&#39;The solution is: &#39;, results);
+});
+// 修改数据
+connection.query(&#39;update users set pwd = &quot;000&quot; where id = 2&#39;, function(error, results, fields) {
+    if (error) throw error;
+    console.log(&#39;The solution is: &#39;, results);
+});
+// 删除数据
+connection.query(&#39;delete from users where id = 3&#39;, function(error, results, fields) {
+    if (error) throw error;
+    console.log(&#39;The solution is: &#39;, results);
+});
+// 查询数据
+connection.query(&#39;select * from users&#39;, function(error, results, fields) {
+    if (error) throw error;
+    console.log(&#39;The solution is: &#39;, results);
+});
+
+// 4 关闭数据库连接
+connection.end();
+</code></pre>
+<h1 id="web-">web开发模式及身份认证</h1>
+<h2 id="web-">web开发</h2>
+<p>目前主流的 Web 开发模式有两种，分别是：
+① 基于服务端渲染的传统 Web 开发模式</p>
+<p>服务端渲染的概念：服务器发送给客户端的 HTML 页面，是在服务器通过字符串的拼接，动态生成的。因此，客户端不
+需要使用 Ajax 这样的技术额外请求页面的数据</p>
+<p>优点：
+① 前端耗时少。因为服务器端负责动态生成 HTML 内容，浏览器只需要直接渲染页面即可。尤其是移动端，更省电。
+② 有利于SEO。因为服务器端响应的是完整的 HTML 页面内容，所以爬虫更容易爬取获得信息，更有利于 SEO。
+缺点：
+① 占用服务器端资源。即服务器端完成 HTML 页面内容的拼接，如果请求较多，会对服务器造成一定的访问压力。
+② 不利于前后端分离，开发效率低。使用服务器端渲染，则无法进行分工合作，尤其对于前端复杂度高的项目，不利于
+项目高效开发。</p>
+<p>② 基于前后端分离的新型 Web 开发模式</p>
+<p><strong>前后端分离的概念：前后端分离的开发模式，依赖于 Ajax 技术的广泛应用。即后端不提供完整的 HTML 页面内容，而</strong>
+<strong>是提供一些 API 接口，使得前端可以获取到 json 数据；然后前端通过 Ajax 调用后端提供的 API 接口，拿到 json 数据</strong>
+<strong>之后再在前端进行 HTML 页面的拼接，最终展示在浏览器上。</strong>
+<strong>简而言之，前后端分离的 Web 开发模式，就是后端只负责提供 API 接口，前端使用 Ajax 调用接口的开发模式。</strong></p>
+<h2 id="-authentication-">身份认证(authentication)</h2>
+<p>对于服务端渲染和前后端分离这两种开发模式来说，分别有着不同的身份认证方案：
+① 服务端渲染推荐使用 Session 认证机制
+② 前后端分离推荐使用 JWT 认证机制</p>
+<h3 id="session-">session的认证机制</h3>
+<p>由于每次的http请求都是无状态的,所以需要保留每次的请求状态,就需要设置Cookie来保留状态</p>
+<p><strong>Cookie 是存储在用户浏览器中的一段不超过 4 KB 的字符串。它由一个名称（Name）、一个值（Value）和其它几个用</strong>
+于控制 Cookie 有效期、安全性、使用范围的可选属性组成。
+不同域名下的 Cookie 各自独立，每当客户端发起请求时，会自动把当前域名下所有未过期的 Cookie 一同发送到服务器。
+Cookie的几大特性：
+① 自动发送
+② 域名独立
+③ 过期时限
+④ 4KB 限制</p>
+<p> Cookie 在身份认证中的作用
+客户端第一次请求服务器的时候，服务器通过<strong>响应头</strong>的形式，向客户端发送一个身份认证的 Cookie，客户端会自动
+将 Cookie 保存在浏览器中。
+随后，当客户端浏览器每次请求服务器的时候，浏览器会自动将身份认证相关的 Cookie，通过 <strong>请求头</strong> 的形式发送给
+服务器，服务器即可验明客户端的身份。</p>
+<p>cookie不具有安全性</p>
+<p>由于 Cookie 是存储在浏览器中的，而且<strong>浏览器也提供了读写 Cookie 的 API</strong>，因此 <strong>Cookie 很容易被伪造</strong>，不具有安全
+性。因此不建议服务器将重要的隐私数据，通过 Cookie 的形式发送给浏览器。</p>
+<p><strong>session</strong></p>
+<p><img src="C:\Users\monster\AppData\Roaming\Typora\typora-user-images\image-20200311155451419.png" alt="image-20200311155451419"></p>
+<p><strong>session的局限性</strong></p>
+<p>Session 认证机制需要配合 Cookie 才能实现。由于 Cookie 默认不支持跨域访问，所以，当涉及前端跨域请求后端接口
+的时候，需要做很多额外的配置，才能实现跨域 Session 认证。
+注意：
+⚫ <strong>当前端请求后端接口不存在跨域问题的时候，推荐使用 Session 身份认证机制。</strong>
+⚫ <strong>当前端需要跨域请求后端接口的时候，不推荐使用 Session 身份认证机制，推荐使用 JWT 认证机制。</strong></p>
+<h3 id="jwt-">jwt认证机制</h3>
+<p>JWT 通常由三部分组成，分别是 <strong>Header（头部）、Payload（有效荷载）、Signature（签名）。</strong>
+三者之间使用英文的“.”分隔</p>
+<p>其中：
+<strong>⚫ Payload 部分才是真正的用户信息，它是用户信息经过加密之后生成的字符串。</strong>
+<strong>⚫ Header 和 Signature 是安全性相关的部分，只是为了保证 Token 的安全性</strong>。</p>
+<p>客户端收到服务器返回的 JWT 之后，通常会将它储存在 <strong>localStorage 或 sessionStorage</strong> 中。
+此后，客户端每次与服务器通信，都要带上这个 JWT。<strong>推荐的做法是把 JWT 放在 HTTP 请求头的 Authorization 字段</strong>
+<strong>中</strong>，Authentication:Bearer<token></p>
+<h1 id="-app-use-">补充app.use的使用</h1>
+<h2 id="-">注册路由的模块</h2>
+<p>app.use(&#39;/api&#39;,router)</p>
+<h2 id="-">注册中间件</h2>
+<p>app.use(express.static)</p>
+<p>app.use(express.urlencoded({extended:false}))</p>
+<h1 id="-express-mysql-api-">使用Express/MySQL写API接口</h1>
+<h2 id="-">初始化项目</h2>
+<pre><code class="lang-js">npm init -y
+//生成package.json文件
+</code></pre>
+<pre><code class="lang-js">app.js文件
+//导入express文件
+const express=require(&#39;express&#39;);
+//导入express路由的部分
+const router=require(&#39;../router&#39;)
+// 导入 Joi 来定义验证规则
+const Joi = require(&#39;@hapi/joi&#39;)
+
+//使用urlencoded
+app.use(express.urlencoded({extended:false}))
+
+//注册路由
+app.use(&#39;/api&#39;,router)
+
+
+
+// 导入错误级别中间件
+app.use(function (err, req, res, next) {
+    // Joi 参数校验失败
+    if (err instanceof Joi.ValidationError) {
+        return res.send({
+            status: 1,
+            message: err.message
+        })
+    }
+    // 4.2 未知错误
+    res.send({
+        status: 1,
+        message: err.message
+    })
+})
+
+
+
+const app=express();
+app.listen(5500,()=&gt;{
+    console.log(&#39;server is running&#39;)
+})
+</code></pre>
+<h2 id="-">注册和登录的模块化处理</h2>
+<h3 id="-">路由的模块</h3>
+<p>router.js文件</p>
+<pre><code class="lang-js">const express=require(&#39;express&#39;);
+const router=express.Router();
+//引入// 1. 导入 @escook/express-joi
+const expressJoi = require(&#39;@escook/express-joi&#39;)
+//导入表单的判断
+const userSchema=require(&#39;./judge&#39;)
+
+//expressJoi(userSchema)表单验证中间件,若用户名和密码输入错误的时候,会在app.js文件中的错误中间件中提示
+
+//注册事件
+router.post(&#39;/reg&#39;,expressJoi(userSchema),})
+//登录的请求
+//此时登录的页面也需要进行表单的验证
+router.post(&#39;/login&#39;,pressJoi(userSchema),)     });
+
+})
+//导出router
+module.exports=router
+</code></pre>
+<h3 id="-">请求函数的模块</h3>
+<pre><code class="lang-js">//导入数据库的模块
+const db=require(&#39;./sql&#39;)
+// 导入生成jwt的包
+const jwt = require(&#39;jsonwebtoken&#39;);
+// 解析jwt为对象的包
+const expressJWT = require(&#39;express-jwt&#39;);
+// 设置secret密钥
+const secretKey = &#39;你好我是小爱同学,不换型白色的挥洒&#39;
+//注册的请求
+function regUser(req,res){
+    //获取body的内容,
+    const body=req.body;
+    //对body的表单进行验证.在这里使用第三方插件来运行
+    //使用数据库
+    const str=&#39;insert into users.ev set?&#39;,
+    //发送数据
+ db.query(str,body,(err,results)=&gt;{
+if(err)return res.send({status:1,message:err.message})   
+           //添加成功以后根据affectRows来进行判断
+          if(affectedRows!==1)return res.send({status:1,message:&#39;注册失败&#39;})
+         if(affectedRows===1)return res.send({status:0,message:&#39;注册成功&#39;})
+})    
+    //登录的请求
+  function loginUser(res,req){
+    //获取post请求的数据
+    const body=req.body
+    //查询sql的语句
+    //根据用户名和密码来对数据库进行查询数据是否存在
+    const str=&#39;select * from users.ev where username=? and password=?&#39;;
+    //发送数据库的请求
+    db.query(str,[body.username,body.password],(err,results)=&gt;{
+     if(err) return res.send({status:1,message:err.message}) ;
+      //根据results返回的数组长度,判断数据是否存在
+        if(rerults.length===0)return res.send({status:1,message:&#39;登录失败&#39;})
+        //登录成功以后,服务器会向浏览器发送token的值,所以此时需要导入token的第三方插件
+    //获取到的results是一个数组加对象的形式,所以需要获取到results[0],即可以得到登录的值
+  /* //     results[0]:[
+
+  RowDataPacket {
+    id: 1,
+    username: &#39;admin&#39;,
+    password: &#39;&#39;,
+    email: null,
+    user_pic: &#39;&#39;,
+    status: 0
+  }
+]*/
+        //得到的值里面有一些重要的隐私所以我们发送到客户端的时候需要对内容进行隐藏
+        results[0].password=&#39;&#39;;
+            results[0].user_pic=&#39;&#39;;
+        //此时进行token的生成,使用jwt.sing()的方法
+
+/*res.send({status:0,message:&#39;登录成功&#39;,token:jwt.sign(results[0], secretKey, { expiresIn: &#39;30s&#39; }) })} */
+ //此时系统会出现错误
+//Error: Expected &quot;payload&quot; to be a plain object.次数说明results[0]的部分不是一个普通的对象
+//所以需要声明一个变量,保存进去
+  const obj = { ...results[0] }
+        res.send({ status: 0, message: &#39;登陆成功&#39;, token: &#39;Bearer &#39; + jwt.sign(obj, 
+ /*次数不要忘记在token前加上Bearer */              secretKey, { expiresIn: &#39;30s&#39; }) })
+    })
+}
+
+</code></pre>
+<h3 id="-">验证表单的模块</h3>
+<pre><code class="lang-js">// 导入 Joi 来定义验证规则
+const Joi = require(&#39;@hapi/joi&#39;)
+// 自定义表单的元素
+const userSchema = {
+    // 2.1 校验 req.body 中的数据
+    body: {
+        username: Joi.string().alphanum().min(3).max(12).required(),
+        password: Joi.string().pattern(/^[\S]{6,15}$/),
+
+    }
+}
+module.exports = userSchema
+
+
+</code></pre>
+<h3 id="-">发送数据库的模块</h3>
+<pre><code class="lang-js">npm i mysql
+//下载mysql数据库
+//导入数据库文件
+const mysql=require(&#39;mysql&#39;);
+const db=mysql.creatPool({
+    //主机地址
+    host:&#39;127.0.0.1&#39;,
+    user:&#39;root&#39;,
+    password:&#39;admin123&#39;,
+    database:&#39;user&#39;
+
+})
+//测试连接数据库是否成功
+db.query(&#39;select 1&#39;,(err,results)=&gt;{
+    console.log(results)
+    //{1:1}即成功
+})
+
+//此时导出db模块
+module.exports=db
+</code></pre>
+<h1 id="promise">Promise</h1>
+<p><strong>什么是promise?</strong></p>
+<p>promise是一个构造函数,在promise.prototype上有一个then的方法</p>
+<p><img src="https://img-blog.csdnimg.cn/20190112161316164.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NoYWQ5Nw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<pre><code class="lang-js">//异步执行的机制和同步的执行机制不慎相同,在异步中,主要是跟文件的大小有关,和顺序无关.而同步的执行机制是从上往下执行的,和顺序是由关系的.
+//此时我们访问三个不同的文件夹,三个文件夹的内容都是相同的.
+//但当我们执行了fs.readFile以后,此时输出的内容会是a/b/c  a/c/b不一定是按照顺序读取的
+const fs = require(&#39;fs&#39;);
+fs.readFile(&#39;./a.js&#39;, &#39;utf8&#39;, (err, data) =&gt; {
+    if (err) {
+        return console.log(err.message);
+    }
+    console.log(data);
+})
+fs.readFile(&#39;./b.js&#39;, &#39;utf8&#39;, (err, data) =&gt; {
+    if (err) {
+       return console.log(err.message);
+   }
+    console.log(data);
+})
+fs.readFile(&#39;./c.js&#39;, &#39;utf8&#39;, (err, data) =&gt; {
+    if (err) {
+        return console.log(err.message);
+    }
+    console.log(data);
+})
+
+</code></pre>
+<p>此时如果我们按照顺序读取的话,需要嵌套执行/</p>
+<pre><code class="lang-js">const fs = require(&#39;fs&#39;);
+fs.readFile(&#39;./a.js&#39;, &#39;utf8&#39;, (err, data) =&gt; {
+    if (err) {
+        return console.log(err.message);
+    }
+    console.log(data);
+    fs.readFile(&#39;./b.js&#39;, &#39;utf8&#39;, (err, data) =&gt; {
+    if (err) {
+       return console.log(err.message);
+   }
+    console.log(data);
+        fs.readFile(&#39;./c.js&#39;, &#39;utf8&#39;, (err, data) =&gt; {
+    if (err) {
+        return console.log(err.message);
+    }
+    console.log(data);
+   })
+  })
+})
+</code></pre>
+<p>但此时代码过于冗余,而且可读性比较差,此时可以使用,ES6提供的promise方法</p>
+<p>promise的使用方法</p>
+<pre><code class="lang-js">var fs = require(&#39;fs&#39;);
+console.log(&#39;1&#39;);
+// 创建一个new的实例对象,在promise只有执行了异步的对象才会进行操作
+// , 同步对象不会有影响,
+//只要new了一个promise实例,就会立即执行这个promise所代表的异步操作
+const promise = new Promise(function (resolve, reject) {
+    console.log(&#39;2&#39;);
+    fs.readFile(&#39;./a.js&#39;, &#39;utf8&#39;, function (err, data) {
+        if (/* 异步操作成功 */!err) {
+            resolve(data);
+        } else {
+            reject(err);
+        }
+    })
+});
+console.log(3);
+setTimeout(function () {
+    console.log(&#39;地那个时期&#39;);
+
+}, 0)
+// 此时then中的function输入的就是resolve()函数
+function th(data) {
+    console.dir(data)
+}
+promise.then(th).catch(function (err) {
+    console.log(&#39;读取文件失败&#39; + err);
+})
+//此时打印的结果是:
+//1
+//2
+//3
+//地那个时期
+//&quot;console.log(&#39;nishishui &#39;);\r\n&quot;
+
+
+
+</code></pre>
+<p>使用promise方法解决异步的问题:</p>
+<pre><code class="lang-js">var fs = require(&#39;fs&#39;);
+// 创建一个new的实例对象,在promise只有执行了异步的对象才会进行操作
+// , 同步对象不会有影响,
+const promise = new Promise(function (resolve, reject) {
+    // ... some code
+    fs.readFile(&#39;./a.js&#39;, &#39;utf8&#39;, function (err, data) {
+        if (/* 异步操作成功 */!err) {
+            resolve(data);
+        } else {
+            reject(err);
+        }
+    })
+});
+const promise1 = new Promise(function (resolve, reject) {
+    // ... some code
+    fs.readFile(&#39;./b.js&#39;, &#39;utf8&#39;, function (err, data) {
+        if (/* 异步操作成功 */!err) {
+            resolve(data);
+        } else {
+            reject(err);
+        }
+    })
+});
+const promise2 = new Promise(function (resolve, reject) {
+    // ... some code
+    fs.readFile(&#39;./c.js&#39;, &#39;utf8&#39;, function (err, data) {
+        if (/* 异步操作成功 */!err) {
+            resolve(data);
+        } else {
+            reject(err);
+        }
+    })
+});
+
+// 此时then中的function输入的就是resolve()函数
+
+promise.then(function (data) {
+    console.dir(data)
+    return promise1       //return了一个promise的实例化对象以后,则下面的then里面的函数就是promise1中的resolve方法  
+}).then(function (data) {
+    console.dir(data)
+    return promise2 //此时如果不写这句话,则返回的是undefined
+}).then(function (data) {
+    console.dir(data)
+}).catch(function (err) {
+    console.log(&#39;读取文件失败&#39; + err);
+})
+
+
+
+</code></pre>
+<p>此时代码中有多处的地方重复,所以可以使用函数进行封装一下</p>
+<p>封装后的promise</p>
+<pre><code class="lang-js">var fs = require(&#39;fs&#39;);
+// 创建一个new的实例对象,在promise只有执行了异步的对象才会进行操作
+// , 同步对象不会有影响,
+function promise(path) {
+    return new Promise(function (resolve, reject) {
+        // ... some code
+        fs.readFile(path, &#39;utf8&#39;, function (err, data) {
+            if (/* 异步操作成功 */!err) {
+                resolve(data);
+            } else {
+                reject(err);
+            }
+        })
+    });
+}
+// 此时then中的function输入的就是resolve()函数
+promise(&#39;./a.js&#39;)
+    .then(function (data) {
+        console.dir(data)
+        return promise(&#39;./b.js&#39;)       //return 了一个promise的实例化对象以后,则下面的then里面的函数就是promise1中的resolve方法
+    })
+    .then(function (data) {
+        console.dir(data)
+        return promise(&#39;./c.js&#39;)
+    })
+    .then(function (data) {
+        console.dir(data);
+
+    })
+
+//获取失败的信息
+    .catch(function (err) {
+        console.log(&#39;读取文件失败&#39; + err);
+    })
+//无论是否报错都会执行的
+
+
+
+
+</code></pre>
+<h2 id="-async">异步函数async</h2>
+<p>异步函数是异步编程语法解决的终极方案,可以使代码变得清晰明了,不再有回调函数的嵌套</p>
+<pre><code class="lang-js">// 在普通函数定义的前面机上async关键字,普通的函数就变成了异步函数
+
+//异步函数返回的是promise对象
+
+//在异步函数的内部使用return关键字进行结果的返回,结果会被包裹在promise对象中,return 关键字替代了resolve 的方法
+
+//调用throw 的方法的时候抛出程序出错,后面的代码不会被执行
+console.log(&#39;我是1&#39;);
+async function fn() {
+    throw &#39;你好呀&#39;
+    setTimeout(() =&gt; {
+        console.log(&#39;你好&#39;);
+    }, 0)
+}
+fn().then(function (data) {
+    console.log(data);
+
+})
+    .catch(function (err) {
+        console.log(err);
+
+    })
+</code></pre>
+<h2 id="await-">await关键字</h2>
+<p>注意:await关键字只能出现在异步函数中</p>
+<p>await promise await后面只能写promise的对象,写其他API是不可以的</p>
+<p>await关键字可以暂停异步函数向下执行</p>
+<pre><code class="lang-js">//awiat关键字只能使用在async函数中
+async function fn() {
+    return &#39;p1&#39;
+}
+async function fn1() {
+    return &#39;p2&#39;
+}
+async function fn3() {
+    return &#39;p3&#39;
+}
+async function rn() {
+    const Fn = await fn()
+    const Fn1 = await fn1()
+    const Fn2 = await fn3()
+    console.log(Fn);
+    console.log(Fn1);
+    console.log(Fn2);
+}
+fn()
+</code></pre>
+<h2 id="-promisify-">使用promisify封装文件的调用</h2>
+<pre><code class="lang-js">const fs = require(&#39;fs&#39;)
+//改造先有的异步API,返回promise对象
+
+const promisify = require(&#39;util&#39;).promisify;
+// 调用promisify方法改造现有的api
+const read = promisify(fs.readFile);
+async function run() {
+    let l1 = await read(&#39;./a.js&#39;, &#39;utf8&#39;)
+    let l2 = await read(&#39;./b.js&#39;, &#39;utf8&#39;)
+    let l3 = await read(&#39;./c.js&#39;, &#39;utf8&#39;)
+    console.log(l1, l2, l3);
+}
+run()
+</code></pre>
+<h1 id="crud-">CRUD 案例</h1>
+<h3 id="-">起步</h3>
+<ul>
+<li>初始化</li>
+</ul>
+<pre><code class="lang-html">npm init -y
+</code></pre>
+<ul>
+<li>安装依赖安装package,.json的依赖项</li>
+</ul>
+<ul>
+<li><ul>
+<li>安装 express</li>
+</ul>
+</li>
+</ul>
+<pre><code>npm i -S express
+</code></pre><ul>
+<li><ul>
+<li>安装配置 art-template 模板</li>
+</ul>
+</li>
+</ul>
+<pre><code>npm install --save art-template express-art-template
+</code></pre><pre><code>app.engine(&#39;html&#39;, require(&#39;express-art-template&#39;));
+</code></pre><ul>
+<li><ul>
+<li>获取表单 post 请求的 API：body-parser</li>
+</ul>
+</li>
+</ul>
+<pre><code>npm install --save body-parser
+</code></pre><pre><code class="lang-js">var express = require(&#39;express&#39;)
+var bodyParser = require(&#39;body-parser&#39;)
+var app = express()
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+</code></pre>
+<ul>
+<li><ul>
+<li>安装其他工具</li>
+</ul>
+</li>
+</ul>
+<pre><code>npm i -S bootstrap@3.3.7 
+npm i -S jquery
+</code></pre><ul>
+<li>模板处理</li>
+</ul>
+<h3 id="-">路由设计</h3>
+<table>
+<thead>
+<tr>
+<th>请求方法</th>
+<th>请求路径</th>
+<th>get 参数</th>
+<th>post 参数</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/students</td>
+<td></td>
+<td></td>
+<td>渲染首页</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/students/new</td>
+<td></td>
+<td></td>
+<td>渲染添加学生页面</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/students/new</td>
+<td></td>
+<td>name、age、gender、hobbies</td>
+<td>处理添加学生请求</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/students/edit</td>
+<td>id</td>
+<td></td>
+<td>渲染编辑页面</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/students/edit</td>
+<td></td>
+<td>id、name、age、gender、hobbies</td>
+<td>处理编辑请求</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/students/delete</td>
+<td>id</td>
+<td></td>
+<td>处理删除请求</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-">路由提取模块</h3>
+<p>router.js：</p>
+<pre><code class="lang-js">var express = require(&#39;express&#39;);
+var fs = require(&#39;fs&#39;);
+var Student = require(&#39;./student&#39;);
+
+// 创建一个路由容器
+var router = express.Router();
+
+// 把路由挂载到 router 路由容器中
+router.get(&#39;/students&#39;, function(req, res) {
+});
+
+router.get(&#39;/students/new&#39;, function(req, res) {
+});
+
+router.post(&#39;/students/new&#39;, function(req, res) {
+});
+
+router.get(&#39;/students/edit&#39;, function(req, res) {
+});
+router.post(&#39;/students/edit&#39;, function(req, res) {
+});
+router.get(&#39;/students/delete&#39;, function(req, res) {
+});
+
+// 把 router 导出
+module.exports = router;
+</code></pre>
+<p>app.js：</p>
+<pre><code class="lang-js">var router = require(&#39;./router&#39;);
+
+// 把路由容器挂载到 app 服务中
+app.use(router);
+</code></pre>
+<h2 id="-api">设计操作数据的api</h2>
+<h4 id="-">自己编写模板</h4>
+<ol>
+<li><p>处理模板</p>
+</li>
+<li><p>配置开放静态的资源</p>
+</li>
+<li><p>配置模板引擎</p>
+</li>
+<li><p>简单的路由设计 /</p>
+</li>
+<li><p>提取路由模块</p>
+</li>
+<li><p>由于接下来的一些列的操作都需要数据,所以需要封装</p>
+</li>
+</ol>
+<h1 id="mongodb">MongoDB</h1>
+<p>参考 <a href="https://www.runoob.com/mongodb/mongodb-tutorial.html">MongoDB 菜鸟教程</a></p>
+<h3 id="-mongodb">安装与配置 MongoDB</h3>
+<ul>
+<li>下载 MongoDB : <a href="https://pan.baidu.com/s/1-8cKmiMsv7vmLVV8Pp8_7w"><strong>MongoDB 3.4.10 百度云地址</strong> </a>（提取码: r96j）</li>
+<li>安装 MongoDB</li>
+<li>配置环境变量：<code>path</code> 变量 =&gt;<code>C:\Program Files\MongoDB\Server\3.4\bin</code></li>
+<li>检查安装是否成功：<code>cmd</code> 窗口 =&gt; <code>mongod --version</code></li>
+</ul>
+<h3 id="-">启动和关闭数据库</h3>
+<ul>
+<li>启动：<code>打开控制台输入mongod</code></li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>第一次执行命令前，在C盘下新建目录：<code>C:\data\db</code></li>
+<li>如果想要修改默认的数据存储目录，可以：<code>mongod --dbpath=数据存储目录路径</code></li>
+<li>首次启动可以在c盘的目录下的新建data的里面新建bd文件才能够使用</li>
+</ol>
+<ul>
+<li>关闭：<code>Ctrl+C</code></li>
+</ul>
+<h3 id="-">连接和退出数据库</h3>
+<ul>
+<li>连接：<code>mongo</code></li>
+<li>退出：<code>exit</code></li>
+</ul>
+<h3 id="mongodb-">MongoDB 基本命令</h3>
+<ul>
+<li>查看显示所有数据库：<code>show dbs</code></li>
+<li>查看当前操作的数据库：<code>db</code></li>
+<li>切换到指定数据库（若没有则会创建）：<code>use 数据库名称</code></li>
+<li>插入数据：<code>db.students.insertOne({&quot;name&quot;:&quot;Lyy&quot;})</code></li>
+<li>查看数据库的表：<code>show collections</code></li>
+<li>查看指定表的数据：<code>db.students.find()</code></li>
+</ul>
+<h2 id="mongodb-">MongoDB数据库的基本概念</h2>
+<ul>
+<li><p>可以有数据库</p>
+</li>
+<li><p>一个数据可可以有多个集合</p>
+</li>
+<li><p>一个集合可以有多个文档</p>
+</li>
+<li><pre><code class="lang-js">qq:{
+    user:[
+
+    ], 
+        product[],
+},
+</code></pre>
+</li>
+<li></li>
+</ul>
+<h3 id="-node-mongodb">在 Node 中操作 MongoDB</h3>
+<ul>
+<li>使用官方的 <a href="https://www.npmjs.com/package/mongodb">mongodb 包</a>来操作</li>
+<li>使用<a href="https://mongoosejs.com/">第三方包 mongoose</a> 来操作</li>
+</ul>
+<h4 id="-">起步</h4>
+<p>参考：<a href="https://mongoosejs.com/docs/index.html">mongoose 官方指南</a></p>
+<ul>
+<li>安装</li>
+</ul>
+<pre><code>npm i mongoose
+</code></pre><ul>
+<li>Hello World</li>
+</ul>
+<pre><code class="lang-js">const mongoose = require(&#39;mongoose&#39;);
+// 连接数据库
+mongoose.connect(&#39;mongodb://localhost:27017/test&#39;, { useNewUrlParser: true });
+// 创建一个模型（就是在设计数据库）
+const Cat = mongoose.model(&#39;Cat&#39;, { name: String });
+// 实例化一个 Cat
+const kitty = new Cat({ name: &#39;Zildjian&#39; });
+// 持久化保存 kitty 实例
+kitty.save().then(() =&gt; console.log(&#39;meow&#39;));
+</code></pre>
+<h4 id="-">官方指南</h4>
+<ol>
+<li>设计 Schema 发布 Model</li>
+</ol>
+<pre><code class="lang-js">var mogoose = require(&#39;mongoose&#39;);
+var Schema = mongoose.Schema;
+
+// 1.连接数据库
+mongoose.connect(&#39;mongodb://localhost:27017/test&#39;);
+
+// 2.设计文档结构
+var userSchema = new Schema({
+    userName: {
+        type: String,
+        required: true // 非空
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String
+    }
+});
+
+// 3.将文档结构发布为模型
+// mongoose.model()方法用来将一个架构发布为模型
+// 第一个参数：表示你的数据库名称（大写名词单数字符串），这里的 User 会变成 users 集合名称
+// 第二个参数：架构 Schema
+// 返回值：模型构造函数
+var User = mongoose.model(&#39;User&#39;, userSchema);
+
+// 4.使用模型构造函数操作 users 集合中的数据（增删改查）
+</code></pre>
+<ol>
+<li>新增数据</li>
+</ol>
+<pre><code class="lang-js">// 添加数据
+var admin = new User({
+    userName: &#39;admin&#39;,
+    password: &#39;123456&#39;,
+    email: &#39;admin@admin.com&#39;
+});
+// 持久化
+admin.save(function(err, ret) {
+    if (err) {
+        console.log(&#39;保存失败&#39;);
+    } else {
+        console.log(&#39;保存成功&#39;);
+        console.log(ret);
+    }
+});
+</code></pre>
+<ol>
+<li>查询数据</li>
+</ol>
+<ul>
+<li>查询所有数据</li>
+</ul>
+<pre><code class="lang-js">// 查询所有数据
+User.find(function(err, ret) {
+  if (err) {
+    console.log(&#39;查询失败&#39;);
+  } else {
+    console.log(ret);
+  }
+}); 
+</code></pre>
+<ul>
+<li>按条件查询</li>
+</ul>
+<pre><code class="lang-js">// 按条件查询
+User.find({
+    userName: &#39;admin&#39; // 查询用户名为admin的
+}, function(err, ret) {
+    if (err) {
+        console.log(&#39;查询失败&#39;);
+    } else {
+        console.log(ret);
+    }
+});
+</code></pre>
+<ol>
+<li>删除数据</li>
+</ol>
+<pre><code class="lang-js">// 删除数据
+User.deleteOne({
+    userName: &#39;admin&#39;
+}, function(err) {
+    if (err) {
+        return handleError(err)
+    } else {
+        console.log(&#39;删除成功&#39;);
+    }
+});
+</code></pre>
+<pre><code class="lang-js">//根据条件删除一个
+Model.findOneAndRemove(condition,[option],callback)
+
+//根据id删除一个
+Model.findByIdAndRemove(Id,option,callback)
+</code></pre>
+<ol>
+<li>更新数据</li>
+</ol>
+<pre><code class="lang-js">// 更新数据
+User.updateOne({
+    _id: &#39;5e37e693c84d393bdcdd09db&#39;
+}, {
+    userName: &#39;admin&#39;,
+    password: &#39;000000&#39;,
+    email: &#39;admin@admin.com&#39;
+}, function(err, res) {
+    if (err) {
+        console.log(&#39;更新失败&#39;);
+    } else {
+        console.log(&#39;更新成功&#39;);
+    }
+});
+</code></pre>
+<hr>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>

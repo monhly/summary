@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //有一个楼梯共M级,刚开始的时候你在第一级,若每次只能跨上一级或者是第二级,要走M级共有多少中走法
+        /*
+        思路分析:
+        要到达n级楼梯,只有两种方式,从n-1或者是n-2级到达的,
+
+        */
+        function cStairs(n) {
+            if (n === 1 || n === 2) {
+                return 1
+            } else {
+                return cStairs(n - 1) + cStairs(n - 2)
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

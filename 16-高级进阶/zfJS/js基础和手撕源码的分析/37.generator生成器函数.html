@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function add() {
+            let index = 1;
+            return index++
+        }
+        //生成器函数
+        // function* genrator(x) {
+        //     console.log('获取的 x', x)
+        //     let x1 = yield add();
+        //     console.log('2', x1)
+        //     let y = yield add()
+        //     console.log(3, y)
+        //     let z = yield add();
+        //     console.log(z)
+        // };
+        // let p = genrator(10)
+        // //使用next进行参数传递的时候,在第一次的时候是不会生效的;
+        // //只有在第一次yield中执行完毕以后,才会接收第二次传递的参数
+        // console.log(p.next(9998));
+        // console.log(p.next());
+        // console.log(p.next(435));
+        // console.log(p.next(453));
+        // console.log(p.next(5467));
+
+
+
+        //基于generator和promise实现async 和await 的简化版
+
+        // 模拟数据请求：执行方法，发送一个数据请求，传递的值是请求的时间，请求成功后的结果也是这个值
+        const query = interval => {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(interval);
+                }, interval);
+            });
+        };
+        // function AsyncFunction(generator, ...params) {
+        //     return new Promise(resolve => {
+        //         let itor = generator(...params);
+        //         const next = x => {
+        //             let { value, done } = itor.next(x);
+        //             if (done) return resolve();
+        //             value.then(result => next(result)).catch(resaon => itor.throw(reason))
+        //         }
+        //         next()
+        //     })
+        // }
+        // AsyncFunction(function* generator(x, y) {
+        //     console.log(x, y);
+        //     let result = yield query(1000);
+        //     console.log(`第一个请求成功，结果是:${result}`);
+
+        //     result = yield query(2000);
+        //     console.log(`第二个请求成功，结果是:${result}`);
+
+        //     result = yield query(3000);
+        //     console.log(`第三个请求成功，结果是:${result}`);
+        // }, 100, 200).then(() => {
+        //     // generator处理完成，执行这个操作
+        //     console.log('全部处理完成');
+        // });
+
+
+
+        //手动实现async和await函数
+        function asyncFunction(generator) {
+            return new Promise(resolve => {
+                let gen = generator();
+                const next = e => {
+                    console.log(e);
+                    let { value, done } = gen.next(e);
+                    if (done) return resolve;
+                    value.then(result =>{console.log(result); next(result)}).catch(reason => gen.throw(reason))
+                }
+                next()
+
+            })
+        }
+        asyncFunction(function* generator(){
+            let result=yield query(1000);
+            console.log(result)
+            result=yield query(2000)
+            console.log(result);
+
+        })
+    </script>
+</body>
+
+</html>

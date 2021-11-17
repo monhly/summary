@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //队列的学习
+
+        /*
+        1.队列和栈是类似的,不同的是队列是先进先出,(FIFO),它的结构类似如下:
+        常见的队列操作有:进队,出队,是否是空队,获取头元素,清空元素以及size获取队列的长度
+
+        */
+        function Queue() {
+            let items = [];
+            this.enqueue = function (e) {
+                items.push(e)
+
+            }
+            this.dequeue = function () {
+                return items.shift()
+            }
+            this.isEmpty = function () {
+                return items.length === 0
+            }
+            this.clear = function () {
+                items = []
+            }
+            this.size = function () {
+                return items.length
+            }
+        }
+
+
+        /*
+
+        2.双端队列:
+        在原有的队列的基础上扩充了:对头/队尾都可以进出队列
+        */
+        function Queue() {
+            let items = [];
+            this.addFirst = function (e) {
+                items.unshift(e)
+            }
+            this.removeFirst = function (e) {
+                return items.shift()
+            }
+            this.addLast = function (e) {
+                items.push(e)
+            }
+            this.removeLast = function () {
+                return items.pop()
+            }
+            this.enqueue = function (e) {
+                items.push(e)
+
+            }
+            this.dequeue = function () {
+                return items.shift()
+            }
+            this.isEmpty = function () {
+                return items.length === 0
+            }
+            this.clear = function () {
+                items = []
+            }
+            this.size = function () {
+                return items.length
+            }
+        }
+
+
+        /*
+        3.滑动窗口:队列的另一种应用
+        滑动窗口就是一个运行在一个大数组上的子列表,该数组是一个底层元素的集合
+        */
+    </script>
+</body>
+
+</html>

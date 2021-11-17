@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    canvas{
+    border: 1px #ccc solid;
+    }</style>
+<canvas id="canvas" width="500px" height="600px"></canvas>
+<script>
+    var canvas=document.getElementById('canvas')
+    var ctx=canvas.getContext('2d')
+    // 设置绘制网格的间距
+    const size=10
+    // 获取画布的宽度和高度
+    const w=ctx.canvas.width
+    const h=ctx.canvas.height
+    //对表格进行绘制
+    // 需要绘制的次数
+    const xcount=Math.floor(h/size)
+    for (let index = 0; index < xcount; index++) {
+        // 设置绘制的新路径
+        ctx.beginPath();
+        // 设置开始绘制的位置
+        ctx.moveTo(0,index*size-.5)
+        // 设置line位置
+        ctx.lineTo(w,index*size-.5)
+        ctx.strokeStyle='#ccc'
+        ctx.stroke()
+
+    }
+    // 设置y轴绘制的位置
+    const ycount=Math.floor(w/size)
+    for (let index = 0; index < ycount; index++) {
+    //   设置起点位置
+    ctx.beginPath()
+    ctx.moveTo(index*size-.5,0)
+    ctx.lineTo(index*size-.5,h)
+    ctx.stroke()
+
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./jquery.js"></script>
+    <script>
+        // function deepClone(obj, catchess) {
+        //     catchess = new Set()
+        //         //只有当传入的是数组和对象的时候,在进行深克隆的处理,
+        //         // let type=toType(obj) //检测传入的对象
+        //     if (!/^(array|object)$/.test(obj)) {
+        //         return obj
+        //     }
+        //     if (catchess.has(obj)) return obj;
+        //     catchess.add(obj);
+        //     let keys = [...Object.keys(obj), ...Object.getOwnPropertySymbols(obj)],
+        //         clone = {};
+        //     Array.isArray(obj) ? clone = [] : null;
+        //     keys.forEach(i => {
+        //         clone[i] = deepClone(obj[i])
+        //     })
+        //     return clone
+        // }
+
+        //手动实现深克隆;
+        function deepClone(obj) {
+            if (!/^(object|function)$/.test(typeof obj)) {
+                return obj
+            }
+            //判断传入的是object还是array
+            let clone = [],
+                keys = [...Object.keys(obj), ...Object.getOwnPropertySymbols(obj)]
+            Array.isArray(obj) ? null : clone = {}
+            //each keys
+            keys.forEach(item => {
+                clone[item] = deepClone(obj[item])
+            })
+            return clone
+        }
+        let arr = [
+            {
+                name: '哈哈',
+                list: [1, 2, 3, 4, 5],
+
+            }
+        ]
+
+
+        // let obj = {
+        //     name: 'sad撒',
+        //     add: [1, 3, 3]
+        // }
+        let add = deepClone(arr)
+    </script>
+</body>
+
+</html>

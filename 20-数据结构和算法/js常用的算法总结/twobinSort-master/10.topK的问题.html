@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         *  什么是tOPk的问题:
+         * 简单来说就是在一组数据汇总找到[频率出现最高的前K个数],或者是前K大 或者是前K小的数
+         *
+         *经典的Topk的问题有 最大(小)K个数 前k个高频元素 第K个最大(小)的元素
+         *
+        */
+
+
+        // 练习题1
+        // 在未排序的数组中找到第k个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素。
+        // 如: 输入: [4,5,1,6,2,7,3,8] 和k=4输出: 5
+
+        function findKthLargest(nums, k) {
+            nums.sort((a, b) => b - a)
+            return nums[k - 1]
+        }
+
+
+        //练习题2,最小k个数
+        // 参考9.1
+
+
+        //练习题3.前k个高频元素
+        //给定一个非空的整数数组,返回其中出现高频前k高的元素
+        function topKFrequent(nums, k) {
+            let map = new Map(), arr = [...new Set(nums)];
+            nums.map(num => {
+                if (map.has(num)) map.set(num, map.get(num) + 1)
+                else map.set(num, 1)
+            })
+            console.log('nums', nums)
+            console.log('mpa', map)
+            console.log('arr.sort((a, b) => map.get(b) - map.get(a))', arr.sort((a, b) => map.get(b) - map.get(a)))
+            return arr.sort((a, b) => map.get(b) - map.get(a)).slice(0, k)
+        }
+        let a = topKFrequent([1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3], 2)
+        console.log(a)
+    </script>
+</body>
+
+</html>

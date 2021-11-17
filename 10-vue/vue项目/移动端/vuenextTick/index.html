@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.js"></script>
+<body>
+    <div id="app">
+        <div id="div1">{{name}}</div>
+        <button @click="hChangeName">改变name</button>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                name:'abc'
+            },
+            methods: {
+                hChangeName(){
+
+                    console.log(document.getElementById('div1').innerHTML) // abc
+                    this.name = "123" 
+                    // 不应该是反映到dom吗？
+                    // 数据修改了之后，dom结构的变化是异步的：是需时间来更新的。
+                    // 如果希望立即看到数据修改后对应的最的dom
+                    this.$nextTick(()=>{
+                      console.log(document.getElementById('div1').innerHTML) //123
+                    })
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

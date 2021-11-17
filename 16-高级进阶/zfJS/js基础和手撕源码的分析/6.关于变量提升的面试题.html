@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>关于变量提升的面试题</title>
+</head>
+
+<body>
+    <script>
+        // windwo.a和a
+        // 直接获取a是访问a这个变量,此时a没有定义,所以就会出现报错
+        // window.a此时是去访问window对象上的某个属性,所以是是对象访问,window对象是存在的,只不过是a这个属性不存在,所以获取的window.a这个属性的时候a是没有定义的
+
+        // console.log(a)//undefined
+        // var a = 12;
+        // function fn() {
+        //     console.log(a)//undefined
+        //     var a = 13
+        // }
+        // fn()
+        // console.log(a)//12
+
+        // 此时a不存在所以输出a的时候会报错
+        //  console.log(a)
+        // a = 12
+        // function fn() {
+        //     console.log(a)//12
+        //     a = 13
+        // }
+        // fn()
+        // console.log(a)//13
+
+        // console.log('foo1', foo)
+        // {
+        //     console.log('foo2', foo)
+        //     function foo() { 1 }
+        //     foo = 1
+        //     function foo() {
+        //         2
+        //     }
+        //     foo = 4
+        //     foo = 5
+        //     function foo() { }
+        //     foo = 6
+        //     console.log('foo3', foo)
+        // }
+        // // foo = 2
+        // console.log(foo);
+
+        // var x = 1;
+        // function func(x, y = function an() { x = 2 }) {
+        //     x = 3;//2
+        //     y();
+        //     console.log(x);//2
+        // }
+        // func(5)
+        // console.log(x)//1
+
+        // var x = 1;
+        // function func(x, y = function an() { console.log(x); x = 2; console.log(x) }) {
+        //     //func(x, y = function an() { console.log(x); x = 2; console.log(x) }) 此处会形成私有的作用域 , 形参赋值 x=5
+        //     /*
+        //     {
+        //         //func(x, y = function an() { console.log(x); x = 2; console.log(x) }) 此处会形成私有的作用域 , 形参赋值 x=5
+
+        //         var x = 3;
+        //         y();
+        //         console.log(x);//2
+        //      }
+        //      此处会形成私有的块级上下文,当私有块级作用域和私有上下文的变量和形参一致时,会相互传递参数
+        //     */
+        //     console.log('x', x)
+        //     var c = 3;
+        //     console.log('c', c);
+        //     y();
+        //     console.log(x);//2
+        // }
+        // func(5)
+        // console.log(x)//1
+
+        var x = 1;
+
+        function func(
+            x,
+            y = function an() {
+                x = 2;
+            }
+        ) {
+            var x = 3;
+            var y = function an() {
+                x = 4;
+            };
+            y();
+            console.log(x);
+        }
+        func(5);
+        console.log(x);
+    </script>
+</body>
+
+</html>

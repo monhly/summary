@@ -1,0 +1,17 @@
+{
+  "name": "vite_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "less": "^4.1.1",
+    "vite": "^2.4.4"
+  }
+}

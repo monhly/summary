@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    canvas{
+    border: 1px #ccc solid;
+    }</style>
+<canvas id="canvas" width="500px" height="600px"></canvas>
+<script>
+    var canvas=document.getElementById('canvas')
+    var ctx=canvas.getContext('2d')
+    // 设置绘制网格的间距
+    const size=10
+    // 获取画布的宽度和高度
+    const w=ctx.canvas.width
+    const h=ctx.canvas.height
+    //对表格进行绘制
+    // 需要绘制的次数
+    const xcount=Math.floor(h/size)
+    for (let index = 0; index < xcount; index++) {
+        // 设置绘制的新路径
+        ctx.beginPath();
+        // 设置开始绘制的位置
+        ctx.moveTo(0,index*size-.5)
+        // 设置line位置
+        ctx.lineTo(w,index*size-.5)
+        ctx.strokeStyle='#ccc'
+        ctx.stroke()
+
+    }
+    // 设置y轴绘制的位置
+    const ycount=Math.floor(w/size)
+    for (let index = 0; index < ycount; index++) {
+    //   设置起点位置
+    ctx.beginPath()
+    ctx.moveTo(index*size-.5,0)
+    ctx.lineTo(index*size-.5,h)
+    ctx.stroke()
+
+    }
+    // 绘制坐标
+    ctx.beginPath()
+    // 设置坐标原点
+    var yuan=20
+    var x=yuan
+    var y=h-20
+    ctx.moveTo(x,y)
+    ctx.lineTo(w-20,y)
+    ctx.lineWidth =2;
+    ctx.strokeStyle="#000"
+    ctx.stroke()
+    // 绘制x轴方向的三角形
+    ctx.moveTo(w-15,y)
+    ctx.lineTo(w-20,y-5)
+    ctx.lineTo(w-20,y+5)
+    ctx.fill()
+    // 设置y轴重点
+    ctx.beginPath()
+    ctx.moveTo(x,y)
+    ctx.lineTo(x,20)
+    ctx.lineWidth =2;
+    ctx.strokeStyle="#000"
+    ctx.stroke()
+    // 绘制y轴三角形
+    ctx.moveTo(x,x-5)
+    ctx.lineTo(x+5,x)
+    ctx.lineTo(x-5,x)
+    ctx.fill()
+    // 设置数据
+    const data=[
+        {
+            x:100,
+            y:105,
+
+        },
+        {
+            x:200,
+            y:205,
+
+        },
+        {
+            x:300,
+            y:305,
+
+        },
+        {
+            x:400,
+            y:105,
+
+        },
+        {
+            x:450,
+            y:305,
+
+        }
+    ]
+        // 对数据进行遍历后转换成绘图需要的点
+        var dottedSize=6
+       var prevCanvasX=0
+       var prevCanvasY=0
+        // 遍历选择的点
+    data.forEach((i,index)=>{
+        var canvasX = x + i.x;
+        var canvasY = y - i.y;
+        console.log(canvasX,canvasY);
+
+       /*绘制点*/
+        ctx.beginPath();
+        ctx.moveTo(canvasX - dottedSize / 2, canvasY - dottedSize / 2);
+        ctx.lineTo(canvasX + dottedSize / 2, canvasY - dottedSize / 2);
+        ctx.lineTo(canvasX + dottedSize / 2, canvasY + dottedSize / 2);
+        ctx.lineTo(canvasX - dottedSize / 2, canvasY + dottedSize / 2);
+        ctx.closePath();
+        ctx.fill();
+        // 根据索引进行连线
+         if(index== 0){
+            ctx.beginPath()
+            ctx.moveTo(x,y)
+            // 移动到下一个节点
+            ctx.lineTo(canvasX,canvasY)
+            ctx.stroke()
+            }else {
+                /*上一个点*/
+                ctx.beginPath();
+                ctx.moveTo(prevCanvasX,prevCanvasY);
+                ctx.lineTo(canvasX,canvasY);
+                ctx.stroke();
+            }
+            // /*记录当前的坐标，下一次要用*/
+            prevCanvasX = canvasX;
+            prevCanvasY = canvasY;
+
+
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Promise.resolve('haha').then(res => console.log('promsie001')).then(res => console.log('promsie002')).then(res => console.log('promsie003'))
+        new Promise(resolve => {
+            console.log('promise1')
+            resolve()
+        }).then(() => {
+            console.log('then1')
+            new Promise(resolve => {
+                console.log('promise2')
+                resolve()
+            }).then((res) => {
+                console.log('res', res)
+                console.log('21')
+                return
+            }).then(() => {
+                console.log('22')
+            })
+        }).then(() => {
+            console.log('thne12')
+        })
+
+
+        // setTimeout(function () {
+        //     console.log(1);
+        // }, 1000);
+        // console.log(2);
+        // new Promise(resolve => {
+        //     console.log(3);
+        //     resolve();
+        //     console.log(4);
+        // }).then(() => {
+        //     console.log(5);
+        // }).then(() => {
+
+        //     console.log(6);
+        // });
+        // console.log(7);
+        // const fn = () => {
+        //     console.log(9);
+        // };
+        // (async function () {
+        //     console.log(8);
+        //     await fn();
+
+        //     console.log(10);
+        //     await fn();
+        //     // 任务6
+        //     console.log(11);
+        // })();
+        // console.log(12);
+    </script>
+</body>
+
+</html>

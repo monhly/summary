@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<canvas width="600" height="400">123456</canvas>
+<script>
+    var myCanvas = document.querySelector('canvas');
+    var ctx = myCanvas.getContext('2d');
+
+    ctx.lineWidth=10
+    // 设置渐变色
+    // 根据点组成的线进行循环遍历
+    for (let index = 0; index < 255; index++) {
+       ctx.beginPath()//给每一个点设置新的绘制路劲
+       ctx.moveTo(100+index-1,100)
+        ctx.lineTo(100+index,100)
+        // 设置样式
+        ctx.strokeStyle=`rgb(${index},${index},0)`
+        ctx.stroke()
+    }
+</script>
+</body>
+</html>

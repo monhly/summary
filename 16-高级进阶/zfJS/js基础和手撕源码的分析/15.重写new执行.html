@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function _new(ctor, ...params) {
+            //1.创建一个对象,将对象的__proto_指向ctor构造函数的prototype属性
+            let obj = {};
+            obj.__proto__ = ctor.prototype;
+            //2.执行构造函数,将this指向实例对象
+            let result = ctor.call(obj, ...params);
+            //3.判断返回的结果
+            if (/(function|object)/.test(typeof result)) return result;
+            return obj;
+        }
+
+        function __new(ctor, ...params) {
+            //创建一个空对象
+            let obj = {};
+            obj.__proto__ = ctor.prototype;
+            let result = ctor.call(obj, ...params);
+            if (/(object | function)/.test(typeof result)) return result;
+            return obj;
+        }
+        // 实现Object._create()
+        function _create(ctor) {
+            function Proxy() {}
+            Proxy.prototype = ctor;
+            //返回实例对象
+            return new Proxy();
+        }
+        // function Fn() {
+        //     this.name = '假按揭啊';
+        //     this.getx = () => {
+        //         console.log(this.name);
+        //     }
+        // }
+        // function _new(ctor, ...params) {
+        //     //ctro 构造函数  params 后期传递的参数
+        //     //1.创建一个ctor的实例对象,所谓创建实例对象就是需要将实例的__proto__指向ctor.prototype
+        //     let obj = Object.create(ctor.prototype)
+        //     console.log('obj', obj);
+        //     //2.把构造函数当做普通函数进行执行,让方法中的this指向实例对象
+        //     let result = ctor.call(obj, ...params)
+        //     //3.确认返回值的结果[如果返回的是原始值则返回实例对象]
+        //     if (/(function|object)/.test(typeof result)) return result
+        //     return obj
+
+        // }
+
+        // let f = _new(Fn)
+
+        // //重写Object.create()
+        // var _create = function (ctor) {
+        //     function Proxy() { }
+        //     Proxy.prototype = ctor;
+        //     return new Proxy
+        // }
+    </script>
+</body>
+
+</html>

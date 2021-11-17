@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        /*
+            事件循环:主线程不断的从消息队列中取消息,这个过程就是事件循环,这种机制叫做事件循环机制,取一次消息并执行的过程叫做一次循环;
+            js主线程不断的循环往复的从任务队列中读取任务,其中运行机制称为事件循环.
+
+
+        */
+        /*
+            微任务:
+            process.nextTick;
+            promise
+            MutationObserver
+        */
+        /*
+            宏任务:
+            setTimeout定时器
+            I/O
+            UI渲染
+        */
+
+
+
+
+
+        // setTimeout(() => {
+        //     console.log(1);
+        // }, 20);
+        // console.log(2);
+        // setTimeout(() => {
+        //     console.log(3);
+        // }, 10);
+        // console.log(4);
+        // console.time('AA');
+        // for (let i = 0; i < 90000000; i++) {
+        //     // do soming
+        // }
+        // /** 正常情况下不知性for循环的时候,此时定时器的执行时间是按照设置的时间正常执行的.但是此时for循环结束以后,里面设置的定时器已经到达了指定时间,所以会优先执行*/
+        // console.timeEnd('AA'); //=>AA: 79ms 左右
+        // console.log(5);
+        // setTimeout(() => {
+        //     console.log(6);
+        // }, 8);
+        // console.log(7);
+        // setTimeout(() => {
+        //     console.log(8);
+        // }, 15);
+        // console.log(9);
+
+
+
+        //2.
+        // async function async1() {
+        //     console.log('async1 start');
+        //     await async2();
+        //     console.log('async1 end');
+        //     await async2()
+        //     console.log('async1.1')
+        // }
+        // async function async2() {
+        //     console.log('async2');
+        // }
+        // console.log('script start');
+        // setTimeout(function () {
+        //     console.log('setTimeout');
+        // }, 0)
+        // async1();
+        // new Promise(function (resolve) {
+        //     console.log('promise1');
+        //     resolve();
+        // }).then(function () {
+        //     console.log('promise2');
+        // }).then(() => {
+        //     console.log('promise2.1')
+        // })
+        // console.log('script end');
+
+        // 3.
+
+
+        // let body = document.body;
+        // body.addEventListener('click', function () {
+        //     Promise.resolve().then(() => {
+        //         console.log(1);
+        //     });
+        //     console.log(2);
+        // });
+        // body.addEventListener('click', function () {
+        //     Promise.resolve().then(() => {
+        //         console.log(3);
+        //     });
+        //     console.log(4);
+        // });
+        //第一个宏任务执行完毕以后在执行下一个宏任务
+        //dom事件是宏任务,所以在执行宏任务的时候,会先把微任务执行再继续执行宏任务,所以第二次的点击事件会在第一次的微任务执行完毕以后再去执行
+
+
+        //4.
+        // console.log('start');
+        // let intervalId;
+        // Promise.resolve().then(() => {
+        //     console.log('p1');
+        // }).then(() => {
+        //     console.log('p2');
+        // });
+        // setTimeout(() => {
+        //     Promise.resolve().then(() => {
+        //         console.log('p3');
+        //     }).then(() => {
+        //         console.log('p4');
+        //     });
+        //     setInterval(() => {
+        //         console.log('interval');
+        //     }, 3000);
+        //     console.log('timeout1');
+        // }, 0);
+
+
+
+
+        //5.
+        // setTimeout(() => {
+        //     console.log('a');
+        // });
+        // Promise.resolve().then(() => {
+        //     console.log('b');
+        // }).then(() => {
+        //     Promise.resolve().then(data => {
+        //         console.log('d')
+        //     }).then(() => {
+        //         console.log('e')
+        //     }).then(() => {
+        //         console.log('h')
+        //     })
+        // }).then(data => {
+        //     console.log('c');
+        // }).then(() => {
+        //     console.log('g')
+        // })
+
+
+        //6.
+        // function func1() {
+        //     console.log('func1 start');
+        //     return new Promise(resolve => {
+        //         resolve('OK');
+        //     });
+        // }
+        // function func2() {
+        //     console.log('func2 start');
+        //     return new Promise(resolve => {
+        //         setTimeout(() => {
+        //             resolve('OK');
+        //         }, 10);
+        //     });
+        // }
+        // console.log(1);
+        // setTimeout(async () => {
+        //     console.log(2);
+        //     await func1();
+        //     console.log(3);
+        // }, 20);
+        // //此时for循环执行的时候,第一个定时器的时间已经到了,所以在宏任务汇总会优先被执行
+        // for (let i = 0; i < 90000000; i++) { } //循环大约要进行80MS左右
+        // console.log(4);
+        // func1().then(result => {
+        //     console.log(5);
+        // });
+        // func2().then(result => {
+        //     //需要等待到定时器执行完以后,才会被执行
+        //     console.log(6);
+        // });
+        // setTimeout(() => {
+        //     console.log(7);
+        // }, 0);
+        // console.log(8);
+
+
+
+
+        // async function async1() {
+        //     console.log('async1 start')
+        //     await async2()
+        //     console.log('async1 end')
+        // }
+        // async function async2() {
+        //     console.log('async2')
+        // }
+        // console.log('script start')
+        // setTimeout(function () {
+        //     console.log('settimeout')
+        // })
+        // async1()
+        // new Promise(function (resolve) {
+        //     console.log('promise1')
+        //     resolve()
+        // }).then(function () {
+        //     console.log('promise2')
+        // })
+        // process.nextTick(() => {
+        //     console.log('process.nextTick')
+        // })
+        // console.log('script end')
+
+        // 在node环境中process.nextTick的执行顺序是要先由于promise.then的
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <template id="haha">
+        <my-com></my-com>
+    </template>
+    <template id="myCom">
+        <div>
+            [{{hah}}
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const why = {
+            template: `#haha`,
+            data() {
+                return {
+                    count: 1,
+                    info: {
+                        name: '哈哈',
+                        age: 'asdas',
+                    }
+                }
+            },
+            methods: {
+                increament() {
+                    this.count++
+                }
+            },
+        };
+        const app = Vue.createApp(why);
+        //全局注册组件
+        app.component('my-com', {
+            template: '#myCom',
+            data() {
+                return {
+                    hah: 'xiunzujian'
+                }
+            },
+        })
+        // 方式1使用短横线分隔符,定义一个组件,
+        //方式2使用驼峰命名的方式
+        app.mount('#app')
+        //组件的拆分,
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fun() {
+            this.a = 0;
+            this.b = function () {
+                alert(this.a);
+            }
+        }
+
+        // //构造函数的原型重定向
+        // /*
+
+        // 原始浏览器开辟的对象的属性和方法会被销毁,包括constructor
+
+        // */
+        fun.prototype = {
+            b: function () {
+                this.a = 20;
+                alert(this.a);
+            },
+            c: function () {
+                this.a = 30;
+                console.log(this);
+                alert('这是c的a' + this.a)
+            }
+        }
+
+
+        var my_fun = new fun();
+        my_fun.b();
+        my_fun.__proto__.b()
+        my_fun.c();
+
+
+        function Fn() {
+            this.x = 100;
+            this.y = 200;
+            this.getX = function () {
+                console.log(this.x);
+            };
+        }
+        Fn.prototype.getX = function () {
+            console.log('获取的this.this', this)
+            console.log(this.x);
+        };
+        Fn.prototype.getY = function () {
+            console.log('获取的this.this', this)
+            console.log(this.y);
+        };
+        let f1 = new Fn;
+        let f2 = new Fn;
+        // console.log(Fn.prototype.__proto__ === Object.prototype)
+        // console.log(Object.prototype)
+        // console.log(f1.getX === f2.getX);
+        // console.log(f1.getY === f2.getY);
+        // console.log(f1.__proto__.getY === Fn.prototype.getY);
+        // console.log(f1.__proto__.getX === f2.getX);
+        // console.log(f1.getX === Fn.prototype.getX);
+        // console.log(f1.constructor);
+        // console.log(Fn.prototype.__proto__ === Object.prototype);
+        // f1.getX();
+        // //Fn.prototype.getX()
+        // //此时获取的y不是自己私有的数据,需要从原型链上继续寻找
+        console.log(Fn.prototype.getX()) //此时获取的this就是Fn.prototype
+            // f2.getY();
+            // Fn.prototype.getY();
+    </script>
+</body>
+
+</html>

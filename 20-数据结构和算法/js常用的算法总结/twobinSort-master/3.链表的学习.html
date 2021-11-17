@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //链表的学习
+        /*
+        链表不需要连续的内存空间,它是由一组零散的内存块透过指针链接而成的,
+        每个块都要包含当前的内容,以及下一个的指针
+        类型:单链表,双链表,循环链表
+        
+        */
+        //1.单链表的结构
+        function SignalList() {
+            //创建头部的节点
+            let head = null,
+                //创建节点
+                Node = function(ele) {
+                    this.element = ele;
+                    this.next = null
+                },
+                // 链表长度
+                length = 0;
+            this.getList = function() {
+                return head
+            };
+            //查找某个节点
+            this.search = function(ele) {
+                //查找某个节点
+                let p = head;
+                if (!p) return false
+                while (p) {
+                    if (p.element === ele) return true
+                    p = p.next
+                }
+                return false
+            };
+            //添加元素
+
+            this.append = function(ele) {
+                    let node = new Node(ele),
+                        p = head;
+                    if (!head) {
+                        head = node;
+                    } else {
+                        while (p.next) {
+                            p = p.next
+                        }
+                        p.next = node
+                    }
+                    length += 1
+                    console.log(head)
+                }
+                //插入某个节点
+            this.insert = function(position, ele) {
+                if (position < 0 || position > length) {
+                    return null
+                }
+                if (!head) {
+                    head = node;
+                    length++
+                    return
+                }
+                // debugger
+                let node = new Node(ele);
+                let dummy = new Node()
+                dummy.next = head;
+                let curr = dummy
+                for (let index = 0; index < position; index++) {
+                    curr = curr.next
+                }
+                node.next = curr.next;
+                curr.next = node;
+                length++
+                console.log('获取的node', head)
+
+            }
+            this.remove = function(ele) {
+                let p = head,
+                    prev = head;
+                if (!head) return
+                while (p) {
+                    if (p.element === ele) {
+                        p = p.next;
+                        prev.next = p
+                    } else {
+                        prev = p;
+                        p = p.next
+                    }
+                }
+                console.log('获取的节点', head)
+            };
+            this.isEmpty = function() {};
+            this.size = function() {}
+
+        }
+
+        let list = new SignalList(),
+            i = 0;
+        for (; i < 5; i++) {
+            list.append(i)
+                // debugger
+        }
+        console.log('获取的list', list)
+    </script>
+</body>
+
+</html>

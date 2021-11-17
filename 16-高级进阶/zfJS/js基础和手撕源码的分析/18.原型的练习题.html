@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function C1(name) {
+        //     if (name) {
+        //         this.name = name;
+        //     }
+        // }
+        // function C2(name) {
+        //     //此时的name是undefined
+        //     this.name = name;
+        // }
+        // function C3(name) {
+        //     this.name = name || 'join';
+        // }
+        // C1.prototype.name = 'Tom';
+        // C2.prototype.name = 'Tom';
+        // C3.prototype.name = 'Tom';
+        // alert((new C1().name) + (new C2().name) + (new C3().name));
+
+
+        /*
+        变量提升
+        初始化this
+
+
+        */
+        // function Foo() {
+        //     getName = function () {
+        //         console.log(1);
+        //     };
+
+        //     return this;
+        // }
+        // Foo.getName = function () {
+        //     console.log(2);
+        // };
+        // Foo.prototype.getName = function () {
+        //     console.log(3);
+        // };
+        // var getName = function () {
+        //     console.log(4);
+        // };
+        // function getName() {
+        //     console.log(5);
+        // }
+        // Foo.getName();//执行的是Foo上的属性
+        // getName();//变量提升后对函数进行重新的赋值 ====>4
+        // Foo().getName();//Foo当做普通函数执行,getName为全局的变量
+        // getName(); //上次的执行改变了函数 所以输出为1
+        // new Foo.getName();//代码执行的优先级成员访问高于 new 所以先执行成员访问 //此时输出的是2
+        // // console.log(new Foo)
+        // // console.log(new Foo())
+
+        // new Foo().getName();//运算优先级  先执行实例,在执行.getName //3
+        // new new Foo().getName();//3
+
+
+
+        function Foo() {
+            //创建了私有的方法
+            getName = function () {
+                console.log(1);
+            };
+            return this;
+        }
+        Foo.getName = function () {
+            console.log(2);
+        };
+        Foo.prototype.getName = function () {
+            console.log(3);
+        };
+        var getName = function () {
+            console.log(4);
+        };
+        function getName() {
+            console.log(5);
+        }
+        // Foo.getName();//2
+        // getName();//4
+        // Foo().getName();//1
+        // getName();//1
+        // new Foo.getName();//2
+
+        // new Foo().getName();//3
+        // new new Foo().getName();//3
+    </script>
+</body>
+
+</html>

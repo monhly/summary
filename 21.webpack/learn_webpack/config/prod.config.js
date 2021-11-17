@@ -1,0 +1,54 @@
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+const base = require('./base.config')
+const { merge } = require('webpack-merge')
+
+module.exports = merge(base, {
+  mode: 'production',
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: '正式环境的',
+    }), //自动打包生成html.html中自动引入打包好的,js
+
+    //提供编译阶段的全局变量,可以再其他js中进行调用,
+    /**
+      *
+          传入的每个键DefinePlugin都是一个标识符或多个标识符，以..
+          如果值是一个字符串，它将被用作代码片段。
+          如果值不是字符串，它将被字符串化（包括函数）。
+          如果值是一个对象，则所有键的定义方式相同。
+          如果您typeof为键添加前缀，则它仅针对调用类型定义。
+          这些值将被内联到代码中，允许缩小传递以删除冗余条件。
+      */
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(true),
+      VERSION: JSON.stringify('5fa3b9'),
+      BROWSER_SUPPORTS_HTML5: true,
+      TWO: '1+1',
+      'typeof window': JSON.stringify('object'),
+    }),
+  ],
+  module: {
+    //loader的加载顺序是从右往左,从下往上执行,
+    rules: [
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+    ],
+  },
+  //   devServe:{
+  //       contentBase:path.join(__dirname,'dist'),
+  //       compress:true,
+  //       port:900
+  //   }
+})

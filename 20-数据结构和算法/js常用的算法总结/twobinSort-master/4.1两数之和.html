@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var twoSum = function (num, target) {
+            let arr = [],
+                nums = num || [],
+                i = 0;
+
+            for (; i < nums.length; i++) {
+                //获取的差值
+                let k = target - nums[i],
+                    isFind = nums.findIndex(item => item === k)
+                //判断这个下标是否存在,不存在或者是等于当前的下标,则退出当前循环
+                if (isFind !== -1 && isFind !== i) {
+                    arr = [i, isFind]
+                    break
+                }
+            }
+            return arr;
+        }
+        //使用map的方法实现
+        var twoSum1 = function (nums, target) {
+            let arrs = new Map();
+            for (let index = 0; index < nums.length; index++) {
+                if (arrs.has(target - nums[targets - nums[index]])) {
+                    return [arrs.get(target - nums[index]), index]
+                }
+                arrs.set(nums[index], index)
+            }
+        }
+        twoSum([3, 2, 4], 6)
+    </script>
+</body>
+
+</html>

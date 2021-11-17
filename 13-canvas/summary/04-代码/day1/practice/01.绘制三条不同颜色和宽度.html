@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<canvas id="canvas" width="900px" height="1000px"></canvas>
+<script>
+    var canvas=document.getElementById('canvas')
+    var ctx=canvas.getContext('2d')
+    // 设置画笔的位置
+    ctx.beginPath();
+
+    ctx.moveTo(100,200)
+    // 设置绘制的路径
+    ctx.lineTo(600,200)
+    // 设置描绘的颜色
+    ctx.strokeStyle='red'
+    //设置线条的宽度
+    ctx.lineWidth=20
+    ctx.stroke()
+
+    ctx.beginPath();
+    ctx.moveTo(100,100);
+    /*4.绘制直线 (轨迹，绘制路径)*/
+    ctx.lineTo(200,100);
+    /*5.描边*/
+    ctx.strokeStyle='blue'
+    //设置线条的宽度
+    ctx.lineWidth=10
+    ctx.stroke()
+
+    ctx.beginPath();
+    ctx.moveTo(100,300);
+    /*4.绘制直线 (轨迹，绘制路径)*/
+    ctx.lineTo(200,300);
+    ctx.strokeStyle='green'
+    //设置线条的宽度
+    ctx.lineWidth=25
+    /*5.描边*/
+    // 进行描绘
+    ctx.stroke()
+
+</script>
+</body>
+</html>

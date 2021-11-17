@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <template id="haha">
+        <div>
+            <table>
+                <thead>
+                    <th></th>
+                    <th>书籍</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                </thead>
+                <tbody>
+                    <tr v-for="i in 10">
+                        <td>{{i}}</td>
+                        <td>{{i}}</td>
+                        <td>{{i}}</td>
+                        <td>{{i}}</td>
+                        <td>{{i}}</td>
+                        <td>
+                            <button>删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const why = {
+            template: `#haha`,
+            data() {
+                return {
+                    count: 1,
+                    info: {
+                        name: '哈哈',
+                        age: 'asdas',
+                    }
+                }
+            },
+            methods: {
+                increament() {
+                    this.info = {
+                        name: '新改变的值'
+                    }
+                },
+                increament1() {
+                    this.info.name = 'chongxin'
+                }
+            },
+            watch: {
+                //默认情况下,watch能够监听到info整个数据的变化,但是对于单个数据的变化,watch是监听不到的,如上述中我们对于name属性值进行单个数据的更改的时候,此时对于获取的数据是捕获不到的.
+                info: {
+                    handler(newVal, oldVal) {
+                        console.log('获取的新值', newVal, '获取的旧值', oldVal)
+                    },
+                    deep: true
+                    //使用deep属性后,变更的新值和旧值是相同的,因为它们的引用指向同一个对象;Vue不会保留变更之前值的副本
+                },
+                //方法:对info属性进行深度的监听
+                // info: {
+                //     handler(newVal, oldVal) {
+                //         console.log('获取的新值', newVal, '获取的旧值', oldVal)
+                //     },
+                //     //进行深度的监听
+                //     deep: true,
+                //     //立即执行函数
+                //     immediate: true
+                // }
+                //方法2基于字符串的函数式写法
+                "info.name"(newVal, oldVal) {
+                    console.log('获取的信息', newVal, oldVal)
+                }
+            },
+        };
+        const app = Vue.createApp(why);
+        app.mount('#app')
+        //
+        /*
+         watch监听器的使用
+
+          */
+
+    </script>
+</body>
+
+</html>

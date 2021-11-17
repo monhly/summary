@@ -1,0 +1,4 @@
+    let total = x + y;
+    this.x = x;
+    this.y = y;
+    return total;

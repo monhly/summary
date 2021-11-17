@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var ctx=document.getElementById('canvas').getContext('2d')
+        // 设置渐变色的矩形
+        // x0,y0开始位置 x1,y1结束为止
+        var linered =ctx.createLinearGradient(100, 100, 200, 100);
+        linered.addColorStop(0, 'pink');
+        linered.addColorStop(1,'yellow')
+        ctx.fillStyle = linered;
+        ctx.fillRect(100,100,100,100);
+
+    </script>
+</body>
+</html>

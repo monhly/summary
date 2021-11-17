@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //给定一个字符串,找到它的第一个不重复的字符,并返回它的索引,如果不存在就返回-1
+        //leecode 387
+        /*
+        示例：
+
+        s = "leetcode"
+        返回 0
+
+        s = "loveleetcode"
+        返回 2
+
+        // 提示：你可以假定该字符串只包含小写字母
+
+        */
+
+        // const firstUniqChar = function (s) {
+        //     const map = {};
+
+        //     for (const v of s) {
+        //         map[v] = (map[v] || 0) + 1
+        //     }
+        //     for (let index = 0; index < s.length; index++) {
+        //         if (map[s[index]] === 1) {
+        //             return index
+        //         }
+        //     }
+        //     return -1
+        // }
+        const firstUniqChar = (s) => {
+            const obj = {}
+            //for of遍历字符串值是字符串本身
+            for (const v of s) {
+                obj[v] = (obj[v] || 0) + 1
+            }
+            for (let index = 0; index < s.length; index++) {
+                let val = s[index]
+                if (obj[val] === 1) {
+                    return index
+                }
+            }
+            return -1
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //罗马数字转成整数的问题:
+        /*
+         I: 1,
+        V: 5,
+        IV: 4,
+        IX: 9,
+        X: 10,
+        XL: 40,
+        XC: 90,
+        L: 50,
+        C: 100,
+        CD: 400,
+        CM: 900,
+        D: 500,
+        M: 1000,
+
+        示例 1:
+
+        输入: "III"
+        输出: 3
+        示例 2:
+
+        输入: "IV"
+        输出: 4
+        示例 3:
+
+        输入: "IX"
+        输出: 9
+        示例 4:
+
+        输入: "LVIII"
+        输出: 58
+        解释: L = 50, V= 5, III = 3.
+
+        */
+        const romanToInt = function (s) {
+            const map = {
+                I: 1,
+                V: 5,
+                IV: 4,
+                IX: 9,
+                X: 10,
+                XL: 40,
+                XC: 90,
+                L: 50,
+                C: 100,
+                CD: 400,
+                CM: 900,
+                D: 500,
+                M: 1000,
+            }
+            let res = 0,
+                index = 0,
+                len = s.length;
+            while (index < len) {
+                if (index + 1 < len && map[s.slice(index, index + 2)]) {
+                    res += map[s.slice(index, index + 2)]
+                    index += 2
+                } else {
+                    res += map[s.slice(index, index + 1)];
+                    index += 1;
+                }
+            }
+            return res
+        }
+        // romanToInt('LVIII')
+        // 方式二
+        var romanToInt = function (s) {
+            var obj = {
+                'I': 1,
+                'V': 5,
+                'X': 10,
+                'L': 50,
+                'C': 100,
+                'D': 500,
+                'M': 1000
+            }
+            var res = 0
+            for (var i = 0; i < s.length; i++) {
+                if (obj[s[i + 1]] > obj[s[i]]) {
+                    res -= obj[s[i]]
+                } else {
+                    res += obj[s[i]]
+                }
+            }
+            return res
+        };
+
+
+
+
+
+    </script>
+</body>
+
+</html>
